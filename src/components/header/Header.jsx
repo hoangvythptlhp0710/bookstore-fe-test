@@ -1,30 +1,33 @@
 import React from 'react';
-import {Button, Form, FormControl, Nav, Navbar} from 'react-bootstrap';
+import './Header.css'
 
 const Header = () => {
     return (
-        <Navbar bg="light" expand="lg" fixed='top'>
-            <Navbar.Brand href="/">Our Bookstore</Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbar-nav"/>
-            <Navbar.Collapse id="navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/categories">Categories</Nav.Link>
-                    <Nav.Link href="/about">About Us</Nav.Link>
-                </Nav>
-                <Form className='d-flex'>
-                    <div className="d-flex">
-                        <FormControl type="text" placeholder="Search" className="mr-2"/>
-                        <Button variant="outline-dark">Search</Button>
+        <nav bg='light' expand='lg'>
+            <div className='top'>
+                <nav className='ml-auto'>
+                    <a href='/login'>Login  |</a>
+                    <a href='/register'>Register</a>
+                </nav>
+            </div>
+            <div className='menu'>
+                <div href='/'><img src='./images/logo.png' alt='logo' className='logo'></img></div>
+                <div className='cats'>
+                    <a href='#'>Comic book</a>
+                    <a href='#'>Adventure book</a>
+                    <a href='#'>Literature</a>
+                    <a href='#'>Detective book</a>
+                </div>
+                <form className='d-flex'>
+                    <div className='d-flex'>
+                        <input type='text' placeholder='Search' className='mr-2' />
+                        <button className='btn'>Search</button>
                     </div>
-                </Form>
-                <Nav className="ml-auto">
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/register">Register</Nav.Link>
-                    {/*<Nav.Link href="/logout">Logout</Nav.Link>*/}
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+                </form>
+                <a href='#'><img src='./images/cart.png' alt='cart' className='cart'></img></a>
+            </div>
+            <hr></hr>
+        </nav>
     );
 };
 

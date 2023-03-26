@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Button} from 'react-bootstrap'
 import axios from "axios";
 
 export default class Login extends Component {
@@ -52,14 +51,8 @@ export default class Login extends Component {
                     <input type="password" id='password' className="form-control" placeholder="Enter password"
                         onChange={this.handleChange}/>
                 </div>
-                <div className="mb-3">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1"/>
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div>
                 <div className="d-grid">
-                    <Button type="submit" className="btn" variant="outline-dark">Submit</Button>
+                    <button type="submit" className="btn" variant="outline-dark">Submit</button>
                 </div>
             </form>
         )
