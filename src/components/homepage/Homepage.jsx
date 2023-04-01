@@ -8,7 +8,7 @@ class HomepageWithLocation extends Component {
         products: [],
         pages: 0,
         current: 0,
-        search: "false"
+        search: ""
     }
 
     url = "http://localhost:8080/"
@@ -25,7 +25,23 @@ class HomepageWithLocation extends Component {
             this.setState({
                 products,
                 pages,
-                current
+                current,
+                search: this.props.location.state.name
+            });
+        })
+    }
+
+    fetchSort = (direction) => {
+        this.props.location.state.name = null;
+        axios.get(this.url, {params: {price: true, direction: direction}}).then((res) => {
+            const products = res.data.content;
+            const pages = res.data.totalPages;
+            const current = res.data.number;
+            this.setState({
+                products,
+                pages,
+                current,
+                search: this.props.location.state.name
             });
         })
     }
@@ -68,22 +84,30 @@ class HomepageWithLocation extends Component {
     render() {
         const arr = [];
         if (this.props.location.state !== null) {
-            if (this.props.location.state.name !== null)
+            if (this.props.location.state.name !== this.state.search)
                 this.fetchSearch();
             for (let i = 0; i < this.state.pages; i++) {
                 if (this.state.current === i) {
-                    arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                    arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {
+                        this.handleSearchSwitch(i)
+                    }}>{i + 1}</button>)
                 } else {
-                    arr.push(<button className="page page-click" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                    arr.push(<button className="page page-click" key={"page_" + i} onClick={() => {
+                        this.handleSearchSwitch(i)
+                    }}>{i + 1}</button>)
                 }
             }
         } else {
             const arr = [];
             for (let i = 0; i < this.state.pages; i++) {
                 if (this.state.current === i) {
-                    arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                    arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {
+                        this.handleSwitch(i)
+                    }}>{i + 1}</button>)
                 } else {
-                    arr.push(<button className="page page-click" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                    arr.push(<button className="page page-click" key={"page_" + i} onClick={() => {
+                        this.handleSwitch(i)
+                    }}>{i + 1}</button>)
                 }
             }
         }
@@ -91,6 +115,14 @@ class HomepageWithLocation extends Component {
             return (
                 <section className="container">
                     <div className="wrapper">
+                        <div className="text-center">
+                            <button className="bi-sort-up btn btn-outline-secondary m-2"
+                                    onClick={() => {this.fetchSort("asc")}}> Price
+                            </button>
+                            <button className="bi-sort-down btn btn-outline-secondary m-2"
+                                    onClick={() => {this.fetchSort("desc")}}> Price
+                            </button>
+                        </div>
                         <div className="inner">
                             <div className="grid mg-left-10">
                                 <div className="products">

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Header.css'
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 class HeaderWithNavigate extends Component {
     url = "http://localhost:8080/search"
@@ -17,7 +17,7 @@ class HeaderWithNavigate extends Component {
 
     search = (event) => {
         event.preventDefault();
-        this.props.navigate('/?name='+this.state.name,{state:{name:this.state.name}})
+        this.props.navigate('/?name=' + this.state.name, {state: {name: this.state.name}})
     }
 
     render() {
@@ -41,7 +41,7 @@ class HeaderWithNavigate extends Component {
                         <div className='d-flex'>
                             <input type='search' placeholder='Enter name of book' className='search mr-2'
                                    id="name" onChange={this.handleChange}/>
-                            <button className='btn' onClick={this.search}>Search</button>
+                            <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
                     <a href='/#'><img src='/images/cart.png' alt='cart' className='cart'></img></a>
@@ -54,7 +54,7 @@ class HeaderWithNavigate extends Component {
 
 function Header(props) {
     let navigate = useNavigate();
-    return <HeaderWithNavigate {...props} navigate={navigate} />
+    return <HeaderWithNavigate {...props} navigate={navigate}/>
 }
 
 export default Header;

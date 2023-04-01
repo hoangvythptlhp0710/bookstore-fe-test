@@ -8,14 +8,17 @@
     align-content: center;
 }
 
+.green-btn {
+    background-color: #33cc33;
+}
+
 .btn {
-    background-color: #33cc66;
     color: black;
     height: 40px;
 }
 
-.btn:hover {
-    background-color: #33cc33;
+.green-btn:hover {
+    background-color: rgba(70, 255, 100, 1);
     color: black;
 }
 
