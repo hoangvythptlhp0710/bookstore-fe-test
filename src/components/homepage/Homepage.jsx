@@ -1,18 +1,33 @@
 import React, {Component} from 'react'
 import axios from "axios";
 import "./Homepage.css";
+import {useLocation} from 'react-router-dom';
 
-export default class Homepage extends Component {
+class HomepageWithLocation extends Component {
     state = {
         products: [],
         pages: 0,
-        current: 0
+        current: 0,
+        search: "false"
     }
 
     url = "http://localhost:8080/"
 
     componentDidMount() {
         this.fetchProductList();
+    }
+
+    fetchSearch = () => {
+        axios.get(this.url + "search", {params: {name: this.props.location.state.name}}).then((res) => {
+            const products = res.data.content;
+            const pages = res.data.totalPages;
+            const current = res.data.number;
+            this.setState({
+                products,
+                pages,
+                current
+            });
+        })
     }
 
     fetchProductList = () => {
@@ -22,7 +37,8 @@ export default class Homepage extends Component {
             const current = res.data.number;
             this.setState({
                 products,
-                pages
+                pages,
+                current
             });
         })
     }
@@ -30,27 +46,45 @@ export default class Homepage extends Component {
     handleSwitch = (i) => {
         axios.get(this.url + i).then((res) => {
             const products = res.data.content;
-            const pages = res.data.totalPages;
             console.log(res.data)
             this.setState({
                 products,
-                pages
+                current: i
             });
         })
-        this.fetchProductList();
+    }
+
+    handleSearchSwitch = (i) => {
+        axios.get(this.url + "search/" + i).then((res) => {
+            const products = res.data.content;
+            console.log(res.data)
+            this.setState({
+                products,
+                current: i
+            });
+        })
     }
 
     render() {
         const arr = [];
-        for (let i = 0; i < this.state.pages; i++) {
-            if (this.state.current == i) {
-                arr.push(<span className="page page-clicked" key={"page_"+ i} onClick={() => {
-                    this.handleSwitch(i)
-                }}>{i+1}</span>)
-            } else {
-                arr.push(<span className="page page-click" key={"page_" + i} onClick={() => {
-                    this.handleSwitch(i)
-                }}>{i+1}</span>)
+        if (this.props.location.state !== null) {
+            if (this.props.location.state.name !== null)
+                this.fetchSearch();
+            for (let i = 0; i < this.state.pages; i++) {
+                if (this.state.current === i) {
+                    arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                } else {
+                    arr.push(<button className="page page-click" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                }
+            }
+        } else {
+            const arr = [];
+            for (let i = 0; i < this.state.pages; i++) {
+                if (this.state.current === i) {
+                    arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                } else {
+                    arr.push(<button className="page page-click" key={"page_" + i} onClick={() => {this.handleSwitch(i)}}>{i + 1}</button>)
+                }
             }
         }
         if (this.state.products.length !== 0)
@@ -64,7 +98,7 @@ export default class Homepage extends Component {
                                         {
                                             this.state.products.map(product => (
                                                 <div className="item text-center" key={product.id}>
-                                                    <a href="#" className="product-item">
+                                                    <a href="/#" className="product-item">
                                                         <div className="product-img">
                                                             <img className="lazy-load"
                                                                  src={product.images}
@@ -95,3 +129,10 @@ export default class Homepage extends Component {
             )
     }
 }
+
+function Homepage(props) {
+    let location = useLocation();
+    return <HomepageWithLocation {...props} location={location}/>
+}
+
+export default Homepage;
