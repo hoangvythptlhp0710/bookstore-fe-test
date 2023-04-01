@@ -34,9 +34,9 @@ function Footer() {
                         <p>Address:Km 9, đường Nguyễn Trãi, quận Nam Từ Liêm, Hà Nội, Việt Nam</p>
                         <p>Email: hanu@hanu.edu.vn | tuyensinh@hanu.edu.vn</p>
                         <ul>
-                            <li><a href="#"><i className="bi bi-facebook"></i></a></li>
-                            <li><a href="#"><i className="bi bi-instagram"></i></a></li>
-                            <li><a href="#"><i className="bi bi-tiktok"></i></a></li>
+                            <li><a href="/#"><i className="bi bi-facebook"></i></a></li>
+                            <li><a href="/#"><i className="bi bi-instagram"></i></a></li>
+                            <li><a href="/#"><i className="bi bi-tiktok"></i></a></li>
                         </ul>
                     </div>
                     <div>

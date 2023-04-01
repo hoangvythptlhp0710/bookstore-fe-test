@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Button} from 'react-bootstrap'
 import axios from 'axios';
+import './Auth.css'
 
 export default class Register extends Component {
     state = {
@@ -13,7 +14,7 @@ export default class Register extends Component {
 
     handleChange = event => {
         this.setState({
-          [event.target.id]: event.target.value
+            [event.target.id]: event.target.value
         });
     }
 
@@ -32,53 +33,58 @@ export default class Register extends Component {
         }
         axios.post(this.url, Account)
             .then(res => {
-                console.log(res);
-                if (res.status === 201) {
-                    window.location = "/";
+                console.log(res)
+                if (res.data.code === '201') {
+                    window.location = "/login";
                 }
             })
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h3>Register</h3>
-                <div className="mb-3">
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        id='username'
-                        className="form-control"
-                        placeholder="Enter username"
-                        onChange={this.handleChange}
-                    />
+
+            <div className="auth-wrapper">
+                <div className="auth-inner">
+                    <form onSubmit={this.handleSubmit}>
+                        <h3>Register</h3>
+                        <div className="mb-3">
+                            <label>Username</label>
+                            <input
+                                type="text"
+                                id='username'
+                                className="form-control"
+                                placeholder="Enter username"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                id='email'
+                                className="form-control"
+                                placeholder="Enter email"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                id='password'
+                                className="form-control"
+                                placeholder="Enter password"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="d-grid">
+                            <Button type="submit" className="btn" variant="outline-dark">
+                                Submit
+                            </Button>
+                        </div>
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        id='email'
-                        className="form-control"
-                        placeholder="Enter email"
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        id='password'
-                        className="form-control"
-                        placeholder="Enter password"
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="d-grid">
-                    <Button type="submit" className="btn" variant="outline-dark">
-                        Submit
-                    </Button>
-                </div>
-            </form>
+            </div>
         )
     }
 }
