@@ -114,6 +114,10 @@ class HomepageWithLocation extends Component {
         if (this.state.products.length !== 0)
             return (
                 <section className="container">
+                    <div className='carousel'>
+                        <img src="./images/book2.jpg" alt='book2'/>
+                    </div>
+                    <hr></hr>
                     <div className="wrapper">
                         <div className="text-center">
                             <button className="bi-sort-up btn btn-outline-secondary m-2"
@@ -130,7 +134,7 @@ class HomepageWithLocation extends Component {
                                         {
                                             this.state.products.map(product => (
                                                 <div className="item text-center" key={product.id}>
-                                                    <a href="/#" className="product-item">
+                                                    <a href={"/product?id="+product.id} className="product-item">
                                                         <div className="product-img">
                                                             <img className="lazy-load"
                                                                  src={product.images}
