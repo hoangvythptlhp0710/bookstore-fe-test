@@ -114,7 +114,7 @@ class HomepageWithLocation extends Component {
             return (
                 <section className="container">
                     <div className='carousel'>
-                        <img src="./images/book2.jpg" alt='book2'/>
+                        <img src="/images/book2.jpg" alt='book2'/>
                     </div>
                     <hr></hr>
                     <div className="wrapper">
@@ -154,7 +154,11 @@ class HomepageWithLocation extends Component {
                                         }
                                     </div>
                                     <div>
-                                        {arr}
+                                        {arr.map((item) => (
+                                            <div>
+                                                {item}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

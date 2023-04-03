@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import withRouter from './withRouter';
-import "./product.css";
+import withRouter from './WithRouter';
+import "./Product.css";
 import { Link } from 'react-router-dom';
 
 class ProductDetails extends React.Component {
@@ -74,8 +74,8 @@ class ProductDetails extends React.Component {
     }
 
     render() {
-        return (<div className='containerProductDetalsWithCondition'>
-        {this.state.statusCode === 200 ? (<div className='containerProductDetals'>
+        return (<div className='containerProductDetailsWithCondition'>
+        {this.state.statusCode === 200 ? (<div className='containerProductDetails'>
             <div className='pictures'>
                 <div className='big'><img src={this.state.images[0]} alt='img'></img></div>
                 <div className='smallContainer'>
