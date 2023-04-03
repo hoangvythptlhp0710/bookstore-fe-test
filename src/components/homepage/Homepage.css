@@ -6,6 +6,7 @@
     line-height: normal;
     box-sizing: border-box;
     padding: 0 30px;
+    height: max-content;
 }
 
 .inner {

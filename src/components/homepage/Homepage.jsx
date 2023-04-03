@@ -134,10 +134,10 @@ class HomepageWithLocation extends Component {
                                         {
                                             this.state.products.map(product => (
                                                 <div className="item text-center" key={product.id}>
-                                                    <a href={"/product?id="+product.id} className="product-item">
+                                                    <a href={"/product/"+product.id} className="product-item">
                                                         <div className="product-img">
                                                             <img className="lazy-load"
-                                                                 src={product.images}
+                                                                 src={product.images[0]}
                                                                  data-src={product.images}
                                                                  alt={product.name}/>
                                                             <div className="sale-off">-20%</div>
