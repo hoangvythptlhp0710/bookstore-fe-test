@@ -23,7 +23,7 @@ class HeaderWithNavigate extends Component {
     baseLink = "http://localhost:3000/product/"
     render() {
         return (
-            <nav bg='light' expand='lg'>
+            <nav>
                 <div className='top'>
                     <nav className='ml-auto'>
                         <a href='/login'>Login |</a>
@@ -68,7 +68,7 @@ class HeaderWithNavigate extends Component {
             </nav>
         );
     }
-};
+}
 
 function Header(props) {
     let navigate = useNavigate();

@@ -9,19 +9,19 @@ function Footer() {
         <footer className="dark-footer">
             <div className="slogans">
                 <div>
-                    <img src="./images/service.png" alt="service 5 star" className="imgFooter"></img>
+                    <img src="/images/service.png" alt="service 5 star" className="imgFooter"></img>
                     <p>Dedicated service</p>
                 </div>
                 <div>
-                    <img src="./images/diversity.png" alt="diversity" className="imgFooter"></img>
+                    <img src="/images/diversity.png" alt="diversity" className="imgFooter"></img>
                     <p>Different products</p>
                 </div>
                 <div>
-                    <img src="./images/delivery.png" alt="good delivery" className="imgFooter"></img>
+                    <img src="/images/delivery.png" alt="good delivery" className="imgFooter"></img>
                     <p>Fast delivery</p>
                 </div>
                 <div>
-                    <img src="./images/price.png" alt="suitable price" className="imgFooter"></img>
+                    <img src="/images/price.png" alt="suitable price" className="imgFooter"></img>
                     <p>Dedicated service</p>
                 </div>
             </div>
