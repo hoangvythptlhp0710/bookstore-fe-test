@@ -57,6 +57,42 @@ form input {
 
 .cart {
     width: 30px;
+    margin-right: 30px;
+}
+
+.account {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    list-style: none;
+}
+.sub-account {
+    position: absolute;
+    background-color: #f7fffa;
+    width: 80px;
+    margin-left: -30px;
+    display: none;
+}
+
+.account:hover .sub-account {
+    display: block;
+}
+
+.sub-account div {
+    padding: 8px 0px;
+    margin-left: -5px;
+    border-bottom: 1px solid #33cc66;
+}
+
+.sub-account div:last-child {
+    border: none;
+}
+
+.sub-account div:hover {
+    background-color: #33cc66;
+}
+.sub-account div:hover a{
+    color: white;
 }
 
 .search {
