@@ -32,7 +32,7 @@ class HomepageWithLocation extends Component {
     }
 
     fetchSort = (direction) => {
-        this.props.location.state.name = null;
+        this.props.location.state = null;
         axios.get(this.url, {params: {price: true, direction: direction}}).then((res) => {
             const products = res.data.content;
             const pages = res.data.totalPages;
@@ -40,8 +40,7 @@ class HomepageWithLocation extends Component {
             this.setState({
                 products,
                 pages,
-                current,
-                search: this.props.location.state.name
+                current
             });
         })
     }
