@@ -6,12 +6,7 @@ import { Link } from 'react-router-dom';
 
 class ProductDetails extends React.Component {
     state = {
-        productId: 1,
-        name: '',
-        price: 0,
-        description: '',
-        inStock: 0,
-        images: [],
+        outputCart: {},
         count: 1,
         statusCode: 0,
         errorMessage:''
@@ -43,7 +38,10 @@ class ProductDetails extends React.Component {
         .then((res) => {
         })
         .catch(error => {
-            console.log(error)
+            this.setState({
+                statusCode: error.response.status,
+                errorMessage: error.message,
+            })
         })
     };
 
