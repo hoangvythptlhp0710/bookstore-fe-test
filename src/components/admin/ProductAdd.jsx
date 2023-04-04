@@ -1,9 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Admin.css";
-
-
 
 
 export default class ProductAdd extends React.Component {
@@ -77,7 +74,10 @@ export default class ProductAdd extends React.Component {
         axios.post(this.url + 'admin/product', product, { headers })
             .then((res) => {
                 console.log(res.data);
-                this.props.reloadProductList();         
+                if (res.status === 200) {
+                    window.location = "/admin";
+                }
+                // this.props.reloadProductList();         
             })
             .catch(error => {
                 console.error(error);
@@ -87,30 +87,31 @@ export default class ProductAdd extends React.Component {
     render() {
         return (
             <div className="container text-center mt-3 mb-5">
-                <h3 className=" text-primary- p-2">
+                <h3 className=" text-primary- p-2 ">
                     ADD NEW PRODUCT
                 </h3>
                 <form className="form add card p-3 " onSubmit={this.handleSubmit}>
-                    <label className="form-label h5 text-succes">Name</label>
-                    <input type="text" className="form-control" id="name" value={this.state.name}  required onChange={this.handleChange} />
+                    <label className=" h6 guide">Name</label>
+                    <input type="text" className="form-control enter" id="name" value={this.state.name}  required onChange={this.handleChange} />
 
-                    <label className="form-label h5 text-succes">Description</label>
-                    <input type="text" className="form-control" id="description" value={this.state.description}  required onChange={this.handleChange} />
+                    <label className=" h6 guide">Description</label>
+                    <input type="text" className="form-control enter" id="description" value={this.state.description}  required onChange={this.handleChange} />
 
-                    <label className="form-label h5 text-succes">Price</label>
-                    <input type="number" className="form-control" id="price" value={this.state.price}  required onChange={this.handleChange} />
-
-
-                    <label className="form-label h5 text-succes">Quantity</label>
-                    <input type="number" className="form-control" id="inStock" value={this.state.inStock}  required onChange={this.handleChange} />
+                    <label className="h6 guide">Price</label>
+                    <input type="number" className="form-control enter" id="price" value={this.state.price}  required onChange={this.handleChange} />
 
 
-                    <label className="form-label h5 text-succes">Images</label>
-                    <input type="text" className="form-control" id="images" value={this.state.images}  required onChange={this.handleAddImage}  />
+                    <label className="h6 guide">Quantity</label>
+                    <input type="number" className="form-control enter" id="inStock" value={this.state.inStock}  required onChange={this.handleChange} />
 
 
-                    <label className="form-label h5 text-succes">Category</label>
-                    <select  className="form-control" id="category" onChange={ this.handleCategoryChange }>
+                    <label className="h6 guide">Images</label>
+                    <input type="text" className="form-control enter" id="images" value={this.state.images}  required onChange={this.handleAddImage}  />
+
+
+                    <label className=" h6 guide ">Category</label>
+                    <select  className="form-control enter" id="category" onChange={ this.handleCategoryChange } >
+                            <option >Select Category</option>
                             <option value="Comic">Comic</option>
                             <option value="Detective">Detective</option>
                             <option value="Literature">Literature</option>
@@ -120,11 +121,9 @@ export default class ProductAdd extends React.Component {
                             <option value="Horror">Horro</option>
                     </select>
                    
-                    <div className="text-center">
-                        <button type="submit" className="btn btn-primary  bg-success"> 
-                        Add Book
-                        </button>
-                        <Link to={"/admin" } className="btn btn-primary " type="submit" >Add product</Link>
+                    <div className="btnSubmit">
+                        <button type="submit" className="btn btn-primary  bg-success">Add Product</button>
+                       
                     </div>
                 </form>
             </div>

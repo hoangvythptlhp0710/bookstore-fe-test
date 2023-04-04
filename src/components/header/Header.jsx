@@ -59,6 +59,7 @@ class HeaderWithNavigate extends Component {
                     <a href='/#'><Link to={this.baseLink + "/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
+                            <div><a href='/admin'>Product management</a></div>
                             <div><a href='/updateCustomer'>Update</a></div>
                             <div><a href='/deleteCustomer'>Delete</a></div>
                         </ul>

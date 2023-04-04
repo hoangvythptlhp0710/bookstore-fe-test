@@ -11,6 +11,7 @@ import Admin from './components/admin/Admin';
 import ProductDetails from './components/products/ProductDetails';
 import "./App.css"
 import ShoppingCart from './components/cart/ShoppingCart';
+import ProductUpdate from './components/admin/ProductUpdate';
 
 
 
@@ -29,9 +30,8 @@ function App() {
                     <Route path="/admin" element={<Admin/>}/>
                     {/* <Route path="/admin/product" element={<ProductList/>}/> */}
                     <Route path="/admin/add" element={<ProductAdd/>}/>
-                </Routes>
-                <Footer/>
-                
+                    <Route path="/admin/product/:id" element={<ProductUpdate/>}/>
+                </Routes>  
             </div>
             <Footer/>
         </Router>

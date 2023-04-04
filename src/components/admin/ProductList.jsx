@@ -39,10 +39,19 @@ export default class ProductList extends React.Component {
         }
     }
 
-   
+    
 
+   
+   
     deleteRow = (id) => {
-        axios.delete(`${this.url}delete/${id}`)
+        const accessToken = localStorage.getItem('accessToken');
+
+
+        const headers = {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          };
+        axios.delete(`${this.url}admin/product/${id}`, {headers})
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -96,11 +105,12 @@ export default class ProductList extends React.Component {
                                         
                                         <td>
                                             {/* <Link to={"/update/" + product.id  } className="btn btn-primary">Update</Link> */}
-                                            <i className="bi bi-pen"></i>
+                                            
+                                            <a href={`/admin/product/` + `${product.id}`}><i className="bi bi-pen"></i></a>
                                         </td>
                                         <td>
-                                        {/* <button className="btn btn-danger" onClick={() => { this.deleteRow(student.id) }}>DELETE</button> */}
-                                        <i className="bi bi-trash"></i>
+                                        {/* <button className="btn btn-danger" onClick={() => { this.deleteRow(product.id) }}>DELETE</button> */}
+                                        <i className="bi bi-trash" onClick={() => { this.deleteRow(product.id) }}></i>
                                         </td>
                                     </tr>
                                 )
