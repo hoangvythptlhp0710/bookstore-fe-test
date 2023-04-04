@@ -56,7 +56,7 @@ class HeaderWithNavigate extends Component {
                             <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
-                    <a href='/#'><Link to={this.baseLink + "/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
+                    <a href='/#'><Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
                             <div><a href='/updateCustomer'>Update</a></div>
