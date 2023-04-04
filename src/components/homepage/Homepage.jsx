@@ -97,7 +97,6 @@ class HomepageWithLocation extends Component {
                 }
             }
         } else {
-            const arr = [];
             for (let i = 0; i < this.state.pages; i++) {
                 if (this.state.current === i) {
                     arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {
@@ -110,20 +109,24 @@ class HomepageWithLocation extends Component {
                 }
             }
         }
-        if (this.state.products.length !== 0)
+        if (this.state.products.length !== 0) {
             return (
                 <section className="container">
                     <div className='carousel'>
-                        <img src="./images/book2.jpg" alt='book2'/>
+                        <img src="/images/book2.jpg" alt='book2'/>
                     </div>
                     <hr></hr>
                     <div className="wrapper">
                         <div className="text-center">
                             <button className="bi-sort-up btn btn-outline-secondary m-2"
-                                    onClick={() => {this.fetchSort("asc")}}> Price
+                                    onClick={() => {
+                                        this.fetchSort("asc")
+                                    }}> Price
                             </button>
                             <button className="bi-sort-down btn btn-outline-secondary m-2"
-                                    onClick={() => {this.fetchSort("desc")}}> Price
+                                    onClick={() => {
+                                        this.fetchSort("desc")
+                                    }}> Price
                             </button>
                         </div>
                         <div className="inner">
@@ -133,10 +136,10 @@ class HomepageWithLocation extends Component {
                                         {
                                             this.state.products.map(product => (
                                                 <div className="item text-center" key={product.id}>
-                                                    <a href={"/product?id="+product.id} className="product-item">
+                                                    <a href={"/product/" + product.id} className="product-item">
                                                         <div className="product-img">
                                                             <img className="lazy-load"
-                                                                 src={product.images}
+                                                                 src={product.images[0]}
                                                                  data-src={product.images}
                                                                  alt={product.name}/>
                                                             <div className="sale-off">-20%</div>
@@ -162,6 +165,7 @@ class HomepageWithLocation extends Component {
                     </div>
                 </section>
             )
+        }
     }
 }
 

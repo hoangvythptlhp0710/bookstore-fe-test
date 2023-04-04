@@ -8,6 +8,9 @@ import Footer from "./components/footer/Footer";
 // import ProductList from './components/admin/ProductList';
 import ProductAdd from './components/admin/ProductAdd';
 import Admin from './components/admin/Admin';
+import ProductDetails from './components/products/ProductDetails';
+import "./App.css"
+import ShoppingCart from './components/cart/ShoppingCart';
 
 
 
@@ -15,9 +18,11 @@ function App() {
 
     return (
         <Router>
+            <Header/>
             <div className="App">
-                <Header/>
                 <Routes>
+                    <Route path="/product/:id" element={<ProductDetails/>} />
+                    <Route path='/cart/:userId' element={<ShoppingCart/>}></Route>
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
@@ -28,6 +33,7 @@ function App() {
                 <Footer/>
                 
             </div>
+            <Footer/>
         </Router>
     )
 }
