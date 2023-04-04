@@ -8,6 +8,7 @@ import Footer from "./components/footer/Footer";
 import ProductDetails from './components/products/ProductDetails';
 import "./App.css"
 import ShoppingCart from './components/cart/ShoppingCart';
+import ProductsByCategory from './components/products/ProductsByCategory';
 
 
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path='/product/:category/:page' element={<ProductsByCategory/>}></Route>
                 </Routes>
             </div>
             <Footer/>

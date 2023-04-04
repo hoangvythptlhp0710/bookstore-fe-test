@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import withRouter from './WithRouter';
 import "./Product.css";
-import { Link } from 'react-router-dom';
 
 class ProductDetails extends React.Component {
     state = {
@@ -104,12 +103,10 @@ class ProductDetails extends React.Component {
                     <button className='nBtn' onClick={this.handleIncrement}>+</button>
                 </div>
                 <div className='addCartOrBuy'>
-                    {/* <Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}> */}
                     <button className='addToCart' onClick={this.handleClick}>
                         <i className="bi bi-cart"></i>
                         Add to cart
                     </button>
-                    {/* </Link> */}
                     <button className='buyNow'>
                         Buy now
                     </button>

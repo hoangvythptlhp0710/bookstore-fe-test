@@ -36,18 +36,18 @@ class HeaderWithNavigate extends Component {
                         <div class="dropdown">
                             <div class="dropbtn"><i class="bi bi-list"></i></div>
                             <div class="dropdown-content">
-                                <a href={this.baseLink + "comic"}>Comic</a>
-                                <a href={this.baseLink + "adventure"}>Adventure</a>
-                                <a href={this.baseLink + "literature"}>Literature</a>
-                                <a href={this.baseLink + "detective"}>Detective</a>
-                                <a href={this.baseLink + "fiction"}>Fiction</a>
-                                <a href={this.baseLink + "horror"}>Horror</a>
+                                <a href={this.baseLink + "comic/0"}>Comic</a>
+                                <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                                <a href={this.baseLink + "literature/0"}>Literature</a>
+                                <a href={this.baseLink + "detective/0"}>Detective</a>
+                                <a href={this.baseLink + "fiction/0"}>Fiction</a>
+                                <a href={this.baseLink + "horror/0"}>Horror</a>
                             </div>
                         </div>
-                        <a href={this.baseLink + "comic"}>Comic</a>
-                        <a href={this.baseLink + "adventure"}>Adventure</a>
-                        <a href={this.baseLink + "literature"}>Literature</a>
-                        <a href={this.baseLink + "detective"}>Detective</a>
+                        <a href={this.baseLink + "comic/0"}>Comic</a>
+                        <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                        <a href={this.baseLink + "literature/0"}>Literature</a>
+                        <a href={this.baseLink + "detective/0"}>Detective</a>
                     </div>
                     <form className='d-flex'>
                         <div className='d-flex'>
