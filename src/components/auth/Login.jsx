@@ -34,6 +34,8 @@ export default class Login extends Component {
                 if (res.status === 200) {
                     window.location = "/";
                 }
+                const accessToken = res.data.accessToken;
+                localStorage.setItem('accessToken', accessToken);
             })
     }
 

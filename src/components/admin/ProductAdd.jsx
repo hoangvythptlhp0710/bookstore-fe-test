@@ -5,23 +5,41 @@ import "./Admin.css";
 
 
 
+
 export default class ProductAdd extends React.Component {
     state = {
         name: '',
         description: '',
-        price: '',
+        price:'',
         inStock: '',
         images: '',
         category: ''
     }
 
-
+    
 
     url = "http://localhost:8080/"
 
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
+        })
+    }
+
+    handleAddImage = (e) => {
+        if (e.target.id === "images") {
+            // Split the comma-separated string into an array of strings
+            const images = e.target.value.split(",");
+            this.setState({ [e.target.id]: images });
+          } else {
+            this.setState({ [e.target.id]: e.target.value });
+          }
+  }
+
+
+    handleCategoryChange = (e) => {
+        this.setState({
+            category: e.target.value
         })
     }
 
@@ -34,25 +52,35 @@ export default class ProductAdd extends React.Component {
             description: '',
             price: '',
             inStock: '',
-            images: '',
+            images: [],
             category: ''
         })
 
         const product = {
             name: this.state.name,
             description: this.state.description,
-            price: this.state.price,
-            inStock: this.state.inStock,
+            price: Number(this.state.price),
+            inStock: Number(this.state.inStock),
             images: this.state.images,
             category: this.state.category
         }
 
-        axios.post(this.url + 'admin/product', product)
+        const accessToken = localStorage.getItem('accessToken');
+
+
+        const headers = {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          };
+
+
+        axios.post(this.url + 'admin/product', product, { headers })
             .then((res) => {
-                console.log(res);
                 console.log(res.data);
-                this.props.reloadProductList();
-               
+                this.props.reloadProductList();         
+            })
+            .catch(error => {
+                console.error(error);
             })
     }
 
@@ -70,19 +98,19 @@ export default class ProductAdd extends React.Component {
                     <input type="text" className="form-control" id="description" value={this.state.description}  required onChange={this.handleChange} />
 
                     <label className="form-label h5 text-succes">Price</label>
-                    <input type="text" className="form-control" id="price" value={this.state.price}  required onChange={this.handleChange} />
+                    <input type="number" className="form-control" id="price" value={this.state.price}  required onChange={this.handleChange} />
 
 
                     <label className="form-label h5 text-succes">Quantity</label>
-                    <input type="text" className="form-control" id="inStock" value={this.state.inStock}  required onChange={this.handleChange} />
+                    <input type="number" className="form-control" id="inStock" value={this.state.inStock}  required onChange={this.handleChange} />
 
 
                     <label className="form-label h5 text-succes">Images</label>
-                    <input type="text" className="form-control" id="images" value={this.state.images}  required onChange={this.handleChange} />
+                    <input type="text" className="form-control" id="images" value={this.state.images}  required onChange={this.handleAddImage}  />
 
 
                     <label className="form-label h5 text-succes">Category</label>
-                    <select  className="form-control" id="category">
+                    <select  className="form-control" id="category" onChange={ this.handleCategoryChange }>
                             <option value="Comic">Comic</option>
                             <option value="Detective">Detective</option>
                             <option value="Literature">Literature</option>
