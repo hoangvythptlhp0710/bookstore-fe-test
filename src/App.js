@@ -24,8 +24,7 @@ function App() {
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    {/*<Route path="/customer{customerId}" element={<UpdateCustomer/>}/>*/}
-                    <Route path="/update" element={<UpdateCustomer/>}/>
+                    <Route path="/update/" element={<UpdateCustomer/>}/>
                     <Route path='/product/:category/:page' element={<ProductsByCategory/>}></Route>
                 </Routes>
             </div>
