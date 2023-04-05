@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Header.css'
-import {useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 class HeaderWithNavigate extends Component {
     url = "http://localhost:8080/search"
@@ -17,12 +17,13 @@ class HeaderWithNavigate extends Component {
 
     search = (event) => {
         event.preventDefault();
-        this.props.navigate('/?name=' + this.state.name, {state: {name: this.state.name}})
+        this.props.navigate('/?name=' + this.state.name, { state: { name: this.state.name } })
     }
 
+    baseLink = "http://localhost:3000/product/"
     render() {
         return (
-            <nav bg='light' expand='lg'>
+            <nav>
                 <div className='top'>
                     <nav className='ml-auto'>
                         <a href='/login'>Login |</a>
@@ -32,19 +33,30 @@ class HeaderWithNavigate extends Component {
                 <div className='menu'>
                     <a href='/'><img src='/images/logo.png' alt='logo' className='logo'></img></a>
                     <div className='cats'>
-                        <a href='/#'>Comic book</a>
-                        <a href='/#'>Adventure book</a>
-                        <a href='/#'>Literature</a>
-                        <a href='/#'>Detective book</a>
+                        <div class="dropdown">
+                            <div class="dropbtn"><i class="bi bi-list"></i></div>
+                            <div class="dropdown-content">
+                                <a href={this.baseLink + "comic/0"}>Comic</a>
+                                <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                                <a href={this.baseLink + "literature/0"}>Literature</a>
+                                <a href={this.baseLink + "detective/0"}>Detective</a>
+                                <a href={this.baseLink + "fiction/0"}>Fiction</a>
+                                <a href={this.baseLink + "horror/0"}>Horror</a>
+                            </div>
+                        </div>
+                        <a href={this.baseLink + "comic/0"}>Comic</a>
+                        <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                        <a href={this.baseLink + "literature/0"}>Literature</a>
+                        <a href={this.baseLink + "detective/0"}>Detective</a>
                     </div>
                     <form className='d-flex'>
                         <div className='d-flex'>
                             <input type='search' placeholder='Enter name of book' className='search mr-2'
-                                   id="name" onChange={this.handleChange}/>
+                                id="name" onChange={this.handleChange} />
                             <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
-                    <a href='/#'><img src='/images/cart.png' alt='cart' className='cart'></img></a>
+                    <a href='/#'><Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
                             <div><a href='/customer/'>Update</a></div>
@@ -55,11 +67,11 @@ class HeaderWithNavigate extends Component {
             </nav>
         );
     }
-};
+}
 
 function Header(props) {
     let navigate = useNavigate();
-    return <HeaderWithNavigate {...props} navigate={navigate}/>
+    return <HeaderWithNavigate {...props} navigate={navigate} />
 }
 
 export default Header;

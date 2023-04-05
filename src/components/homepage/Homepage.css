@@ -1,16 +1,17 @@
 .wrapper {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     color: #000000;
     font-weight: 300;
     line-height: normal;
     box-sizing: border-box;
     padding: 0 30px;
+    height: max-content;
 }
 
 .inner {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     color: #000000;
     font-weight: 300;
     line-height: normal;
@@ -19,7 +20,7 @@
 
 .products {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     color: #000000;
     font-weight: 300;
     line-height: normal;
@@ -31,18 +32,19 @@
     width: 100%;
     padding: 20px;
     margin-top: 50px;
-    background-color: #33cc99;
+
 }
 
 .box {
+    background-color: #33cc99;
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     color: #000000;
     font-weight: 300;
     line-height: normal;
     box-sizing: border-box;
     list-style: none;
-    padding: 0;
+    padding: 10px 10px 0px 0px;
     margin: 0 0 10px -10px;
 }
 
@@ -55,7 +57,7 @@
 
 .product-item {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: 300;
     line-height: normal;
     list-style: none;
@@ -69,7 +71,7 @@
 
 .product-img {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: 300;
     line-height: normal;
     list-style: none;
@@ -82,7 +84,7 @@
 
 .lazy-load {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: 300;
     line-height: normal;
     list-style: none;
@@ -108,7 +110,7 @@
     list-style: none;
     box-sizing: border-box;
     font-size: 12px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: bold;
     position: absolute;
     top: 5px;
@@ -124,7 +126,7 @@
 }
 
 .product-title {
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: 300;
     line-height: normal;
     list-style: none;
@@ -141,7 +143,7 @@
 
 .product-price {
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: 300;
     line-height: normal;
     list-style: none;
@@ -156,14 +158,14 @@
     list-style: none;
     box-sizing: border-box;
     display: inline-block;
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: bold;
     float: left;
     color: #ff0000;
 }
 
 .page {
-    font-family: "Calibri";
+    font-family: "Calibri", "cursive";
     float: right;
     border-radius: 50%;
     padding: 10px;
@@ -173,17 +175,17 @@
 
 .page-clicked {
     font-weight: 600;
-    background-color: #00ce3c;
+    background-color: #85ffa9;
     border: inset 2px #72ff72;
 }
 
 .page-click {
-    background-color: #86ffaa;
+    background-color: #a8ffc3;
     border: outset 2px #33cc33;
 }
 
 .original-price {
-    font-family: "Roboto";
+    font-family: "Roboto", "cursive";
     font-weight: 300;
     line-height: normal;
     list-style: none;

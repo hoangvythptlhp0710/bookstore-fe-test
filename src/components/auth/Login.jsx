@@ -30,11 +30,33 @@ export default class Login extends Component {
         }
         axios.post(this.url, Account, {withCredentials: true})
             .then(res => {
-                console.log("Received token: " + res.data);
+                localStorage.setItem("access_token", res.data.accessToken);
+                localStorage.setItem("userId", res.data.userId);
                 if (res.status === 200) {
                     window.location = "/";
                 }
             })
+        axios.create({
+            baseURL: process.env.REACT_APP_API_URL,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).interceptors.request.use(async (config) => {
+            const customHeader = {};
+            const accessToken =localStorage.getItem("access_token");
+            if(accessToken) {
+                customHeader.Authorization = "Bearer " + accessToken;
+            }
+            return {
+                ...config,
+                headers: {
+                    ...customHeader,
+                    ...config.headers
+                }
+            }
+        });
+
+        
     }
 
     render() {
