@@ -47,8 +47,7 @@ class HeaderWithNavigate extends Component {
                     <a href='/#'><img src='/images/cart.png' alt='cart' className='cart'></img></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
-                            <div><a href='/updateCustomer'>Update</a></div>
-                            <div><a href='/deleteCustomer'>Delete</a></div>
+                            <div><a href='/customer/'>Update</a></div>
                         </ul>
                     </li>
                 </div>
