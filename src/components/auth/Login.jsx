@@ -63,7 +63,6 @@ export default class Login extends Component {
 
     render() {
         return (
-
             <div className="auth-wrapper">
                 <div className="auth-inner">
                     <form onSubmit={this.handleSubmit}>

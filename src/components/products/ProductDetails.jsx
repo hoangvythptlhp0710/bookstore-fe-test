@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import withRouter from './WithRouter';
 import "./Product.css";
-import { Link } from 'react-router-dom';
 
 class ProductDetails extends React.Component {
     state = {
@@ -26,16 +25,23 @@ class ProductDetails extends React.Component {
             this.setState({ count: this.state.count - 1 });
         }
     };
-    handleClick = () => {
+    handleClick = async () => {
+        const data = {};
+        data.productId = this.state.productId;
+        data.quantity = this.state.count;
+        this.postProductToCart(data, () => {
+            window.location.href = "http://localhost:3000/cart/" + localStorage.getItem("user")
+        })
+    };
+
+    async postProductToCart(data, callback) {
         const headers = {
             'Authorization': 'Bearer ' + localStorage.getItem("access_token"),
             'Content-Type': 'application/json'
         };
-        const data = {};
-        data.productId = this.state.productId;
-        data.quantity = this.state.count;
-        axios.post("http://localhost:8080/cart/"+ localStorage.getItem("userId"), JSON.stringify(data), {headers})
+        await axios.post("http://localhost:8080/cart/"+ localStorage.getItem("userId"), JSON.stringify(data), {headers})
         .then((res) => {
+            
         })
         .catch(error => {
             this.setState({
@@ -43,7 +49,8 @@ class ProductDetails extends React.Component {
                 errorMessage: error.message,
             })
         })
-    };
+        callback()
+    }
 
     fetchProduct(id) {
         axios.get("http://localhost:8080/product/" + id)
@@ -96,12 +103,10 @@ class ProductDetails extends React.Component {
                     <button className='nBtn' onClick={this.handleIncrement}>+</button>
                 </div>
                 <div className='addCartOrBuy'>
-                    <Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}>
                     <button className='addToCart' onClick={this.handleClick}>
                         <i className="bi bi-cart"></i>
                         Add to cart
                     </button>
-                    </Link>
                     <button className='buyNow'>
                         Buy now
                     </button>

@@ -36,18 +36,18 @@ class HeaderWithNavigate extends Component {
                         <div class="dropdown">
                             <div class="dropbtn"><i class="bi bi-list"></i></div>
                             <div class="dropdown-content">
-                                <a href={this.baseLink + "comic"}>Comic</a>
-                                <a href={this.baseLink + "adventure"}>Adventure</a>
-                                <a href={this.baseLink + "literature"}>Literature</a>
-                                <a href={this.baseLink + "detective"}>Detective</a>
-                                <a href={this.baseLink + "fiction"}>Fiction</a>
-                                <a href={this.baseLink + "horror"}>Horror</a>
+                                <a href={this.baseLink + "comic/0"}>Comic</a>
+                                <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                                <a href={this.baseLink + "literature/0"}>Literature</a>
+                                <a href={this.baseLink + "detective/0"}>Detective</a>
+                                <a href={this.baseLink + "fiction/0"}>Fiction</a>
+                                <a href={this.baseLink + "horror/0"}>Horror</a>
                             </div>
                         </div>
-                        <a href={this.baseLink + "comic"}>Comic</a>
-                        <a href={this.baseLink + "adventure"}>Adventure</a>
-                        <a href={this.baseLink + "literature"}>Literature</a>
-                        <a href={this.baseLink + "detective"}>Detective</a>
+                        <a href={this.baseLink + "comic/0"}>Comic</a>
+                        <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                        <a href={this.baseLink + "literature/0"}>Literature</a>
+                        <a href={this.baseLink + "detective/0"}>Detective</a>
                     </div>
                     <form className='d-flex'>
                         <div className='d-flex'>
@@ -56,12 +56,12 @@ class HeaderWithNavigate extends Component {
                             <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
-                    <a href='/#'><Link to={this.baseLink + "/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
+                    <a href='/#'><Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
                             <div><a href='/admin'>Product management</a></div>
-                            <div><a href='/updateCustomer'>Update</a></div>
-                            <div><a href='/deleteCustomer'>Delete</a></div>
+    
+                            <div><a href='/update/'>Update</a></div>
                         </ul>
                     </li>
                 </div>
