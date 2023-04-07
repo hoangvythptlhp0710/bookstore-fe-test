@@ -43,24 +43,24 @@ export default class ShoppingCart extends React.Component {
     };
 
     handleIncrement = (outputCart) => {
-        const itemId = outputCart.itemId;
+        const productId = outputCart.productId;
         const quantity = outputCart.quantity + 1;
-        this.handleClick(quantity, itemId);
-        this.updateState(quantity, itemId)
+        this.handleClick(quantity, productId);
+        this.updateState(quantity, productId)
     };
 
     handleDecrement = (outputCart) => {
-        const itemId = outputCart.itemId;
+        const productId = outputCart.productId;
         const quantity = outputCart.quantity - 1;
-        this.handleClick(quantity, itemId);
-        this.updateState(quantity, itemId)
+        this.handleClick(quantity, productId);
+        this.updateState(quantity, productId)
     };
 
-    updateState = (quantity, itemId) => {
+    updateState = (quantity, productId) => {
         let totalPrice = 0;
         let outputCarts = this.state.outputCarts
         outputCarts.map((item) => {
-            if(item.itemId === itemId) {
+            if(item.productId === productId) {
                 item.quantity = quantity;
             }
             totalPrice += item.price * item.quantity;
@@ -71,13 +71,13 @@ export default class ShoppingCart extends React.Component {
             total: totalPrice
         })
     }
-    handleClick = (quantity, itemId) => {
+    handleClick = (quantity, productId) => {
 
         const headers = {
             'Authorization': 'Bearer ' + localStorage.getItem("access_token"),
             'Content-Type': 'application/json'
         };
-        axios.put("http://localhost:8080/cart/" + itemId + "/" + quantity, { headers })
+        axios.put("http://localhost:8080/cart/" + localStorage.getItem("userId") + "/" + productId + "/" + quantity, { headers })
             .then((res) => {
 
             })

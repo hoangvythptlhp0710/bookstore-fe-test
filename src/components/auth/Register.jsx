@@ -38,6 +38,9 @@ export default class Register extends Component {
                     window.location = "/login";
                 }
             })
+            .catch((error) => {
+                alert(error.response.data.errors[0].defaultMessage)
+            })
     }
 
     render() {
@@ -52,6 +55,7 @@ export default class Register extends Component {
                             <input
                                 type="text"
                                 id='username'
+                                required
                                 className="form-control"
                                 placeholder="Enter username"
                                 onChange={this.handleChange}
@@ -62,6 +66,7 @@ export default class Register extends Component {
                             <input
                                 type="email"
                                 id='email'
+                                required
                                 className="form-control"
                                 placeholder="Enter email"
                                 onChange={this.handleChange}
@@ -72,6 +77,7 @@ export default class Register extends Component {
                             <input
                                 type="password"
                                 id='password'
+                                required
                                 className="form-control"
                                 placeholder="Enter password"
                                 onChange={this.handleChange}

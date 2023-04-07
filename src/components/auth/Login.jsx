@@ -32,11 +32,17 @@ export default class Login extends Component {
             .then(res => {
                 localStorage.setItem("access_token", res.data.accessToken);
                 localStorage.setItem("userId", res.data.userId);
+                localStorage.setItem("role", res.data.role);
                 if (res.status === 200) {
-                    window.location = "/";
+                    if(res.data.role === "ROLE_ADMIN") {
+                        window.location = "/admin"
+                    } else if(res.data.role === "ROLE_CUSTOMER") {
+                        window.location = "/";
+                    }
                 }
-                const accessToken = res.data.accessToken;
-                localStorage.setItem('accessToken', accessToken);
+            })
+            .catch((error) => {
+                alert(error.response.data.message)
             })
         axios.create({
             baseURL: process.env.REACT_APP_API_URL,
@@ -72,6 +78,7 @@ export default class Login extends Component {
                             <input
                                 type="text"
                                 id='username'
+                                required
                                 className="form-control"
                                 placeholder="Enter username"
                                 onChange={this.handleChange}
@@ -82,6 +89,7 @@ export default class Login extends Component {
                             <input
                                 type="password"
                                 id='password'
+                                required
                                 className="form-control"
                                 placeholder="Enter password"
                                 onChange={this.handleChange}

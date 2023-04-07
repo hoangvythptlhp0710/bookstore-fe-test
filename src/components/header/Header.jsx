@@ -25,10 +25,17 @@ class HeaderWithNavigate extends Component {
         return (
             <nav>
                 <div className='top'>
-                    <nav className='ml-auto'>
-                        <a href='/login'>Login |</a>
-                        <a href='/register'>Register</a>
-                    </nav>
+                    {!localStorage.getItem("access_token") ?
+                        <nav className='ml-auto'>
+                            <a href='/login'>Login |</a>
+                            <a href='/register'>Register</a>
+                        </nav>
+                        : <nav className='ml-auto'>
+                            <a href='/logout'>Logout |</a>
+                            <a href='/login'>Re-login |</a>
+                            <a href='/register'>Re-register</a>
+                        </nav>
+                    }
                 </div>
                 <div className='menu'>
                     <a href='/'><img src='/images/logo.png' alt='logo' className='logo'></img></a>
@@ -59,8 +66,6 @@ class HeaderWithNavigate extends Component {
                     <a href='/#'><Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
-                            <div><a href='/admin'>Product management</a></div>
-    
                             <div><a href='/update/'>Update</a></div>
                         </ul>
                     </li>

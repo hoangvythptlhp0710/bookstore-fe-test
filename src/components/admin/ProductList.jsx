@@ -31,17 +31,11 @@ export default class ProductList extends React.Component {
         })
     }
 
-
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.reloadList !== prevProps.reloadList) {
             this.fetchProductList();
         }
     }
-
-    
-
-   
    
     deleteRow = (id) => {
         const accessToken = localStorage.getItem('accessToken');
@@ -59,7 +53,6 @@ export default class ProductList extends React.Component {
                 this.setState({ products })
             })
     }
-
 
     render() {
 
@@ -106,7 +99,7 @@ export default class ProductList extends React.Component {
                                         <td>
                                             {/* <Link to={"/update/" + product.id  } className="btn btn-primary">Update</Link> */}
                                             
-                                            <a href={`/admin/product/` + `${product.id}`}><i className="bi bi-pen"></i></a>
+                                            <a href={`/admin/product/${product.id}`}><i className="bi bi-pen"></i></a>
                                         </td>
                                         <td>
                                         {/* <button className="btn btn-danger" onClick={() => { this.deleteRow(product.id) }}>DELETE</button> */}
