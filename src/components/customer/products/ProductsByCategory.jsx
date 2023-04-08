@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
-import axios from "axios";
 import withRouter from './WithRouter';
+import req, { be_url } from '../../share';
 
 class ProductsByCategory extends Component {
     state = {
         products: [],
     }
-
-    url = "http://localhost:8080/"
 
     componentDidMount() {
         const category = this.props.params.category;
@@ -16,7 +14,7 @@ class ProductsByCategory extends Component {
     }
 
     fetchProducts(category, page) {
-        axios.get("http://localhost:8080/product/" + category + "/" + page)
+        req.get(be_url + "product/" + category + "/" + page)
         .then((res) => {
             this.setState({products: res.data.content})
         })

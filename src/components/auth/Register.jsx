@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Button} from 'react-bootstrap'
 import axios from 'axios';
 import './Auth.css'
+import { be_url } from '../share';
 
 export default class Register extends Component {
     state = {
@@ -10,7 +11,7 @@ export default class Register extends Component {
         password: ''
     }
 
-    url = "http://localhost:8080/register"
+    url = be_url + "register"
 
     handleChange = event => {
         this.setState({

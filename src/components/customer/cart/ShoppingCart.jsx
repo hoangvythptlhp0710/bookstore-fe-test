@@ -1,6 +1,8 @@
 import React from "react";
-import axios from 'axios';
 import "./ShoppingCart.css"
+import req from "../../share";
+import { be_url } from "../../share";
+import { userId } from "../../share";
 
 export default class ShoppingCart extends React.Component {
     state = {
@@ -8,7 +10,7 @@ export default class ShoppingCart extends React.Component {
         total: 0
     }
 
-    url = "http://localhost:8080/cart/"
+    url = be_url + "cart/"
 
     componentDidMount() {
         this.fetchProducts();
@@ -22,7 +24,7 @@ export default class ShoppingCart extends React.Component {
     }
 
     fetchProducts = () => {
-        axios.get(this.url + localStorage.getItem("userId")).then((res) => {
+        req.get(this.url + userId).then((res) => {
             const outputCarts = res.data;
             let totalPrice = 0;
             outputCarts.forEach(product => {
@@ -36,7 +38,7 @@ export default class ShoppingCart extends React.Component {
     };
 
     handleDelete = (id) => {
-        axios.delete(this.url + localStorage.getItem("userId") + `/${id}`).then(res => {
+        req.delete(this.url + userId + `/${id}`).then(res => {
             console.log(res);
             this.fetchProducts();
         });
@@ -52,15 +54,17 @@ export default class ShoppingCart extends React.Component {
     handleDecrement = (outputCart) => {
         const productId = outputCart.productId;
         const quantity = outputCart.quantity - 1;
-        this.handleClick(quantity, productId);
-        this.updateState(quantity, productId)
+        if (quantity >= 0) {
+            this.handleClick(quantity, productId);
+            this.updateState(quantity, productId)
+        }
     };
 
     updateState = (quantity, productId) => {
         let totalPrice = 0;
         let outputCarts = this.state.outputCarts
         outputCarts.map((item) => {
-            if(item.productId === productId) {
+            if (item.productId === productId) {
                 item.quantity = quantity;
             }
             totalPrice += item.price * item.quantity;
@@ -72,12 +76,7 @@ export default class ShoppingCart extends React.Component {
         })
     }
     handleClick = (quantity, productId) => {
-
-        const headers = {
-            'Authorization': 'Bearer ' + localStorage.getItem("access_token"),
-            'Content-Type': 'application/json'
-        };
-        axios.put("http://localhost:8080/cart/" + localStorage.getItem("userId") + "/" + productId + "/" + quantity, { headers })
+        req.put(this.url + userId + "/" + productId + "/" + quantity)
             .then((res) => {
 
             })

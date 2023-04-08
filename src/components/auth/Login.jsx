@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import './Auth.css';
+import { be_url } from '../share';
 
 export default class Login extends Component {
     state = {
@@ -9,7 +10,7 @@ export default class Login extends Component {
         password: ''
     }
 
-    url = "http://localhost:8080/login"
+    url = be_url + "login"
 
     handleChange = event => {
         this.setState({
@@ -44,27 +45,6 @@ export default class Login extends Component {
             .catch((error) => {
                 alert(error.response.data.message)
             })
-        axios.create({
-            baseURL: process.env.REACT_APP_API_URL,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        }).interceptors.request.use(async (config) => {
-            const customHeader = {};
-            const accessToken =localStorage.getItem("access_token");
-            if(accessToken) {
-                customHeader.Authorization = "Bearer " + accessToken;
-            }
-            return {
-                ...config,
-                headers: {
-                    ...customHeader,
-                    ...config.headers
-                }
-            }
-        });
-
-        
     }
 
     render() {

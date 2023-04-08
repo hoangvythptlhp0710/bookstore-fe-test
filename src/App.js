@@ -9,10 +9,10 @@ import ProductAdd from './components/admin/ProductAdd';
 import Admin from './components/admin/Admin';
 import "./App.css"
 import ProductUpdate from './components/admin/ProductUpdate';
-import UpdateCustomer from "./components/auth/UpdateCustomer";
-import ProductDetails from './components/products/ProductDetails';
-import ShoppingCart from './components/cart/ShoppingCart';
-import ProductsByCategory from './components/products/ProductsByCategory';
+import UpdateCustomer from "./components/customer/customerProfile/UpdateCustomer";
+import ProductDetails from './components/customer/products/ProductDetails';
+import ProductsByCategory from './components/customer/products/ProductsByCategory';
+import ShoppingCart from './components/customer/cart/ShoppingCart'
 
 
 function App() {

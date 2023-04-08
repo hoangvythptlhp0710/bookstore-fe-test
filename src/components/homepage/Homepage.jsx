@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from "axios";
 import "./Homepage.css";
 import {useLocation} from 'react-router-dom';
+import { be_url } from '../share';
 
 class HomepageWithLocation extends Component {
     state = {
@@ -11,7 +12,7 @@ class HomepageWithLocation extends Component {
         search: ""
     }
 
-    url = "http://localhost:8080/"
+    url = be_url
 
     componentDidMount() {
         this.fetchProductList();

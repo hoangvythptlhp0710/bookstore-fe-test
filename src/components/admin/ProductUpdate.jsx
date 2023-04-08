@@ -1,22 +1,18 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import req from "../share";
+import { be_url } from "../share";
 
 //form update 
 export default function ProductUpdate(props) {
     const {id} = useParams();
-    // let history = useNavigate()
-
     const [product, setProduct] = useState({
- 
         name: "",
         description: "",
         price:"",
         inStock: "",
         images: "",
         category: ""
-    
     })
 
     useEffect(() => {
@@ -30,22 +26,10 @@ export default function ProductUpdate(props) {
         setProduct({...product,[event.target.id] : event.target.value})
         console.log(product);
     }
-
-    const accessToken = localStorage.getItem('accessToken');
-
-
-        const headers = {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          };
-
-
-    let url = "http://localhost:8080/";
-
     const submitForm = async (e) => {
         e.preventDefault();
         console.log(product);
-        await axios.put(`${url}admin/product/${id}`, product, { headers })
+        await req.put(`${be_url}admin/product/${id}`, product)
             .then((result) => {
                 console.log(result);
                 // history("/");
@@ -55,7 +39,7 @@ export default function ProductUpdate(props) {
     }
 
     let fetchProductList = async () => {
-        await axios.get(url + 'product/' + id).then((res) => {
+        await req.get(be_url + 'product/' + id).then((res) => {
             const products = res.data;
             console.log(products);
             setProduct( products );

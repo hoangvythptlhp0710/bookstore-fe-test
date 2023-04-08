@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './Header.css'
 import { Link, useNavigate } from "react-router-dom";
+import { be_url, role, userId } from '../share';
+import { fe_url } from '../share';
 
 class HeaderWithNavigate extends Component {
-    url = "http://localhost:8080/search"
+    url = be_url + "search"
 
     state = {
         name: ""
@@ -20,7 +22,7 @@ class HeaderWithNavigate extends Component {
         this.props.navigate('/?name=' + this.state.name, { state: { name: this.state.name } })
     }
 
-    baseLink = "http://localhost:3000/product/"
+    baseLink = fe_url + "product/"
     render() {
         return (
             <nav>
@@ -55,6 +57,7 @@ class HeaderWithNavigate extends Component {
                         <a href={this.baseLink + "adventure/0"}>Adventure</a>
                         <a href={this.baseLink + "literature/0"}>Literature</a>
                         <a href={this.baseLink + "detective/0"}>Detective</a>
+                        {role === "ROLE_ADMIN" && <a href={fe_url+'admin'}>Manage product</a>}
                     </div>
                     <form className='d-flex'>
                         <div className='d-flex'>
@@ -63,7 +66,7 @@ class HeaderWithNavigate extends Component {
                             <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
-                    <a href='/#'><Link to={"http://localhost:3000/cart/" + localStorage.getItem("userId")}><i class="bi bi-cart2"></i></Link></a>
+                    <a href='/#'><Link to={fe_url + "cart/" + userId}><i class="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
                             <div><a href='/update/'>Update</a></div>

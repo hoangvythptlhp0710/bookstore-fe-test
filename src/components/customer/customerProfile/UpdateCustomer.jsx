@@ -1,14 +1,11 @@
-import axios from "axios";
 import React from 'react'
 import {Button} from "react-bootstrap";
+import req, { be_url, userId } from "../../share";
 
 export default class UpdateCustomer extends React.Component {
     state = {
         customer: {}
     }
-
-
-    url = "http://localhost:8080/"
 
     componentDidMount() {
         this.fetchCustomer();
@@ -19,18 +16,14 @@ export default class UpdateCustomer extends React.Component {
     }
 
     fetchCustomer = () => {
-        axios.get(this.url).then((res) => {
+        req.get(be_url).then((res) => {
             const customer = res.data;
             this.setState({customer});
         });
     };
     handleUpdate = (id) => {
         id.preventDefault();
-        const authorizeCustomer = {
-            'Authorization': 'Bearer' + localStorage.getItem("access_token"),
-            'Content-Type': 'application/json'
-        };
-        axios.put(this.url + "customer/" + localStorage.getItem("userId"), {authorizeCustomer}).then(res => {
+        req.put(be_url + "customer/" + userId).then(res => {
             console.log("Update successfully" + res);
             if (res.status === 200) {
                 window.location = "/";

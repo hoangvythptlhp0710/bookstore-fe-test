@@ -1,7 +1,7 @@
-import axios from "axios";
-// import { Link } from "react-router-dom";
 import React from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { be_url } from "../share";
+import req from "../share";
 
 export default class ProductList extends React.Component {
    
@@ -12,14 +12,12 @@ export default class ProductList extends React.Component {
         search: ""
     }
 
-    url = "http://localhost:8080/";
-
     componentDidMount() {
         this.fetchProductList();
     }
 
     fetchProductList = () => {
-        axios.get(this.url).then((res) => {
+        req.get(be_url).then((res) => {
             const products = res.data.content;
             const pages = res.data.totalPages;
             const current = res.data.number;
@@ -38,14 +36,7 @@ export default class ProductList extends React.Component {
     }
    
     deleteRow = (id) => {
-        const accessToken = localStorage.getItem('accessToken');
-
-
-        const headers = {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          };
-        axios.delete(`${this.url}admin/product/${id}`, {headers})
+        req.delete(`${be_url}admin/product/${id}`)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
