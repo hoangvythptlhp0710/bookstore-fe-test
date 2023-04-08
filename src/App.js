@@ -22,7 +22,7 @@ function App() {
             <Header/>
             <div className="App">
                 <Routes>
-                    <Route path="/product/:id" element={<ProductDetails/>} />
+                    <Route path="/product/:id" element={<ProductDetails/>}/>
                     <Route path='/cart/:userId' element={<ShoppingCart/>}></Route>
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>

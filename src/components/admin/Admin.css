@@ -1,21 +1,21 @@
 .add {
-    background-color: white ;
+    background-color: white;
     border-color: #33cc33;
     width: 60%;
 }
 
-.h6.guide{
+.h6.guide {
     margin-top: 15px;
     margin-bottom: 5px;
-    margin-left: 0px;
+    margin-left: 0;
     margin-right: auto;
 }
 
-.btnSubmit{
+.btnSubmit {
     margin-top: 30px;
 }
 
-.enter{
+.enter {
     border-color: #33cc33;
 }
  

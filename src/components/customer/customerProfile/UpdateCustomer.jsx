@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from "react-bootstrap";
-import req, { be_url, userId } from "../../share";
+import req, {be_url, userId} from "../../share";
 
 export default class UpdateCustomer extends React.Component {
     state = {

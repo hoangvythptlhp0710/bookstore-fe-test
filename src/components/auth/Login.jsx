@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import './Auth.css';
-import { be_url } from '../share';
+import {be_url} from '../share';
 
 export default class Login extends Component {
     state = {
@@ -35,9 +35,9 @@ export default class Login extends Component {
                 localStorage.setItem("userId", res.data.userId);
                 localStorage.setItem("role", res.data.role);
                 if (res.status === 200) {
-                    if(res.data.role === "ROLE_ADMIN") {
+                    if (res.data.role === "ROLE_ADMIN") {
                         window.location = "/admin"
-                    } else if(res.data.role === "ROLE_CUSTOMER") {
+                    } else if (res.data.role === "ROLE_CUSTOMER") {
                         window.location = "/";
                     }
                 }

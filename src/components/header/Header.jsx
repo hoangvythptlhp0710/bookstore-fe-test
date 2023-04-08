@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Header.css'
-import { Link, useNavigate } from "react-router-dom";
-import { be_url, role, userId } from '../share';
-import { fe_url } from '../share';
+import {Link, useNavigate} from "react-router-dom";
+import {accessToken, be_url, fe_url, role, userId} from '../share';
+import axios from "axios";
 
 class HeaderWithNavigate extends Component {
     url = be_url + "search"
@@ -10,6 +10,7 @@ class HeaderWithNavigate extends Component {
     state = {
         name: ""
     }
+    baseLink = fe_url + "product/"
 
     handleChange = event => {
         this.setState({
@@ -19,21 +20,32 @@ class HeaderWithNavigate extends Component {
 
     search = (event) => {
         event.preventDefault();
-        this.props.navigate('/?name=' + this.state.name, { state: { name: this.state.name } })
+        this.props.navigate(`/?name=${this.state.name}`, {state: {name: this.state.name}})
     }
 
-    baseLink = fe_url + "product/"
+    logout = () => {
+        axios.post(`${be_url}logout`).then((res) => {
+            if (res.status === 200) {
+                localStorage.clear()
+                this.setState({
+                    accessToken: null
+                })
+                window.location = "/"
+            }
+        })
+    }
+
     render() {
         return (
             <nav>
                 <div className='top'>
-                    {!localStorage.getItem("access_token") ?
+                    {!accessToken ?
                         <nav className='ml-auto'>
                             <a href='/login'>Login |</a>
                             <a href='/register'>Register</a>
                         </nav>
                         : <nav className='ml-auto'>
-                            <a href='/logout'>Logout |</a>
+                            <a href='/#' onClick={this.logout}>Logout |</a>
                             <a href='/login'>Re-login |</a>
                             <a href='/register'>Re-register</a>
                         </nav>
@@ -42,9 +54,9 @@ class HeaderWithNavigate extends Component {
                 <div className='menu'>
                     <a href='/'><img src='/images/logo.png' alt='logo' className='logo'></img></a>
                     <div className='cats'>
-                        <div class="dropdown">
-                            <div class="dropbtn"><i class="bi bi-list"></i></div>
-                            <div class="dropdown-content">
+                        <div className="dropdown">
+                            <div className="drop-btn"><i className="bi bi-list"></i></div>
+                            <div className="dropdown-content">
                                 <a href={this.baseLink + "comic/0"}>Comic</a>
                                 <a href={this.baseLink + "adventure/0"}>Adventure</a>
                                 <a href={this.baseLink + "literature/0"}>Literature</a>
@@ -57,16 +69,16 @@ class HeaderWithNavigate extends Component {
                         <a href={this.baseLink + "adventure/0"}>Adventure</a>
                         <a href={this.baseLink + "literature/0"}>Literature</a>
                         <a href={this.baseLink + "detective/0"}>Detective</a>
-                        {role === "ROLE_ADMIN" && <a href={fe_url+'admin'}>Manage product</a>}
+                        {role === "ROLE_ADMIN" && <a href={fe_url + 'admin'}>Manage product</a>}
                     </div>
                     <form className='d-flex'>
                         <div className='d-flex'>
                             <input type='search' placeholder='Enter name of book' className='search mr-2'
-                                id="name" onChange={this.handleChange} />
+                                   id="name" onChange={this.handleChange}/>
                             <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
-                    <a href='/#'><Link to={fe_url + "cart/" + userId}><i class="bi bi-cart2"></i></Link></a>
+                    <a href='/#'><Link to={fe_url + "cart/" + userId}><i className="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
                             <div><a href='/update/'>Update</a></div>
@@ -81,7 +93,7 @@ class HeaderWithNavigate extends Component {
 
 function Header(props) {
     let navigate = useNavigate();
-    return <HeaderWithNavigate {...props} navigate={navigate} />
+    return <HeaderWithNavigate {...props} navigate={navigate}/>
 }
 
 export default Header;

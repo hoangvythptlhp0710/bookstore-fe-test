@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import withRouter from './WithRouter';
-import req, { be_url } from '../../share';
+import req, {be_url} from '../../share';
 
 class ProductsByCategory extends Component {
     state = {
@@ -15,12 +15,12 @@ class ProductsByCategory extends Component {
 
     fetchProducts(category, page) {
         req.get(be_url + "product/" + category + "/" + page)
-        .then((res) => {
-            this.setState({products: res.data.content})
-        })
-        .catch((error) => {
+            .then((res) => {
+                this.setState({products: res.data.content})
+            })
+            .catch((error) => {
 
-        })
+            })
     }
 
     render() {

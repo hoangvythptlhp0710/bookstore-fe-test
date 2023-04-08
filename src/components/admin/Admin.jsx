@@ -1,5 +1,5 @@
 import ProductList from "./ProductList";
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 
 export default function Admin() {
@@ -8,9 +8,8 @@ export default function Admin() {
     return (
         <div className="container text-center card mt-3">
             <div className="row">
-               
                 <div className="col">
-                    <ProductList reloadList={reloadList} />
+                    <ProductList reloadList={reloadList}/>
                 </div>
             </div>
         </div>

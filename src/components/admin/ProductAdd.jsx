@@ -1,7 +1,6 @@
 import React from "react";
 import "./Admin.css";
-import { be_url } from "../share";
-import req from "../share";
+import req, {be_url} from "../share";
 
 export default class ProductAdd extends React.Component {
     state = {
@@ -22,9 +21,9 @@ export default class ProductAdd extends React.Component {
     handleAddImage = (e) => {
         if (e.target.id === "images") {
             const images = e.target.value.split(",");
-            this.setState({ [e.target.id]: images });
+            this.setState({[e.target.id]: images});
         } else {
-            this.setState({ [e.target.id]: e.target.value });
+            this.setState({[e.target.id]: e.target.value});
         }
     }
 
@@ -77,33 +76,38 @@ export default class ProductAdd extends React.Component {
                 </h3>
                 <form className="form add card p-3 " onSubmit={this.handleSubmit}>
                     <label className=" h6 guide">Name</label>
-                    <input type="text" className="form-control enter" id="name" value={this.state.name} required onChange={this.handleChange} />
+                    <input type="text" className="form-control enter" id="name" value={this.state.name} required
+                           onChange={this.handleChange}/>
 
                     <label className=" h6 guide">Description</label>
-                    <input type="text" className="form-control enter" id="description" value={this.state.description} required onChange={this.handleChange} />
+                    <input type="text" className="form-control enter" id="description" value={this.state.description}
+                           required onChange={this.handleChange}/>
 
                     <label className="h6 guide">Price</label>
-                    <input type="number" className="form-control enter" id="price" value={this.state.price} required onChange={this.handleChange} />
+                    <input type="number" className="form-control enter" id="price" value={this.state.price} required
+                           onChange={this.handleChange}/>
 
 
                     <label className="h6 guide">Quantity</label>
-                    <input type="number" className="form-control enter" id="inStock" value={this.state.inStock} required onChange={this.handleChange} />
+                    <input type="number" className="form-control enter" id="inStock" value={this.state.inStock} required
+                           onChange={this.handleChange}/>
 
 
                     <label className="h6 guide">Images</label>
-                    <input type="text" className="form-control enter" id="images" value={this.state.images} required onChange={this.handleAddImage} />
+                    <input type="text" className="form-control enter" id="images" value={this.state.images} required
+                           onChange={this.handleAddImage}/>
 
 
                     <label className=" h6 guide ">Category</label>
-                    <select className="form-control enter" id="category" onChange={this.handleCategoryChange} >
-                        <option >Select Category</option>
+                    <select className="form-control enter" id="category" onChange={this.handleCategoryChange}>
+                        <option>Select Category</option>
                         <option value="Comic">Comic</option>
                         <option value="Detective">Detective</option>
                         <option value="Literature">Literature</option>
-                        <option value="Adventure">Aventure</option>
+                        <option value="Adventure">Adventure</option>
                         <option value="Classics">Classics</option>
                         <option value="Fiction">Fiction</option>
-                        <option value="Horror">Horro</option>
+                        <option value="Horror">Horror</option>
                     </select>
                     <div className="btnSubmit">
                         <button type="submit" className="btn btn-primary  bg-success">Add Product</button>

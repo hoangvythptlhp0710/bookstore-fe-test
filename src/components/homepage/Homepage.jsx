@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from "axios";
 import "./Homepage.css";
 import {useLocation} from 'react-router-dom';
-import { be_url } from '../share';
+import {be_url} from '../share';
 
 class HomepageWithLocation extends Component {
     state = {
@@ -12,14 +12,12 @@ class HomepageWithLocation extends Component {
         search: ""
     }
 
-    url = be_url
-
     componentDidMount() {
         this.fetchProductList();
     }
 
     fetchSearch = () => {
-        axios.get(this.url + "search", {params: {name: this.props.location.state.name}}).then((res) => {
+        axios.get(`${be_url}search`, {params: {name: this.props.location.state.name}}).then((res) => {
             const products = res.data.content;
             const pages = res.data.totalPages;
             const current = res.data.number;
@@ -34,7 +32,7 @@ class HomepageWithLocation extends Component {
 
     fetchSort = (direction) => {
         this.props.location.state = null;
-        axios.get(this.url, {params: {price: true, direction: direction}}).then((res) => {
+        axios.get(be_url, {params: {price: true, direction: direction}}).then((res) => {
             const products = res.data.content;
             const pages = res.data.totalPages;
             const current = res.data.number;
@@ -47,7 +45,7 @@ class HomepageWithLocation extends Component {
     }
 
     fetchProductList = () => {
-        axios.get(this.url).then((res) => {
+        axios.get(be_url).then((res) => {
             const products = res.data.content;
             const pages = res.data.totalPages;
             const current = res.data.number;
@@ -60,7 +58,7 @@ class HomepageWithLocation extends Component {
     }
 
     handleSwitch = (i) => {
-        axios.get(this.url + i).then((res) => {
+        axios.get(`${be_url}${i}`).then((res) => {
             const products = res.data.content;
             console.log(res.data)
             this.setState({
@@ -71,7 +69,7 @@ class HomepageWithLocation extends Component {
     }
 
     handleSearchSwitch = (i) => {
-        axios.get(this.url + "search/" + i).then((res) => {
+        axios.get(`${be_url}search/${i}`).then((res) => {
             const products = res.data.content;
             console.log(res.data)
             this.setState({
@@ -158,7 +156,11 @@ class HomepageWithLocation extends Component {
                                         }
                                     </div>
                                     <div>
-                                        {arr}
+                                        {arr.map((item) => (
+                                            <div>
+                                                {item}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

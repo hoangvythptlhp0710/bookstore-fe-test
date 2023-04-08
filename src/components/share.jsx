@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const req = axios.create({
-  baseURL: 'http://localhost:8080/',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + localStorage.getItem('access_token')
-  }
+    baseURL: 'http://localhost:8080/',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    }
 });
 
 export default req;

@@ -1,8 +1,6 @@
 import React from "react";
 import "./ShoppingCart.css"
-import req from "../../share";
-import { be_url } from "../../share";
-import { userId } from "../../share";
+import req, {be_url, userId} from "../../share";
 
 export default class ShoppingCart extends React.Component {
     state = {
@@ -93,42 +91,48 @@ export default class ShoppingCart extends React.Component {
             <div className="container text-center mt-3">
                 <table className="table">
                     <thead>
-                        <tr>
-                            <th colSpan="5" className="h3">My shopping cart</th>
-                        </tr>
-                        <tr className="h5">
-                            <th></th>
-                            <th>Product name</th>
-                            <th>Product price</th>
-                            <th>Number</th>
-                            <th>Delete</th>
-                        </tr>
+                    <tr>
+                        <th colSpan="5" className="h3">My shopping cart</th>
+                    </tr>
+                    <tr className="h5">
+                        <th></th>
+                        <th>Product name</th>
+                        <th>Product price</th>
+                        <th>Number</th>
+                        <th>Delete</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {
-                            this.state.outputCarts
-                                .map(outputCart =>
-                                    <tr key={outputCart.productId}>
-                                        <td><img src={outputCart.images[0]} alt="img"></img></td>
-                                        <td> {outputCart.name} </td>
-                                        <td> {outputCart.price} $</td>
-                                        <td> <div className='bar'>
-                                            <button className='nBtn' onClick={() => this.handleIncrement(outputCart)}>+</button>
-                                            <span className='number'>{outputCart.quantity}</span>
-                                            <button className='nBtn' onClick={() => this.handleDecrement(outputCart)}>-</button>
-                                        </div> </td>
-                                        <td>
-                                            <button className="btn green-btn" onClick={() => {
-                                                if (window.confirm("Are you sure you want to delete this product?")) {
-                                                    this.handleDelete(outputCart.productId);
-                                                }
-                                            }}>
-                                                Delete
+                    {
+                        this.state.outputCarts
+                            .map(outputCart =>
+                                <tr key={outputCart.productId}>
+                                    <td><img src={outputCart.images[0]} alt="img"></img></td>
+                                    <td> {outputCart.name} </td>
+                                    <td> {outputCart.price} $</td>
+                                    <td>
+                                        <div className='bar'>
+                                            <button className='nBtn'
+                                                    onClick={() => this.handleIncrement(outputCart)}>+
                                             </button>
-                                        </td>
-                                    </tr>
-                                )
-                        }
+                                            <span className='number'>{outputCart.quantity}</span>
+                                            <button className='nBtn'
+                                                    onClick={() => this.handleDecrement(outputCart)}>-
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button className="btn green-btn" onClick={() => {
+                                            if (window.confirm("Are you sure you want to delete this product?")) {
+                                                this.handleDelete(outputCart.productId);
+                                            }
+                                        }}>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                    }
                     </tbody>
                 </table>
                 <p>Total price: <strong>{this.state.total} $</strong></p>
