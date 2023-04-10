@@ -50,7 +50,7 @@ export default function ProductUpdate(props) {
     return (
         <div className="container text-center mt-3 mb-5">
             <h3 className=" text-primary- p-2 ">
-                ADD NEW PRODUCT
+                UPDATE A PRODUCT
             </h3>
             <form className="form add card p-3 " onSubmit={(e) => {
                 submitForm(e)

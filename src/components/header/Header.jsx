@@ -81,7 +81,7 @@ class HeaderWithNavigate extends Component {
                     <a href='/#'><Link to={fe_url + "cart/" + userId}><i className="bi bi-cart2"></i></Link></a>
                     <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                         <ul className='sub-account'>
-                            <div><a href='/update/'>Update</a></div>
+                            <div><a href='/customer/:id'>Update</a></div>
                         </ul>
                     </li>
                 </div>
