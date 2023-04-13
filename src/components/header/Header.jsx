@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Header.css'
 import {Link, useNavigate} from "react-router-dom";
-import {accessToken, be_url, fe_url, role, userId} from '../share';
+import {accessToken, be_url, fe_url, role} from '../others/Share';
 import axios from "axios";
 
 class HeaderWithNavigate extends Component {
@@ -10,7 +10,7 @@ class HeaderWithNavigate extends Component {
     state = {
         name: ""
     }
-    baseLink = fe_url + "product/"
+    baseLink = fe_url + "book/"
 
     handleChange = event => {
         this.setState({
@@ -52,7 +52,7 @@ class HeaderWithNavigate extends Component {
                     }
                 </div>
                 <div className='menu'>
-                    <a href='/'><img src='/images/logo.png' alt='logo' className='logo'></img></a>
+                    <a href='/'><img src='/images/icon.jpg' alt='logo' className='logo mt-1'></img></a>
                     <div className='cats'>
                         <div className="dropdown">
                             <div className="drop-btn"><i className="bi bi-list"></i></div>
@@ -74,12 +74,15 @@ class HeaderWithNavigate extends Component {
                             <button className='btn green-btn' onClick={this.search}>Search</button>
                         </div>
                     </form>
-                    <a href='/#'><Link to={fe_url + "cart/" + userId}><i className="bi bi-cart2"></i></Link></a>
-                    <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
-                        <ul className='sub-account'>
-                            <div><a href='/customer/:id'>Update</a></div>
-                        </ul>
-                    </li>
+                    {role === "ROLE_CUSTOMER" &&
+                        <>
+                            <a href='/#'><Link to={fe_url + "cart"}><i className="bi bi-cart2"></i></Link></a>
+                            <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
+                                <ul className='sub-account'>
+                                    <div><a href='/customer/:id'>Update</a></div>
+                                </ul>
+                            </li>
+                        </>}
                 </div>
                 <hr></hr>
             </nav>

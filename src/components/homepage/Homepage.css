@@ -37,7 +37,7 @@
 
 .box {
     background: linear-gradient(0deg, rgba(0,202,255,1) 0%, #33cc66);
-    border-radius: 2%;
+    border-radius: 20px;
     font-size: 14px;
     font-family: "Roboto", "cursive";
     color: #000000;
@@ -68,7 +68,7 @@
     display: block;
     background: #fff;
     margin-bottom: 10px;
-    border-radius: 10%;
+    border-radius: 20px;
 }
 
 .product-img {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./ShoppingCart.css"
-import req, {be_url, userId} from "../../share";
+import req, {be_url, userId} from "../../others/Share";
 
 export default class ShoppingCart extends React.Component {
     state = {
@@ -96,8 +96,8 @@ export default class ShoppingCart extends React.Component {
                     </tr>
                     <tr className="h5">
                         <th></th>
-                        <th>Product name</th>
-                        <th>Product price</th>
+                        <th>Book name</th>
+                        <th>Book price</th>
                         <th>Number</th>
                         <th>Delete</th>
                     </tr>
@@ -123,7 +123,7 @@ export default class ShoppingCart extends React.Component {
                                     </td>
                                     <td>
                                         <button className="btn green-btn" onClick={() => {
-                                            if (window.confirm("Are you sure you want to delete this product?")) {
+                                            if (window.confirm("Are you sure you want to delete this book?")) {
                                                 this.handleDelete(outputCart.productId);
                                             }
                                         }}>

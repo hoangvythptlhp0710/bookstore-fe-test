@@ -1,6 +1,7 @@
 import React from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import req, {be_url} from "../share";
+import req, {be_url, role} from "../others/Share";
+import NotFound from "../others/NotFound";
 
 export default class ProductList extends React.Component {
 
@@ -45,66 +46,71 @@ export default class ProductList extends React.Component {
     }
 
     render() {
-        return (
-            <div className="container text-center mt-3">
-                <table className="table ">
-                    <thead>
-                    <tr>
-                        <th colSpan="8">
-                            <h3 className="text">PRODUCT MANAGEMENT</h3>
-                            <a href="/admin/add"><i className="bi bi-file-plus-fill"></i></a>
-                        </th>
-                    </tr>
+        if (role === "ROLE_ADMIN") {
+            return (
+                <div className="container card text-center mt-3">
+                    <table className="table ">
+                        <thead>
+                        <tr>
+                            <th colSpan="8">
+                                <h3 className="text">BOOKS MANAGEMENT</h3>
+                                <a href="/admin/add"><i className="bi bi-file-plus-fill"></i></a>
+                            </th>
+                        </tr>
 
-                    <tr className="h5">
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Category</th>
-                        {/* <th scope="col">Description</th> */}
-                        <th scope="col">Image</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <tr className="h5">
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Category</th>
+                            {/* <th scope="col">Description</th> */}
+                            <th scope="col">Image</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.products.map(product => {
-                        return (
-                            <tr key={product.id}>
-                                <td>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.category}</td>
-                                {/* <td>{product.description}</td> */}
-                                <td>{product.images.map((image) => (
-                                    <div>
-                                        {image}
-                                    </div>
-                                ))}</td>
-                                <td>{product.price}</td>
-                                <td>{product.inStock}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.state.products.map(product => {
+                            return (
+                                <tr key={product.id}>
+                                    <td>{product.id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.category}</td>
+                                    {/* <td>{product.description}</td> */}
+                                    <td>{product.images.map((image) => (
+                                        <div>
+                                            {image}
+                                        </div>
+                                    ))}</td>
+                                    <td>{product.price}</td>
+                                    <td>{product.inStock}</td>
 
 
-                                <td>
-                                    {/* <Link to={"/update/" + product.id  } className="btn btn-primary">Update</Link> */}
+                                    <td>
+                                        {/* <Link to={"/update/" + product.id  } className="btn btn-primary">Update</Link> */}
 
-                                    <a href={`/admin/product/${product.id}`}><i className="bi bi-pen"></i></a>
-                                </td>
-                                <td>
-                                    {/* <button className="btn btn-danger" onClick={() => { this.deleteRow(product.id) }}>DELETE</button> */}
-                                    <i className="bi bi-trash" onClick={() => {
-                                        this.deleteRow(product.id)
-                                    }}></i>
-                                </td>
-                            </tr>
-                        )
-                    })
-                    }
-                    </tbody>
-                </table>
-            </div>
-
-        )
+                                        <a href={`/admin/product/${product.id}`}><i className="bi bi-pen"></i></a>
+                                    </td>
+                                    <td>
+                                        {/* <button className="btn btn-danger" onClick={() => { this.deleteRow(product.id) }}>DELETE</button> */}
+                                        <i className="bi bi-trash" onClick={() => {
+                                            this.deleteRow(product.id)
+                                        }}></i>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            )
+        } else {
+            return (
+                <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+            )
+        }
     }
 }

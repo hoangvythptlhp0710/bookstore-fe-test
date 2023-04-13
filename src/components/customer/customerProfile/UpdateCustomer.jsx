@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {Button} from "react-bootstrap";
-import req, {be_url, userId} from "../../share";
+import req, {be_url, userId} from "../../others/Share";
 
 export default function CustomerUpdate(props) {
     const [customer, setCustomer] = useState({
@@ -16,7 +16,7 @@ export default function CustomerUpdate(props) {
     useEffect(() => {
         fetchCustomerList();
         console.log("listCustomer");
-    }, [])
+    })
     const {username, email, password, address, phone, age, avatar} = customer;
     const handleChange = (event) => {
         setCustomer({...customer, [event.target.id]: event.target.value})

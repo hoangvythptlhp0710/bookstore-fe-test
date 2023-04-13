@@ -6,7 +6,7 @@ export default function Admin() {
     const [reloadList] = useState(false);
 
     return (
-        <div className="container text-center card mt-3">
+        <div className="container text-center mt-3">
             <div className="row">
                 <div className="col">
                     <ProductList reloadList={reloadList}/>

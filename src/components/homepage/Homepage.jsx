@@ -2,18 +2,20 @@ import React, {Component} from 'react'
 import axios from "axios";
 import "./Homepage.css";
 import {useLocation} from 'react-router-dom';
-import {be_url} from '../share';
+import {be_url} from '../others/Share';
+import NotFound from "../others/NotFound";
 
 class HomepageWithLocation extends Component {
     state = {
         products: [],
         pages: 0,
         current: 0,
-        search: ""
+        search: ''
     }
 
     componentDidMount() {
-        this.fetchProductList();
+        if (!this.props.location.state)
+            this.fetchProductList();
     }
 
     fetchSearch = () => {
@@ -94,9 +96,9 @@ class HomepageWithLocation extends Component {
 
     render() {
         const arr = [];
-        if (this.props.location.state !== null) {
-            if (this.props.location.state.name !== this.state.search)
-                this.fetchSearch();
+        if (this.props.location.state !== null && this.props.location.state.name !== this.state.search) {
+            this.fetchSearch();
+            console.log(this.props.location.state.name)
             for (let i = this.state.pages - 1; i >= 0; i--) {
                 if (this.state.current === i) {
                     arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {
@@ -178,7 +180,7 @@ class HomepageWithLocation extends Component {
                                         {
                                             this.state.products.map(product => (
                                                 <div className="item text-center" key={product.id}>
-                                                    <a href={"/product/" + product.id} className="product-item">
+                                                    <a href={"/book/" + product.id} className="product-item">
                                                         <div className="product-img">
                                                             <img className="lazy-load"
                                                                  src={product.images[0]}
@@ -261,9 +263,7 @@ class HomepageWithLocation extends Component {
                                     }}> In Stock
                             </button>
                         </div>
-                        <div className="inner text-center mt-5">
-                            <h2>Nothing was found</h2>
-                        </div>
+                        <NotFound title='(╥﹏╥) No books was found!' details='Perhaps you should try searching another keyword!'/>
                     </div>
                 </section>
             )

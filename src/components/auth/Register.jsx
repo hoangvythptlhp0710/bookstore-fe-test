@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Button} from 'react-bootstrap'
 import axios from 'axios';
 import './Auth.css'
-import {be_url} from '../share';
+import {be_url} from '../others/Share';
 
 export default class Register extends Component {
     state = {

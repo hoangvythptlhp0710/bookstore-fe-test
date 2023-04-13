@@ -10,9 +10,10 @@ import Admin from './components/admin/Admin';
 import "./App.css"
 import ProductUpdate from './components/admin/ProductUpdate';
 import UpdateCustomer from "./components/customer/customerProfile/UpdateCustomer";
-import ProductDetails from './components/customer/products/ProductDetails';
-import ProductsByCategory from './components/customer/products/ProductsByCategory';
+import ProductDetails from './components/products/ProductDetails';
+import ProductsByCategory from './components/products/ProductsByCategory';
 import ShoppingCart from './components/customer/cart/ShoppingCart'
+import NotFound from "./components/others/NotFound";
 
 
 function App() {
@@ -22,16 +23,20 @@ function App() {
             <Header/>
             <div className="App">
                 <Routes>
-                    <Route path="/product/:id" element={<ProductDetails/>}/>
-                    <Route path='/cart/:userId' element={<ShoppingCart/>}></Route>
+                    {/* permit all */}
+                    <Route path="/book/:id" element={<ProductDetails/>}/>
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path='/book/:category/:page' element={<ProductsByCategory/>}></Route>
+                    {/* admin only */}
                     <Route path="/admin" element={<Admin/>}/>
                     <Route path="/admin/add" element={<ProductAdd/>}/>
-                    <Route path="/admin/product/:id" element={<ProductUpdate/>}/>
+                    <Route path="/admin/book/:id" element={<ProductUpdate/>}/>
+                    {/* user only */}
+                    <Route path='/cart' element={<ShoppingCart/>}></Route>
                     <Route path="/customer/:id" element={<UpdateCustomer/>}/>
-                    <Route path='/product/:category/:page' element={<ProductsByCategory/>}></Route>
+                    <Route path="/*" element={<NotFound title='(╥﹏╥) 404 error: Page not found!' details='We cannot find this page, please try again later!'/>}/>
                 </Routes>
             </div>
             <Footer/>

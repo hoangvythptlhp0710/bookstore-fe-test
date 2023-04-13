@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import req, {be_url} from "../share";
+import req, {be_url, role} from "../others/Share";
+import NotFound from "../others/NotFound";
 
 //form update 
 export default function ProductUpdate(props) {
@@ -17,7 +18,7 @@ export default function ProductUpdate(props) {
     useEffect(() => {
         fetchProductList();
         console.log("listProduct");
-    }, [])
+    })
 
     const {name, description, price, inStock, images, category} = product;
 
@@ -47,57 +48,61 @@ export default function ProductUpdate(props) {
     };
 
 
-    return (
-        <div className="container text-center mt-3 mb-5">
-            <h3 className=" text-primary- p-2 ">
-                UPDATE A PRODUCT
-            </h3>
-            <form className="form add card p-3 " onSubmit={(e) => {
-                submitForm(e)
-            }}>
-                <label className=" h6 guide">Name</label>
-                <input type="text" className="form-control enter" id="name" value={name} required
-                       onChange={(e) => handleChange(e)}/>
+    if (role === "ROLE_ADMIN") {
+        return (
+            <div className="container text-center mt-3 mb-5">
+                <h3 className=" text-primary- p-2 ">
+                    UPDATE A BOOK
+                </h3>
+                <form className="form add card p-3 " onSubmit={(e) => {
+                    submitForm(e)
+                }}>
+                    <label className=" h6 guide">Name</label>
+                    <input type="text" className="form-control enter" id="name" value={name} required
+                           onChange={(e) => handleChange(e)}/>
 
-                <label className=" h6 guide">Description</label>
-                <input type="text" className="form-control enter" id="description" value={description} required
-                       onChange={(e) => handleChange(e)}/>
+                    <label className=" h6 guide">Description</label>
+                    <input type="text" className="form-control enter" id="description" value={description} required
+                           onChange={(e) => handleChange(e)}/>
 
-                <label className="h6 guide">Price</label>
-                <input type="number" className="form-control enter" id="price" value={price} required
-                       onChange={(e) => handleChange(e)}/>
-
-
-                <label className="h6 guide">Quantity</label>
-                <input type="number" className="form-control enter" id="inStock" value={inStock} required
-                       onChange={(e) => handleChange(e)}/>
+                    <label className="h6 guide">Price</label>
+                    <input type="number" className="form-control enter" id="price" value={price} required
+                           onChange={(e) => handleChange(e)}/>
 
 
-                <label className="h6 guide">Images</label>
-                <input type="text" className="form-control enter" id="images" value={images} required
-                       onChange={(e) => handleChange(e)}/>
+                    <label className="h6 guide">Quantity</label>
+                    <input type="number" className="form-control enter" id="inStock" value={inStock} required
+                           onChange={(e) => handleChange(e)}/>
 
 
-                <label className=" h6 guide ">Category</label>
-                <select className="form-control enter" id="category" value={category} required
-                        onChange={(e) => handleChange(e)}>
-                    <option>Select Category</option>
-                    <option value="Comic">Comic</option>
-                    <option value="Detective">Detective</option>
-                    <option value="Literature">Literature</option>
-                    <option value="Adventure">Adventure</option>
-                    <option value="Classics">Classics</option>
-                    <option value="Fiction">Fiction</option>
-                    <option value="Horror">Horro</option>
-                </select>
-
-                <div className="btnSubmit">
-                    <button type="submit" className="btn btn-primary  bg-success">Update Product</button>
-
-                </div>
-            </form>
-        </div>
+                    <label className="h6 guide">Images</label>
+                    <input type="text" className="form-control enter" id="images" value={images} required
+                           onChange={(e) => handleChange(e)}/>
 
 
-    )
+                    <label className=" h6 guide ">Category</label>
+                    <select className="form-control enter" id="category" value={category} required
+                            onChange={(e) => handleChange(e)}>
+                        <option>Select Category</option>
+                        <option value="Comic">Comic</option>
+                        <option value="Detective">Detective</option>
+                        <option value="Literature">Literature</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Classics">Classics</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Horror">Horro</option>
+                    </select>
+
+                    <div className="btnSubmit">
+                        <button type="submit" className="btn btn-primary  bg-success">Update Book</button>
+
+                    </div>
+                </form>
+            </div>
+        )
+    } else {
+        return (
+            <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+        )
+    }
 }
