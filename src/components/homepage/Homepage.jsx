@@ -30,9 +30,22 @@ class HomepageWithLocation extends Component {
         })
     }
 
-    fetchSort = (direction) => {
+    fetchSort = (direction, criteria) => {
         this.props.location.state = null;
-        axios.get(be_url, {params: {price: true, direction: direction}}).then((res) => {
+        let config = {};
+        if (criteria === 'price') {
+            config = {params: {price: true, direction: direction}}
+        }
+        if (criteria === 'name') {
+            config = {params: {name: true, direction: direction}}
+        }
+        if (criteria === 'inStock') {
+            config = {params: {inStock: true, direction: direction}}
+        }
+        if (criteria === 'category') {
+            config = {params: {category: true, direction: direction}}
+        }
+        axios.get(be_url, config).then((res) => {
             const products = res.data.content;
             const pages = res.data.totalPages;
             const current = res.data.number;
@@ -84,7 +97,7 @@ class HomepageWithLocation extends Component {
         if (this.props.location.state !== null) {
             if (this.props.location.state.name !== this.state.search)
                 this.fetchSearch();
-            for (let i = 0; i < this.state.pages; i++) {
+            for (let i = this.state.pages - 1; i >= 0; i--) {
                 if (this.state.current === i) {
                     arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {
                         this.handleSearchSwitch(i)
@@ -96,7 +109,7 @@ class HomepageWithLocation extends Component {
                 }
             }
         } else {
-            for (let i = 0; i < this.state.pages; i++) {
+            for (let i = this.state.pages - 1; i >= 0; i--) {
                 if (this.state.current === i) {
                     arr.push(<button className="page page-clicked" key={"page_" + i} onClick={() => {
                         this.handleSwitch(i)
@@ -112,20 +125,50 @@ class HomepageWithLocation extends Component {
             return (
                 <section className="container">
                     <div className='carousel'>
-                        <img src="/images/book2.jpg" alt='book2'/>
+                        <img src="/images/book3.webp" alt='book3'/>
                     </div>
                     <hr></hr>
                     <div className="wrapper">
                         <div className="text-center">
+                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "price")
+                                    }}> Price
+                            </button>
+                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "price")
+                                    }}> Price
+                            </button>
+                            <button className="bi-sort-alpha-up-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "name")
+                                    }}> Name
+                            </button>
+                            <button className="bi-sort-alpha-down-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "name")
+                                    }}> Name
+                            </button>
                             <button className="bi-sort-up btn btn-outline-secondary m-2"
                                     onClick={() => {
-                                        this.fetchSort("asc")
-                                    }}> Price
+                                        this.fetchSort("asc", "category")
+                                    }}> Category
                             </button>
                             <button className="bi-sort-down btn btn-outline-secondary m-2"
                                     onClick={() => {
-                                        this.fetchSort("desc")
-                                    }}> Price
+                                        this.fetchSort("desc", "category")
+                                    }}> Category
+                            </button>
+                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "inStock")
+                                    }}> In Stock
+                            </button>
+                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "inStock")
+                                    }}> In Stock
                             </button>
                         </div>
                         <div className="inner">
@@ -164,6 +207,62 @@ class HomepageWithLocation extends Component {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+            )
+        } else {
+            return (
+                <section className="container">
+                    <div className='carousel'>
+                        <img src="/images/book3.webp" alt='book3'/>
+                    </div>
+                    <hr></hr>
+                    <div className="wrapper">
+                        <div className="text-center">
+                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "price")
+                                    }}> Price
+                            </button>
+                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "price")
+                                    }}> Price
+                            </button>
+                            <button className="bi-sort-alpha-up-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "name")
+                                    }}> Name
+                            </button>
+                            <button className="bi-sort-alpha-down-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "name")
+                                    }}> Name
+                            </button>
+                            <button className="bi-sort-up btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "category")
+                                    }}> Category
+                            </button>
+                            <button className="bi-sort-down btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "category")
+                                    }}> Category
+                            </button>
+                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("asc", "inStock")
+                                    }}> In Stock
+                            </button>
+                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                    onClick={() => {
+                                        this.fetchSort("desc", "inStock")
+                                    }}> In Stock
+                            </button>
+                        </div>
+                        <div className="inner text-center mt-5">
+                            <h2>Nothing was found</h2>
                         </div>
                     </div>
                 </section>

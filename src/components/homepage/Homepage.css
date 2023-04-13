@@ -36,7 +36,8 @@
 }
 
 .box {
-    background-color: #33cc99;
+    background: linear-gradient(0deg, rgba(0,202,255,1) 0%, #33cc66);
+    border-radius: 2%;
     font-size: 14px;
     font-family: "Roboto", "cursive";
     color: #000000;
@@ -67,6 +68,7 @@
     display: block;
     background: #fff;
     margin-bottom: 10px;
+    border-radius: 10%;
 }
 
 .product-img {
@@ -180,7 +182,8 @@
 }
 
 .page-click {
-    background-color: #a8ffc3;
+    font-weight: 600;
+    background-color: #cffddd;
     border: outset 2px #33cc33;
 }
 
@@ -197,7 +200,7 @@
 
 .carousel {
     width: 100%;
-    height: 300px;
+    height: 400px;
     position: relative;
     overflow: hidden;
 }
