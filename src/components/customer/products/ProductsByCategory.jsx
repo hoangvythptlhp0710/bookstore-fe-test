@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import withRouter from './WithRouter';
 import req, {be_url} from '../../share';
+import axios from "axios";
 
 class ProductsByCategory extends Component {
     state = {
@@ -14,8 +15,9 @@ class ProductsByCategory extends Component {
     }
 
     fetchProducts(category, page) {
-        req.get(be_url + "product/" + category + "/" + page)
+        axios.get(be_url + "product/" + category + "/" + page)
             .then((res) => {
+                console.log(res)
                 this.setState({products: res.data.content})
             })
             .catch((error) => {
@@ -28,7 +30,7 @@ class ProductsByCategory extends Component {
             return (
                 <section className="container">
                     <div className='carousel'>
-                        <img src="/images/book2.jpg" alt='book2'/>
+                        <img src="/images/book3.webp" alt='book3'/>
                     </div>
                     <hr></hr>
                     <div className="wrapper">
@@ -61,6 +63,20 @@ class ProductsByCategory extends Component {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+            )
+        } else {
+            return (
+                <section className="container">
+                    <div className='carousel'>
+                        <img src="/images/book3.webp" alt='book3'/>
+                    </div>
+                    <hr></hr>
+                    <div className="wrapper"> 
+                        <div className="inner text-center mt-5">
+                            <h2>Nothing was found</h2>
                         </div>
                     </div>
                 </section>
