@@ -76,6 +76,20 @@ class ProductDetails extends React.Component {
         });
     }
 
+    handleBuyNow = () => {
+        const data = {}
+        data.productId =  this.state.productId
+        data.images = this.state.images
+        data.price = this.state.price
+        data.name = this.state.name
+        data.quantity =  this.state.count
+        console.log(this.state.count)
+        const itemList = [data]
+        localStorage.setItem("total", this.state.count * this.state.price)
+        localStorage.setItem("items", JSON.stringify(itemList));
+        window.location.href = `${fe_url}order/${userId}`;
+    }
+
     render() {
         if (this.state.productId) {
             return (<div className='containerProductDetailsWithCondition'>
@@ -106,7 +120,7 @@ class ProductDetails extends React.Component {
                                     <i className="bi bi-cart"></i>
                                     Add to cart
                                 </button>
-                                <button className='buyNow'>
+                                <button className='buyNow' onClick={this.handleBuyNow}>
                                     Buy now
                                 </button>
                             </div>

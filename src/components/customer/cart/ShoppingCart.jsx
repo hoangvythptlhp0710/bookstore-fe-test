@@ -1,6 +1,6 @@
 import React from "react";
 import "./ShoppingCart.css"
-import req, {be_url, userId} from "../../others/Share";
+import req, { be_url, fe_url, userId } from "../../others/Share";
 
 export default class ShoppingCart extends React.Component {
     state = {
@@ -52,9 +52,11 @@ export default class ShoppingCart extends React.Component {
     handleDecrement = (outputCart) => {
         const productId = outputCart.productId;
         const quantity = outputCart.quantity - 1;
-        if (quantity >= 0) {
+        if (quantity > 0) {
             this.handleClick(quantity, productId);
             this.updateState(quantity, productId)
+        } else if (quantity === 0) {
+            this.handleDelete(productId)
         }
     };
 
@@ -86,57 +88,76 @@ export default class ShoppingCart extends React.Component {
             })
     };
 
+    handleCheckout = () => {
+        let itemList = [];
+        let total = 0;
+        for (let i = 0; i < this.state.outputCarts.length; i++) {
+            const outputCart = this.state.outputCarts[i]
+            const data = {}
+            data.productId = outputCart.productId
+            data.images = outputCart.images
+            data.price = outputCart.price
+            data.name = outputCart.name
+            data.quantity = outputCart.quantity
+            itemList[i] = data
+            total = total + outputCart.price * outputCart.quantity
+        }
+        localStorage.setItem("total", total)
+        localStorage.setItem("items", JSON.stringify(itemList));
+        window.location.href = `${fe_url}order/${userId}`;
+    }
+
     render() {
         return (
             <div className="container text-center mt-3">
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th colSpan="5" className="h3">My shopping cart</th>
-                    </tr>
-                    <tr className="h5">
-                        <th></th>
-                        <th>Book name</th>
-                        <th>Book price</th>
-                        <th>Number</th>
-                        <th>Delete</th>
-                    </tr>
+                        <tr>
+                            <th colSpan="5" className="h3">My shopping cart</th>
+                        </tr>
+                        <tr className="h5">
+                            <th></th>
+                            <th>Book name</th>
+                            <th>Book price</th>
+                            <th>Number</th>
+                            <th>Delete</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {
-                        this.state.outputCarts
-                            .map(outputCart =>
-                                <tr key={outputCart.productId}>
-                                    <td><img src={outputCart.images[0]} alt="img"></img></td>
-                                    <td> {outputCart.name} </td>
-                                    <td> {outputCart.price} $</td>
-                                    <td>
-                                        <div className='bar'>
-                                            <button className='nBtn'
+                        {
+                            this.state.outputCarts
+                                .map(outputCart =>
+                                    <tr key={outputCart.productId}>
+                                        <td><img src={outputCart.images[0]} alt="img"></img></td>
+                                        <td> {outputCart.name} </td>
+                                        <td> {outputCart.price} $</td>
+                                        <td>
+                                            <div className='bar'>
+                                                <button className='nBtn'
                                                     onClick={() => this.handleIncrement(outputCart)}>+
-                                            </button>
-                                            <span className='number'>{outputCart.quantity}</span>
-                                            <button className='nBtn'
+                                                </button>
+                                                <span className='number'>{outputCart.quantity}</span>
+                                                <button className='nBtn'
                                                     onClick={() => this.handleDecrement(outputCart)}>-
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button className="btn green-btn" onClick={() => {
+                                                if (window.confirm("Are you sure you want to delete this book?")) {
+                                                    this.handleDelete(outputCart.productId);
+                                                }
+                                            }}>
+                                                Delete
                                             </button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button className="btn green-btn" onClick={() => {
-                                            if (window.confirm("Are you sure you want to delete this book?")) {
-                                                this.handleDelete(outputCart.productId);
-                                            }
-                                        }}>
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            )
-                    }
+                                        </td>
+                                    </tr>
+                                )
+                        }
                     </tbody>
                 </table>
                 <p>Total price: <strong>{this.state.total} $</strong></p>
-                <button className='buyNow'>
+                <button className='buyNow' onClick={this.handleCheckout}>
                     Buy now
                 </button>
             </div>

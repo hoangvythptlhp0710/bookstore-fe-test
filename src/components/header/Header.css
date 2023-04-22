@@ -28,6 +28,7 @@
 
 .cats {
     margin: auto;
+    margin-left: 0;
 }
 
 a {
@@ -141,4 +142,12 @@ form input {
 
 .dropdown:hover .drop-btn {
     background-color: #3e8e41;
+}
+.customCart {
+    padding-bottom: 0;
+    height: 40px;
+}
+.orders {
+    position: relative; 
+    z-index: 999;
 }

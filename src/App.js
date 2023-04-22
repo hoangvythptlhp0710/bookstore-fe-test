@@ -9,11 +9,13 @@ import ProductAdd from './components/admin/ProductAdd';
 import Admin from './components/admin/Admin';
 import "./App.css"
 import ProductUpdate from './components/admin/ProductUpdate';
-import UpdateCustomer from "./components/customer/customerProfile/UpdateCustomer";
 import ProductDetails from './components/products/ProductDetails';
+import UpdateCustomer from "./components/customer/customerProfile/UpdateCustomer";
 import ProductsByCategory from './components/products/ProductsByCategory';
 import ShoppingCart from './components/customer/cart/ShoppingCart'
 import NotFound from "./components/others/NotFound";
+import CheckoutOrder from './components/order/CheckoutOrder';
+import OrderByStatus from './components/order/OrderByStatus';
 
 
 function App() {
@@ -24,15 +26,17 @@ function App() {
             <div className="App">
                 <Routes>
                     {/* permit all */}
-                    <Route path="/book/:id" element={<ProductDetails/>}/>
+                    <Route path="/product/:id" element={<ProductDetails/>}/>
                     <Route path="/" element={<Homepage/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path='/book/:category/:page' element={<ProductsByCategory/>}></Route>
+                    <Route path='/product/:category/:page' element={<ProductsByCategory/>}></Route>
+                    <Route path="/order/:id"  element={<CheckoutOrder/>}></Route>
+                    <Route path="/order" element={<OrderByStatus />}></Route>
                     {/* admin only */}
                     <Route path="/admin" element={<Admin/>}/>
                     <Route path="/admin/add" element={<ProductAdd/>}/>
-                    <Route path="/admin/book/:id" element={<ProductUpdate/>}/>
+                    <Route path="/admin/product/:id" element={<ProductUpdate/>}/>
                     {/* user only */}
                     <Route path='/cart' element={<ShoppingCart/>}></Route>
                     <Route path="/customer/:id" element={<UpdateCustomer/>}/>
