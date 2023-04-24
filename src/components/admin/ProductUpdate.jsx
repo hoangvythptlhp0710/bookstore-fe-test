@@ -12,7 +12,8 @@ export default function ProductUpdate(props) {
         price: "",
         inStock: "",
         images: "",
-        category: ""
+        category: "",
+        discount: ""
     })
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export default function ProductUpdate(props) {
         console.log("listProduct");
     })
 
-    const {name, description, price, inStock, images, category} = product;
+    const {name, description, price, inStock, images, category, discount} = product;
 
     const handleChange = (event) => {
         setProduct({...product, [event.target.id]: event.target.value})
@@ -28,22 +29,16 @@ export default function ProductUpdate(props) {
     }
     const submitForm = async (e) => {
         e.preventDefault();
-        console.log(product);
         await req.put(`${be_url}admin/product/${id}`, product)
             .then((result) => {
-                console.log(result);
-                // history("/");
                 window.location = "/admin";
-
             })
     }
 
     let fetchProductList = async () => {
         await req.get(be_url + 'product/' + id).then((res) => {
             const products = res.data;
-            console.log(products);
             setProduct(products);
-            console.log(product);
         })
     };
 
@@ -92,6 +87,10 @@ export default function ProductUpdate(props) {
                         <option value="Fiction">Fiction</option>
                         <option value="Horror">Horro</option>
                     </select>
+
+                    <label className="h6 guide">Discount</label>
+                    <input type="text" className="form-control enter" id="images" value={discount} required
+                           onChange={(e) => handleChange(e)}/>
 
                     <div className="btnSubmit">
                         <button type="submit" className="btn btn-primary  bg-success">Update Book</button>

@@ -10,7 +10,8 @@ export default class ProductAdd extends React.Component {
         price: '',
         inStock: '',
         images: '',
-        category: ''
+        category: '',
+        discount: ''
     }
 
     handleChange = (e) => {
@@ -44,7 +45,8 @@ export default class ProductAdd extends React.Component {
             price: '',
             inStock: '',
             images: [],
-            category: ''
+            category: '',
+            discount: ''
         })
 
         const product = {
@@ -53,16 +55,15 @@ export default class ProductAdd extends React.Component {
             price: Number(this.state.price),
             inStock: Number(this.state.inStock),
             images: this.state.images,
-            category: this.state.category
+            category: this.state.category,
+            discount: this.state.discount
         }
 
         req.post(be_url + 'admin/product', product)
             .then((res) => {
-                console.log(res.data);
                 if (res.status === 200) {
                     window.location = "/admin";
                 }
-                // this.props.reloadProductList();         
             })
             .catch(error => {
                 console.error(error);
@@ -113,6 +114,11 @@ export default class ProductAdd extends React.Component {
                             <option value="Fiction">Fiction</option>
                             <option value="Horror">Horror</option>
                         </select>
+
+                        <label className="h6 guide">Discount</label>
+                        <input type="text" className="form-control enter" id="discount" value="0" required
+                               onChange={this.handleAddImage}/>
+
                         <div className="btnSubmit">
                             <button type="submit" className="btn btn-primary  bg-success">Add Book</button>
                         </div>
