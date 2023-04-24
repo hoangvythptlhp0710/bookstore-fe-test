@@ -38,8 +38,6 @@ export default class ProductList extends React.Component {
     deleteRow = (id) => {
         req.delete(`${be_url}admin/product/${id}`)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
                 const products = this.state.products.filter(item => item.id !== id);
                 this.setState({products})
             })
@@ -62,13 +60,12 @@ export default class ProductList extends React.Component {
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Category</th>
-                            {/* <th scope="col">Description</th> */}
                             <th scope="col">Image</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Stock</th>
+                            <th scope="col">In stock</th>
+                            <th scope="col">Discount</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -86,8 +83,7 @@ export default class ProductList extends React.Component {
                                     ))}</td>
                                     <td>{product.price}</td>
                                     <td>{product.inStock}</td>
-
-
+                                    <td>{product.discount}</td>
                                     <td>
                                         {/* <Link to={"/update/" + product.id  } className="btn btn-primary">Update</Link> */}
 

@@ -68,16 +68,18 @@ class HeaderWithNavigate extends Component {
                         <div className="dropdown">
                             <div className="drop-btn"><i className="bi bi-list"></i></div>
                             <div className="dropdown-content">
-                                <a href={this.baseLink + "comic/0"}>Comic</a>
-                                <a href={this.baseLink + "adventure/0"}>Adventure</a>
-                                <a href={this.baseLink + "literature/0"}>Literature</a>
-                                <a href={this.baseLink + "detective/0"}>Detective</a>
-                                <a href={this.baseLink + "fiction/0"}>Fiction</a>
-                                <a href={this.baseLink + "horror/0"}>Horror</a>
+                                {/**/}
                             </div>
                         </div>
+                        <a href={this.baseLink + "detective/0"}>Detective</a>
+                        <a href={this.baseLink + "fiction/0"}>Fiction</a>
+                        <a href={this.baseLink + "horror/0"}>Horror</a>
+                        <a href={this.baseLink + "comic/0"}>Comic</a>
+                        <a href={this.baseLink + "adventure/0"}>Adventure</a>
+                        <a href={this.baseLink + "literature/0"}>Literature</a>
                         {role === "ROLE_ADMIN" && <a href={fe_url + 'admin'}>Manage product</a>}
                         {role === "ROLE_ADMIN" && <a href={fe_url + 'order'}>Manage order</a>}
+
                     </div>
                     <form className='d-flex'>
                         <div className='d-flex'>

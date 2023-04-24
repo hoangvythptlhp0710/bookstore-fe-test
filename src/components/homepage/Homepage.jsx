@@ -179,21 +179,21 @@ class HomepageWithLocation extends Component {
                                     <div className="box">
                                         {
                                             this.state.products.map(product => (
-                                                <div className="item text-center" key={product.id}>
+                                                <div className="product text-center" key={product.id}>
                                                     <a href={"/product/" + product.id} className="product-item">
                                                         <div className="product-img">
                                                             <img className="lazy-load"
                                                                  src={product.images[0]}
                                                                  data-src={product.images}
                                                                  alt={product.name}/>
-                                                            <div className="sale-off">-20%</div>
+                                                            { product.discount !== 0 && <div className="sale-off">-{product.discount}%</div>}
                                                         </div>
                                                         <div className="product-title">{product.name}</div>
                                                         <div className="product-price">
                                                             <span
-                                                                className="current-price">{product.price.toFixed(2)}$</span>
+                                                                className="current-price">{(product.price - product.price * product.discount / 100).toFixed(2)}$</span>
                                                             <span
-                                                                className="original-price"><s>{(product.price * 1.2).toFixed(2)}$</s></span>
+                                                                className="original-price"><s>{(product.price).toFixed(2)}$</s></span>
                                                         </div>
                                                     </a>
                                                 </div>

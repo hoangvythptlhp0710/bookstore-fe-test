@@ -1,6 +1,6 @@
 import React from "react";
 import "./ShoppingCart.css"
-import req, { be_url, fe_url, userId } from "../../others/Share";
+import req, {be_url, fe_url, userId} from "../../others/Share";
 
 export default class ShoppingCart extends React.Component {
     state = {
@@ -26,7 +26,7 @@ export default class ShoppingCart extends React.Component {
             const outputCarts = res.data;
             let totalPrice = 0;
             outputCarts.forEach(product => {
-                totalPrice += product.price * product.quantity;
+                totalPrice = totalPrice + (product.price - product.price * product.discount / 100) * product.quantity;
             });
             this.setState({
                 outputCarts: outputCarts,
@@ -37,7 +37,6 @@ export default class ShoppingCart extends React.Component {
 
     handleDelete = (id) => {
         req.delete(this.url + userId + `/${id}`).then(res => {
-            console.log(res);
             this.fetchProducts();
         });
     };
@@ -67,7 +66,7 @@ export default class ShoppingCart extends React.Component {
             if (item.productId === productId) {
                 item.quantity = quantity;
             }
-            totalPrice += item.price * item.quantity;
+            totalPrice += (item.price - item.price * item.discount / 100) * item.quantity;
             return quantity;
         })
         this.setState({
@@ -96,11 +95,11 @@ export default class ShoppingCart extends React.Component {
             const data = {}
             data.productId = outputCart.productId
             data.images = outputCart.images
-            data.price = outputCart.price
+            data.price = outputCart.price - outputCart.price * outputCart.discount / 100
             data.name = outputCart.name
             data.quantity = outputCart.quantity
             itemList[i] = data
-            total = total + outputCart.price * outputCart.quantity
+            total = total + (outputCart.price - outputCart.price * outputCart.discount / 100) * outputCart.quantity
         }
         localStorage.setItem("total", total)
         localStorage.setItem("items", JSON.stringify(itemList));
@@ -108,10 +107,10 @@ export default class ShoppingCart extends React.Component {
     }
 
     render() {
-        return (
-            <div className="container text-center mt-3">
-                <table className="table">
-                    <thead>
+            return (
+                <div className="container text-center mt-3">
+                    <table className="table">
+                        <thead>
                         <tr>
                             <th colSpan="5" className="h3">My shopping cart</th>
                         </tr>
@@ -122,23 +121,23 @@ export default class ShoppingCart extends React.Component {
                             <th>Number</th>
                             <th>Delete</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {
                             this.state.outputCarts
                                 .map(outputCart =>
                                     <tr key={outputCart.productId}>
                                         <td><img src={outputCart.images[0]} alt="img"></img></td>
                                         <td> {outputCart.name} </td>
-                                        <td> {outputCart.price} $</td>
+                                        <td> {outputCart.price - outputCart.price * outputCart.discount / 100} $</td>
                                         <td>
                                             <div className='bar'>
                                                 <button className='nBtn'
-                                                    onClick={() => this.handleIncrement(outputCart)}>+
+                                                        onClick={() => this.handleIncrement(outputCart)}>+
                                                 </button>
                                                 <span className='number'>{outputCart.quantity}</span>
                                                 <button className='nBtn'
-                                                    onClick={() => this.handleDecrement(outputCart)}>-
+                                                        onClick={() => this.handleDecrement(outputCart)}>-
                                                 </button>
                                             </div>
                                         </td>
@@ -154,13 +153,14 @@ export default class ShoppingCart extends React.Component {
                                     </tr>
                                 )
                         }
-                    </tbody>
-                </table>
-                <p>Total price: <strong>{this.state.total} $</strong></p>
-                <button className='buyNow' onClick={this.handleCheckout}>
-                    Buy now
-                </button>
-            </div>
-        )
+                        </tbody>
+                    </table>
+                    <p>Total price: <strong>{this.state.total} $</strong></p>
+                    <button className='buyNow' onClick={this.handleCheckout}>
+                        Buy now
+                    </button>
+                </div>
+            )
+
     }
 }
