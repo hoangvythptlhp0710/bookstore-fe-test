@@ -39,7 +39,7 @@ function App() {
                     <Route path="/admin/product/:id" element={<ProductUpdate/>}/>
                     {/* user only */}
                     <Route path='/cart' element={<ShoppingCart/>}></Route>
-                    <Route path="/customer/:id" element={<UpdateCustomer/>}/>
+                    <Route path="/my_profile" element={<UpdateCustomer/>}/>
                     <Route path="/*" element={<NotFound title='(╥﹏╥) 404 error: Page not found!' details='We cannot find this page, please try again later!'/>}/>
                 </Routes>
             </div>

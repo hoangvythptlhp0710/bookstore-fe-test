@@ -93,7 +93,7 @@ class HeaderWithNavigate extends Component {
                             <a href='/#'><Link to={fe_url + "cart"}><i className="bi bi-cart2 customCart"><span className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link></a>
                             <li className='account'><img src='/images/account.png' alt='account' className='account'></img>
                                 <ul className='sub-account'>
-                                    <div><a href='/customer/:id'>Profile</a></div>
+                                    <div><a href='/my_profile'>Profile</a></div>
                                     <div className='orders'><a href={fe_url + "order"}>Orders</a></div>
                                 </ul>
                             </li>

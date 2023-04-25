@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {Button} from "react-bootstrap";
 import req, {be_url, userId} from "../../others/Share";
 
-export default function CustomerUpdate(props) {
+export default function CustomerUpdate() {
     const [customer, setCustomer] = useState({
         username: "",
         email: "",
@@ -14,31 +14,31 @@ export default function CustomerUpdate(props) {
         avatar: ""
     })
     useEffect(() => {
-        fetchCustomerList();
-        console.log("listCustomer");
-    })
+        fetchCustomer()
+        console.log("Fetch customer.")
+    }, [])
+
     const {username, email, password, address, phone, age, avatar} = customer;
+
     const handleChange = (event) => {
         setCustomer({...customer, [event.target.id]: event.target.value})
-        console.log(customer);
+        console.log("Change")
     }
 
     const submitForm = async (e) => {
         e.preventDefault();
-        console.log(customer);
+        console.log("Submit form!");
         await req.put(`${be_url}customer/${userId}`, customer)
-            .then((result) => {
-                console.log(result);
+            .then((res) => {
+                console.log("Submit!")
                 window.location = "/";
             })
     }
 
-    let fetchCustomerList = async () => {
+    let fetchCustomer = async () => {
         await req.get(be_url + 'customer/' + userId).then((res) => {
-            const customers = res.data;
-            console.log(customers);
-            setCustomer(customers);
-            console.log(customer);
+            const customer = res.data;
+            setCustomer(customer);
         })
     };
 
