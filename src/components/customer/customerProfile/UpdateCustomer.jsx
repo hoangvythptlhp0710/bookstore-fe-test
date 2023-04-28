@@ -79,6 +79,18 @@ export default function CustomerUpdate() {
                             id='password'
                             required
                             className="form-control"
+                            placeholder="Enter old password"
+                            value={password}
+                            onChange={(e) => handleChange(e)}
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label>New Password</label>
+                        <input
+                            type="password"
+                            id='password'
+                            required
+                            className="form-control"
                             value={password}
                             onChange={(e) => handleChange(e)}
                         />
