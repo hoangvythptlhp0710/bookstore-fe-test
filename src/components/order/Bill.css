@@ -1,0 +1,48 @@
+.address{
+    display: flex;
+    
+}
+
+.boxofbill{
+    border-radius: 5px;
+   border: 1px #33cc66 solid;
+   padding: 5px;
+   padding-left: 10px;
+   padding-right: 10px;
+   margin-top: 10px;
+}
+
+.title{
+    text-align: center;
+ display: block;
+}
+
+.btnconfirm{
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.nameinbill{
+    margin-right: 10px;
+    font-weight: bold;
+}
+.phoneinbill{
+    margin-right: 10px;
+    font-weight: bold;
+}
+.boxinnotif{
+    border-radius: 5px;
+    border: 1px #33cc66 solid;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    width: 40%;
+    margin: auto;
+    margin-top: 50px;
+}
+.mess{
+    display: flex;
+     justify-content: center;
+}

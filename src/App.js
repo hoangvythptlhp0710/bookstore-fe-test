@@ -16,6 +16,8 @@ import ShoppingCart from './components/customer/cart/ShoppingCart'
 import NotFound from "./components/others/NotFound";
 import CheckoutOrder from './components/order/CheckoutOrder';
 import OrderByStatus from './components/order/OrderByStatus';
+import CheckBill from './components/order/CheckBill';
+import SuccessNotify from './components/order/SuccessNotify';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
                     <Route path='/product/:category/:page' element={<ProductsByCategory/>}></Route>
                     <Route path="/order/:id"  element={<CheckoutOrder/>}></Route>
                     <Route path="/order" element={<OrderByStatus />}></Route>
+                    <Route path="/bill" element={<CheckBill />}></Route>
+                    <Route path="/success" element={<SuccessNotify />}></Route>
+                    
                     {/* admin only */}
                     <Route path="/admin" element={<Admin/>}/>
                     <Route path="/admin/add" element={<ProductAdd/>}/>

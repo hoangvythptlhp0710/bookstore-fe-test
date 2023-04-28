@@ -39,21 +39,29 @@ class CheckoutOrder extends React.Component {
         } else {
             dataToCheckout.paymentMethod = "cash"
         }
-        dataToCheckout.customerName = this.state.userInfo.username
-        dataToCheckout.phone = this.state.userInfo.phone
+        dataToCheckout.customerName = this.state.customerName
+        dataToCheckout.phone = this.state.phone
         dataToCheckout.messageOfCustomer = this.state.messageOfCustomer
         dataToCheckout.addressToReceive = this.state.addressToReceive
         dataToCheckout.voucherId = this.state.voucher
+
+        localStorage.setItem('dataToCheckout', JSON.stringify(dataToCheckout)); 
+        localStorage.setItem('products', localStorage.getItem("items")); 
+
+        localStorage.setItem('total', localStorage.getItem("total")); 
 
         req.post(be_url + "order/" + userId, dataToCheckout)
         .then(()=> {
             localStorage.removeItem("items")
             localStorage.removeItem("total")
-            window.location.href = fe_url + "order?status=customer_confirmed"
+            // window.location.href = fe_url + "order?status=customer_confirmed"
+            window.location.href = fe_url + "bill"
         })
             .catch((error) => {
                 console.log(error)
             })
+
+                
     }
 
     handleSelectChange = (e) => {
@@ -87,38 +95,63 @@ class CheckoutOrder extends React.Component {
             <div className="checkoutContainer">
                 <div className="userInfo">
                     <h3>Checkout information</h3>
-                    <input required name="customerName" placeholder="User name" defaultValue={this.state.userInfo.username} onChange={this.handleChange}></input><br></br>
-                    <input required name="phone" placeholder="Phone number" defaultValue={this.state.userInfo.phone} onChange={this.handleChange}></input><br></br>
-                    <input required name="addressToReceive" placeholder="Address to receive" defaultValue={this.state.userInfo.address} onChange={this.handleChange}></input><br></br>
-                    <input required name="messageOfCustomer" placeholder="Message to shop" onChange={this.handleChange}></input>
-                    <div>
-                        <p>Payment method</p>
-                        <select defaultValue="cash" onChange={this.handleSelectChange}>
+                    <form className="form out card">
+                        <label className=" h6 guide">Name</label>
+                        <input class = "checkout" required name="customerName" placeholder="User name"  onChange={this.handleChange}></input>
+
+                        <label className=" h6 guide">Phone number</label>
+                        <input class = "checkout" required name="phone" placeholder="Phone number"  onChange={this.handleChange}></input>
+
+                        <label className="h6 guide">Address</label>
+                        <input class = "checkout" required name="addressToReceive" placeholder="Address to receive" onChange={this.handleChange}></input>
+
+
+                        <label className="h6 guide">Note</label>
+                        <input class = "checkout" required name="messageOfCustomer" placeholder="Message to shop" onChange={this.handleChange}></input>
+
+                        <label className=" h6 guide ">Payment method</label>
+                        <select className="form-control enter" onChange={this.handleSelectChange}>
+                            <option>Select Payment Method</option>
                             <option value="cash">By cash</option>
                             <option value="online">Online</option>
+                    
                         </select>
-                    </div>
+                        
+                    </form>
+
                 </div>
-                <div className="productInfo">
-                    {this.state.items.map(item => <div className="contentProductInfo" key={item.productId}>
+
+
+                <div className="bill">
+                    <h3>Products information</h3>
+                    <div className="productInfo">
+                    {this.state.items.map(item => 
+                    <div className="contentProductInfo" key={item.productId}>
                         <img src={item.images[0]} alt="product"></img>
                         <h4>{item.name}</h4>
                         <p>{item.price} $</p>
                         <p className="quantity_order">Quantity: {item.quantity}</p>
                     </div>)}
+                    
+                    
+                    <div className="amount">
                     <div className="voucher">
                         <input placeholder="voucher code" name="voucher" onChange={this.handleChange}></input>
-                        <button>Use</button>
+                        <button >Use</button>
                     </div>
-                    <hr></hr>
                     <div>
                         <h5>Total: {this.state.total} $</h5>
                     </div>
-                    <hr></hr>
+                    </div>
+                    
                     <button onClick={this.handleCheckout}>Checkout</button>
-                </div>
+                    </div>
+                    
+                    </div>
             </div>
         )
     }
+
+    
 }
 export default withRouter(CheckoutOrder)
