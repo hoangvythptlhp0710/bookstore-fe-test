@@ -39,7 +39,7 @@ class ProductDetails extends React.Component {
     async postProductToCart(data, callback) {
         await req.post(be_url + "cart/" + userId, JSON.stringify(data))
             .then((res) => {
-
+                    
             })
             .catch(error => {
                 this.setState({
@@ -87,6 +87,7 @@ class ProductDetails extends React.Component {
         const itemList = [data]
         localStorage.setItem("total", this.state.count * this.state.price)
         localStorage.setItem("items", JSON.stringify(itemList));
+        
         window.location.href = `${fe_url}order/${userId}`;
     }
 

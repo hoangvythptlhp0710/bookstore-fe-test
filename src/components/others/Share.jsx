@@ -9,7 +9,6 @@ const req = axios.create({
 });
 
 export default req;
-
 export const fe_url = "http://localhost:3000/"
 export const be_url = "http://localhost:8080/"
 export const accessToken = localStorage.getItem("access_token")

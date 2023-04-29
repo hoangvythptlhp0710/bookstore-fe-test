@@ -15,11 +15,31 @@ class CheckBill extends React.Component {
 
 
     handleConfirm = () => {
+
+        localStorage.removeItem("total")
+        localStorage.removeItem("dataToCheckout")
+        
         if(this.state.dataToCheckout.paymentMethod == "cash"){
             window.location.href = fe_url + "success"
         }
-                
+
+
+        if(this.state.dataToCheckout.paymentMethod == "online"){
+            localStorage.setItem('dataToLak', "hehe là nó nè");
+            const totalPrice = this.state.total
+         //  handel online payment
+         req.post(be_url + "customer/paypal/pay/" + this.state.total)
+             .then(response => {
+            localStorage.setItem('dataToPay', JSON.stringify(response.data)); 
+            const resdata = response.data
+            const url = resdata[1].href
+            window.location.href = url
+        })
+            .catch((error) => {
+                console.log(error)
+            })     
     }
+}
 
 
     render() {
@@ -50,7 +70,7 @@ class CheckBill extends React.Component {
                         <p className="total">{item.quantity*item.price} $</p>
                     </div>)}                   
                     <div  className="amount">
-                        <h5>Total:  $</h5>
+                        <h5>Total: {this.state.total} $</h5>
                     </div>
                     <div  className="amount">
                         <h5>Payment: {this.state.dataToCheckout.paymentMethod}</h5>
@@ -65,5 +85,6 @@ class CheckBill extends React.Component {
         )
     }
 }
+
         
 export default withRouter(CheckBill)

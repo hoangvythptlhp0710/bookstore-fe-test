@@ -47,13 +47,16 @@ class CheckoutOrder extends React.Component {
 
         localStorage.setItem('dataToCheckout', JSON.stringify(dataToCheckout)); 
         localStorage.setItem('products', localStorage.getItem("items")); 
+        
 
-        localStorage.setItem('total', localStorage.getItem("total")); 
+         
+        
+        
 
         req.post(be_url + "order/" + userId, dataToCheckout)
         .then(()=> {
             localStorage.removeItem("items")
-            localStorage.removeItem("total")
+            // localStorage.removeItem("total")
             // window.location.href = fe_url + "order?status=customer_confirmed"
             window.location.href = fe_url + "bill"
         })
@@ -79,7 +82,7 @@ class CheckoutOrder extends React.Component {
                 break
             case "addressToReceive":
                 this.setState({ addressToReceive: e.target.value });
-                break
+                
             case "messageOfCustomer":
                 this.setState({ messageOfCustomer: e.target.value });
                 break
@@ -97,23 +100,23 @@ class CheckoutOrder extends React.Component {
                     <h3>Checkout information</h3>
                     <form className="form out card">
                         <label className=" h6 guide">Name</label>
-                        <input class = "checkout" required name="customerName" placeholder="User name"  onChange={this.handleChange}></input>
+                        <input className = "checkout" required name="customerName" placeholder="User name"  onChange={this.handleChange}></input>
 
                         <label className=" h6 guide">Phone number</label>
-                        <input class = "checkout" required name="phone" placeholder="Phone number"  onChange={this.handleChange}></input>
+                        <input className = "checkout" required name="phone" placeholder="Phone number"  onChange={this.handleChange}></input>
 
                         <label className="h6 guide">Address</label>
-                        <input class = "checkout" required name="addressToReceive" placeholder="Address to receive" onChange={this.handleChange}></input>
+                        <input className = "checkout" required name="addressToReceive" placeholder="Address to receive" onChange={this.handleChange}></input>
 
 
                         <label className="h6 guide">Note</label>
-                        <input class = "checkout" required name="messageOfCustomer" placeholder="Message to shop" onChange={this.handleChange}></input>
+                        <input className = "checkout" required name="messageOfCustomer" placeholder="Message to shop" onChange={this.handleChange}></input>
 
                         <label className=" h6 guide ">Payment method</label>
                         <select className="form-control enter" onChange={this.handleSelectChange}>
                             <option>Select Payment Method</option>
                             <option value="cash">By cash</option>
-                            <option value="online">Online</option>
+                            <option value="online">Online with Paypal</option>
                     
                         </select>
                         

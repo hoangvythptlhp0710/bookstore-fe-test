@@ -18,6 +18,7 @@ import CheckoutOrder from './components/order/CheckoutOrder';
 import OrderByStatus from './components/order/OrderByStatus';
 import CheckBill from './components/order/CheckBill';
 import SuccessNotify from './components/order/SuccessNotify';
+import FailNotify from './components/order/FailNotify';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
                     <Route path="/order" element={<OrderByStatus />}></Route>
                     <Route path="/bill" element={<CheckBill />}></Route>
                     <Route path="/success" element={<SuccessNotify />}></Route>
-                    
+                    <Route path="/fail" element={<FailNotify />}></Route>
                     {/* admin only */}
                     <Route path="/admin" element={<Admin/>}/>
                     <Route path="/admin/add" element={<ProductAdd/>}/>
