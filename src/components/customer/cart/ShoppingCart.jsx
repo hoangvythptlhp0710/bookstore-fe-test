@@ -1,6 +1,8 @@
 import React from "react";
 import "./ShoppingCart.css"
 import req, {be_url, fe_url, userId} from "../../others/Share";
+import Header from "../../header/Header";
+import Footer from "../../footer/Footer";
 
 export default class ShoppingCart extends React.Component {
     state = {
@@ -107,7 +109,9 @@ export default class ShoppingCart extends React.Component {
     }
 
     render() {
-            return (
+        return (
+            <>
+                <Header/>
                 <div className="container text-center mt-3">
                     <table className="table">
                         <thead>
@@ -160,7 +164,9 @@ export default class ShoppingCart extends React.Component {
                         Buy now
                     </button>
                 </div>
-            )
+                <Footer/>
+            </>
+        )
 
     }
 }

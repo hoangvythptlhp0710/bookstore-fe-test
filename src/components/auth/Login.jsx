@@ -3,6 +3,8 @@ import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import './Auth.css';
 import {be_url} from '../others/Share';
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 export default class Login extends Component {
     state = {
@@ -36,53 +38,56 @@ export default class Login extends Component {
                 localStorage.setItem("role", res.data.role);
                 if (res.status === 200) {
                     if (res.data.role === "ROLE_ADMIN") {
-                        window.location = "/admin"
+                        window.location = "/admin/products"
                     } else if (res.data.role === "ROLE_CUSTOMER") {
                         window.location = "/";
                     }
                 }
             })
             .catch((error) => {
-                alert(error.response.data.message)
+                alert("Invalid username or password!")
             })
     }
 
     render() {
-        return (
-            <div className="auth-wrapper">
-                <div className="auth-inner">
-                    <form onSubmit={this.handleSubmit}>
-                        <h3>Login</h3>
-                        <div className="mb-3">
-                            <label>Username</label>
-                            <input
-                                type="text"
-                                id='username'
-                                required
-                                className="form-control"
-                                placeholder="Enter username"
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                id='password'
-                                required
-                                className="form-control"
-                                placeholder="Enter password"
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className="d-grid">
-                            <Button type="submit" className="btn" variant="outline-dark">
-                                Submit
-                            </Button>
-                        </div>
-                    </form>
+        return (<>
+                <Header/>
+                <div className="auth-wrapper">
+                    <div className="auth-inner">
+                        <form onSubmit={this.handleSubmit}>
+                            <h3>Login</h3>
+                            <div className="mb-3">
+                                <label>Username</label>
+                                <input
+                                    type="text"
+                                    id='username'
+                                    required
+                                    className="form-control"
+                                    placeholder="Enter username"
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    id='password'
+                                    required
+                                    className="form-control"
+                                    placeholder="Enter password"
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                            <div className="d-grid">
+                                <Button type="submit" className="btn" variant="outline-dark">
+                                    Submit
+                                </Button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+                <Footer/>
+            </>
         )
     }
 }

@@ -52,7 +52,7 @@ export default class ProductList extends React.Component {
                         <tr>
                             <th colSpan="8">
                                 <h3 className="text">BOOKS MANAGEMENT</h3>
-                                <a href="/admin/add"><i className="bi bi-file-plus-fill"></i></a>
+                                <a href="/admin/product/add"><i className="bi bi-file-plus-fill"></i></a>
                             </th>
                         </tr>
 

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import req, {be_url, role} from "../others/Share";
 import NotFound from "../others/NotFound";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 //form update 
 export default function ProductUpdate(props) {
@@ -18,8 +20,8 @@ export default function ProductUpdate(props) {
 
     useEffect(() => {
         fetchProductList();
-        console.log("listProduct");
-    })
+        console.log("list Product");
+    }, [])
 
     const {name, description, price, inStock, images, category, discount} = product;
 
@@ -31,7 +33,7 @@ export default function ProductUpdate(props) {
         e.preventDefault();
         await req.put(`${be_url}admin/product/${id}`, product)
             .then((result) => {
-                window.location = "/admin";
+                window.location = "/admin/products";
             })
     }
 
@@ -101,7 +103,10 @@ export default function ProductUpdate(props) {
         )
     } else {
         return (
-            <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
-        )
+            <>
+                <Header/>
+                <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+                <Footer/>
+            </>)
     }
 }

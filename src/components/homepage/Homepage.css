@@ -36,7 +36,7 @@
 }
 
 .box {
-    background: linear-gradient(0deg, rgba(0,202,255,1) 0%, #33cc66);
+    background: linear-gradient(0deg, rgba(0, 202, 255, 1) 0%, #33cc66);
     border-radius: 20px;
     font-size: 14px;
     font-family: "Roboto", "cursive";
@@ -126,6 +126,7 @@
     background: rgba(0, 209, 255, 1);
     text-align: center;
 }
+
 .product-title {
     font-family: "Roboto", "cursive";
     font-weight: 300;
