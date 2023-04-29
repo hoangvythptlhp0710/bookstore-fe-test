@@ -4,6 +4,8 @@ import withRouter from './WithRouter';
 import "./Product.css";
 import req, {be_url, fe_url, userId} from '../others/Share';
 import NotFound from "../others/NotFound";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 class ProductDetails extends React.Component {
     state = {
@@ -78,11 +80,11 @@ class ProductDetails extends React.Component {
 
     handleBuyNow = () => {
         const data = {}
-        data.productId =  this.state.productId
+        data.productId = this.state.productId
         data.images = this.state.images
         data.price = this.state.price
         data.name = this.state.name
-        data.quantity =  this.state.count
+        data.quantity = this.state.count
         console.log(this.state.count)
         const itemList = [data]
         localStorage.setItem("total", this.state.count * this.state.price)
@@ -93,51 +95,61 @@ class ProductDetails extends React.Component {
 
     render() {
         if (this.state.productId) {
-            return (<div className='containerProductDetailsWithCondition'>
-                    {this.state.statusCode === 200 ? (<div className='containerProductDetails'>
-                        <div className='pictures'>
-                            <div className='big'><img src={this.state.images[0]} alt='img'></img></div>
-                            <div className='smallContainer'>
-                                {this.state.images.slice(1).map((element, key) => (
-                                    <div className='small' key={key}>
-                                        <img src={element} alt='img'></img>
-                                    </div>
-                                ))}
+            return (<>
+                    <Header/>
+
+                    <div className='containerProductDetailsWithCondition'>
+                        {this.state.statusCode === 200 ? (<div className='containerProductDetails'>
+                            <div className='pictures'>
+                                <div className='big'><img src={this.state.images[0]} alt='img'></img></div>
+                                <div className='smallContainer'>
+                                    {this.state.images.slice(1).map((element, key) => (
+                                        <div className='small' key={key}>
+                                            <img src={element} alt='img'></img>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <div className='productDetails'>
-                            <h3>{this.state.name}</h3>
-                            <p>{this.state.description}</p>
-                            <div className='price'>Price: {this.state.price} $</div>
-                            <div className='price'>Available: {this.state.inStock}</div>
-                            <div className='numberBar'>
-                                <div className='titleNumber'>Number</div>
-                                <button className='nBtn' onClick={this.handleDecrement}>-</button>
-                                <span className='number'>{this.state.count}</span>
-                                <button className='nBtn' onClick={this.handleIncrement}>+</button>
+                            <div className='productDetails'>
+                                <h3>{this.state.name}</h3>
+                                <p>{this.state.description}</p>
+                                <div className='price'>Price: {this.state.price} $</div>
+                                <div className='price'>Available: {this.state.inStock}</div>
+                                <div className='numberBar'>
+                                    <div className='titleNumber'>Number</div>
+                                    <button className='nBtn' onClick={this.handleDecrement}>-</button>
+                                    <span className='number'>{this.state.count}</span>
+                                    <button className='nBtn' onClick={this.handleIncrement}>+</button>
+                                </div>
+                                <div className='addCartOrBuy'>
+                                    <button className='addToCart' onClick={this.handleClick}>
+                                        <i className="bi bi-cart"></i>
+                                        Add to cart
+                                    </button>
+                                    <button className='buyNow' onClick={this.handleBuyNow}>
+                                        Buy now
+                                    </button>
+                                </div>
                             </div>
-                            <div className='addCartOrBuy'>
-                                <button className='addToCart' onClick={this.handleClick}>
-                                    <i className="bi bi-cart"></i>
-                                    Add to cart
-                                </button>
-                                <button className='buyNow' onClick={this.handleBuyNow}>
-                                    Buy now
-                                </button>
-                            </div>
-                        </div>
-                    </div>) : (
-                        <section className="container">
-                            <div className="text-center empty">
-                                <h2>(╥﹏╥) {this.state.statusCode} error!</h2>
-                                <h5>Perhaps you should try viewing other books!</h5>
-                            </div>
-                        </section>)}
-                </div>
+                        </div>) : (
+                            <section className="container">
+                                <div className="text-center empty">
+                                    <h2>(╥﹏╥) {this.state.statusCode} error!</h2>
+                                    <h5>Perhaps you should try viewing other books!</h5>
+                                </div>
+                            </section>)}
+                    </div>
+                    <Footer/>
+                </>
+
             )
         } else {
             return (
-                <NotFound title='(╥﹏╥) Book not existed!' details='Perhaps you should try viewing other books!'/>
+                <>
+                    <Header/>
+                    <NotFound title='(╥﹏╥) Book not existed!' details='Perhaps you should try viewing other books!'/>
+                    <Footer/>
+                </>
             )
         }
     }

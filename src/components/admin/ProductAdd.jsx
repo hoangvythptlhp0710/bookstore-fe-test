@@ -1,7 +1,9 @@
 import React from "react";
-import "./Admin.css";
+import "../others/backup/Admin.css";
 import req, {be_url, role} from "../others/Share";
 import NotFound from "../others/NotFound";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 export default class ProductAdd extends React.Component {
     state = {
@@ -62,7 +64,7 @@ export default class ProductAdd extends React.Component {
         req.post(be_url + 'admin/product', product)
             .then((res) => {
                 if (res.status === 200) {
-                    window.location = "/admin";
+                    window.location = "/admin/products";
                 }
             })
             .catch(error => {
@@ -102,7 +104,6 @@ export default class ProductAdd extends React.Component {
                         <input type="text" className="form-control enter" id="images" value={this.state.images} required
                                onChange={this.handleAddImage}/>
 
-
                         <label className=" h6 guide ">Category</label>
                         <select className="form-control enter" id="category" onChange={this.handleCategoryChange}>
                             <option>Select Category</option>
@@ -127,8 +128,11 @@ export default class ProductAdd extends React.Component {
             )
         } else {
             return (
-                <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
-            )
+                <>
+                    <Header/>
+                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+                    <Footer/>
+                </>)
         }
     }
 }

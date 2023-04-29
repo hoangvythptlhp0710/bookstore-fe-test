@@ -2,6 +2,10 @@
     background-color: #f1f1f1;
 }
 
+.logout {
+    font-weight: normal;
+}
+
 .menu {
     display: flex;
     justify-content: space-around;
@@ -142,11 +146,13 @@ form input {
 .dropdown:hover .drop-btn {
     background-color: #3e8e41;
 }
+
 .customCart {
     padding-bottom: 0;
     height: 40px;
 }
+
 .orders {
-    position: relative; 
+    position: relative;
     z-index: 999;
 }

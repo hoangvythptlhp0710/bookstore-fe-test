@@ -1,8 +1,12 @@
 import React from "react";
 import "./ShoppingCart.css"
-import req, {be_url, fe_url, userId} from "../../others/Share";
+import req, {be_url, fe_url, role, userId} from "../../others/Share";
+import Header from "../../header/Header";
+import Footer from "../../footer/Footer";
+import NotFound from "../../others/NotFound";
 
 export default class ShoppingCart extends React.Component {
+
     state = {
         outputCarts: [],
         total: 0
@@ -11,6 +15,7 @@ export default class ShoppingCart extends React.Component {
     url = be_url + "cart/"
 
     componentDidMount() {
+        console.log("fetch")
         this.fetchProducts();
     }
 
@@ -26,8 +31,9 @@ export default class ShoppingCart extends React.Component {
             const outputCarts = res.data;
             let totalPrice = 0;
             outputCarts.forEach(product => {
-                totalPrice = totalPrice + (product.price - product.price * product.discount / 100) * product.quantity;
+                totalPrice += (product.price - product.price * product.discount / 100) * product.quantity;
             });
+            console.log(totalPrice)
             this.setState({
                 outputCarts: outputCarts,
                 total: totalPrice
@@ -74,6 +80,7 @@ export default class ShoppingCart extends React.Component {
             total: totalPrice
         })
     }
+
     handleClick = (quantity, productId) => {
         req.put(this.url + userId + "/" + productId + "/" + quantity)
             .then((res) => {
@@ -106,61 +113,76 @@ export default class ShoppingCart extends React.Component {
         window.location.href = `${fe_url}order/${userId}`;
     }
 
+
     render() {
+        if (role === "ROLE_CUSTOMER") {
             return (
-                <div className="container text-center mt-3">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th colSpan="5" className="h3">My shopping cart</th>
-                        </tr>
-                        <tr className="h5">
-                            <th></th>
-                            <th>Book name</th>
-                            <th>Book price</th>
-                            <th>Number</th>
-                            <th>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            this.state.outputCarts
-                                .map(outputCart =>
-                                    <tr key={outputCart.productId}>
-                                        <td><img src={outputCart.images[0]} alt="img"></img></td>
-                                        <td> {outputCart.name} </td>
-                                        <td> {outputCart.price - outputCart.price * outputCart.discount / 100} $</td>
-                                        <td>
-                                            <div className='bar'>
-                                                <button className='nBtn'
-                                                        onClick={() => this.handleIncrement(outputCart)}>+
+                <>
+                    <Header/>
+                    <div className="container text-center mt-3">
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th colSpan="5" className="h3">My shopping cart</th>
+                            </tr>
+                            <tr className="h5">
+                                <th></th>
+                                <th>Book name</th>
+                                <th>Book price</th>
+                                <th>Number</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.outputCarts
+                                    .map(outputCart =>
+                                        <tr key={outputCart.productId}>
+                                            <td><img src={outputCart.images[0]} alt="img"></img></td>
+                                            <td> {outputCart.name} </td>
+                                            <td> {outputCart.price - outputCart.price * outputCart.discount / 100} $</td>
+                                            <td>
+                                                <div className='bar'>
+                                                    <button className='nBtn'
+                                                            onClick={() => this.handleIncrement(outputCart)}>+
+                                                    </button>
+                                                    <span className='number'>{outputCart.quantity}</span>
+                                                    <button className='nBtn'
+                                                            onClick={() => this.handleDecrement(outputCart)}>-
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button className="btn green-btn" onClick={() => {
+                                                    if (window.confirm("Are you sure you want to delete this book?")) {
+                                                        this.handleDelete(outputCart.productId);
+                                                    }
+                                                }}>
+                                                    Delete
                                                 </button>
-                                                <span className='number'>{outputCart.quantity}</span>
-                                                <button className='nBtn'
-                                                        onClick={() => this.handleDecrement(outputCart)}>-
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button className="btn green-btn" onClick={() => {
-                                                if (window.confirm("Are you sure you want to delete this book?")) {
-                                                    this.handleDelete(outputCart.productId);
-                                                }
-                                            }}>
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                        }
-                        </tbody>
-                    </table>
-                    <p>Total price: <strong>{this.state.total} $</strong></p>
-                    <button className='buyNow' onClick={this.handleCheckout}>
-                        Buy now
-                    </button>
-                </div>
+                                            </td>
+                                        </tr>
+                                    )
+                            }
+                            </tbody>
+                        </table>
+                        <p>Total price: <strong>{this.state.total} $</strong></p>
+                        <button className='buyNow' onClick={this.handleCheckout}>
+                            Buy now
+                        </button>
+                    </div>
+                    <Footer/>
+                </>
             )
+        } else {
+            return (
+                <>
+                    <Header/>
+                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+                    <Footer/>
+                </>
+            )
+        }
 
     }
 }

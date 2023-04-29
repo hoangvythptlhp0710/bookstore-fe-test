@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import req, {be_url, role} from "../others/Share";
-import NotFound from "../others/NotFound";
+import req, {be_url, role} from "../Share";
+import NotFound from "../NotFound";
 
 export default class ProductList extends React.Component {
 
@@ -52,7 +52,7 @@ export default class ProductList extends React.Component {
                         <tr>
                             <th colSpan="8">
                                 <h3 className="text">BOOKS MANAGEMENT</h3>
-                                <a href="/admin/add"><i className="bi bi-file-plus-fill"></i></a>
+                                <a href="/admin/product/add"><i className="bi bi-file-plus-fill"></i></a>
                             </th>
                         </tr>
 

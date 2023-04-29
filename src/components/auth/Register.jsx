@@ -3,6 +3,8 @@ import {Button} from 'react-bootstrap'
 import axios from 'axios';
 import './Auth.css'
 import {be_url} from '../others/Share';
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 export default class Register extends Component {
     state = {
@@ -45,8 +47,8 @@ export default class Register extends Component {
     }
 
     render() {
-        return (
-
+        return (<>
+            <Header/>
             <div className="auth-wrapper">
                 <div className="auth-inner">
                     <form onSubmit={this.handleSubmit}>
@@ -92,6 +94,7 @@ export default class Register extends Component {
                     </form>
                 </div>
             </div>
-        )
+            <Footer/>
+        </>)
     }
 }

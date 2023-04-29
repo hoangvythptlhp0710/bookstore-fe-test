@@ -1,37 +1,39 @@
-.address{
+.address {
     display: flex;
-    
+
 }
 
-.boxofbill{
+.boxofbill {
     border-radius: 5px;
-   border: 1px #33cc66 solid;
-   padding: 5px;
-   padding-left: 10px;
-   padding-right: 10px;
-   margin-top: 10px;
+    border: 1px #33cc66 solid;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
 }
 
-.title{
+.title {
     text-align: center;
- display: block;
+    display: block;
 }
 
-.btnconfirm{
+.btnconfirm {
     text-align: center;
     display: block;
     margin-top: 20px;
 }
 
-.nameinbill{
+.nameinbill {
     margin-right: 10px;
     font-weight: bold;
 }
-.phoneinbill{
+
+.phoneinbill {
     margin-right: 10px;
     font-weight: bold;
 }
-.boxinnotif{
+
+.boxinnotif {
     border-radius: 5px;
     border: 1px #33cc66 solid;
     padding: 5px;
@@ -42,9 +44,10 @@
     margin: auto;
     margin-top: 50px;
 }
-.mess{
+
+.mess {
     display: flex;
-     justify-content: center;
+    justify-content: center;
 }
 
 .amount{

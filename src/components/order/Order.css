@@ -2,7 +2,8 @@
     display: flex;
     margin-top: 50px;
 }
-.amount{
+
+.amount {
     display: flex;
     border: 1px #33cc66 solid;
     padding: 10px;
@@ -10,25 +11,28 @@
     margin-bottom: 10px;
     justify-content: space-between;
     align-content: center;
-    
+
 }
+
 .userInfo {
     width: 50%;
     /* margin: 50px; */
     padding-left: 50px;
     padding-right: 50px;
     display: block;
-   text-align: center;
-    
+    text-align: center;
+
 }
+
 .userInfo input {
     width: 500px;
     height: 50px;
     margin-top: 10px;
     margin-bottom: 10px;
-   
+
 }
-.bill{
+
+.bill {
     width: 50%;
     /* background-color: #f1f1f1; */
     /* height: 500px; */
@@ -37,26 +41,32 @@
     padding-right: 50px;
     text-align: center;
 }
+
 .productInfo {
     border-radius: 5px;
     padding: 10px;
     border: 1px #33cc66 solid;
 }
+
 .contentProductInfo {
     display: flex;
     margin-bottom: 40px;
     justify-content: space-between;
 }
+
 .contentProductInfo img {
     margin-right: 30px;
 }
+
 .contentProductInfo h4 {
     margin-right: 30px;
 }
+
 .productInfo hr {
     margin-bottom: 40px;
     margin-top: 40px;
 }
+
 .order_list {
     background-color: #f1f1f1;
     padding-top: 10px;
@@ -64,9 +74,11 @@
     width: max-content;
     margin: auto;
 }
+
 .order_list ul {
     margin-bottom: 0;
 }
+
 .order_list ul li {
     padding: 15px;
 }
@@ -77,64 +89,74 @@
     margin: auto;
     padding: 0px 10px 0px 10px;
 }
+
 .item {
     display: flex;
     width: auto;
     margin: 10px;
 }
+
 .name_cat {
     width: 40%;
     padding-left: 30px;
 }
+
 .price_quant {
     width: 30%;
 }
+
 button {
     background-color: #33cc66;
     border-radius: 3px;
     border: 0;
     padding: 5px;
 }
+
 button:hover {
     background-color: #07f255;
 }
+
 .numberOfItem {
     font-size: 15px;
     color: #33cc66;
     position: absolute;
     z-index: 999;
 }
+
 .active-link {
     color: red;
-  }
-  .quantity_order {
+}
+
+.quantity_order {
     margin-left: 30px;
-  }
+}
 
 
-.checkout{
+.checkout {
     border-color: #33cc33;
     width: 95%;
-  }
-  .out {
+}
+
+.out {
     background-color: white;
     border-color: #33cc33;
     width: 100%;
-  }
+}
 
-  .form{
+.form {
     padding: 10px;
-  }
-  .enter{
+}
+
+.enter {
     border-width: 2px;
     width: 93%;
-  }
+}
 
-  .bill{
+.bill {
 
     border-radius: 5px;
     border-color: #33cc33;
     border-image-width: 1px;
-  }
+}
 
  
