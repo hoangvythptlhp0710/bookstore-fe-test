@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "../products/WithRouter";
 import "./Bill.css"
-import {fe_url} from "../others/Share";
+import req, { be_url, checkout_url, fe_url, userId } from "../others/Share";
 import Header from "../header/Header";
 import NotFound from "../others/NotFound";
 import Footer from "../footer/Footer";
@@ -31,7 +31,7 @@ class CheckBill extends React.Component {
             localStorage.setItem('dataToLak', "hehe là nó nè");
             const totalPrice = this.state.total
          //  handel online payment
-         req.post(be_url + "customer/paypal/pay/" + this.state.total)
+         req.post(checkout_url + this.state.total)
              .then(response => {
             localStorage.setItem('dataToPay', JSON.stringify(response.data)); 
             const resdata = response.data
@@ -50,7 +50,7 @@ class CheckBill extends React.Component {
 
 
     render() {
-        if (role === "ROLE_USER") {
+        // if (role === "ROLE_USER") {
             return (
 
                 <div className="container">
@@ -92,15 +92,15 @@ class CheckBill extends React.Component {
 
                 </div>
             )
-        } else {
-            return (
-                <>
-                    <Header/>
-                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
-                    <Footer/>
-                </>
-            )
-        }
+        // } else {
+        //     return (
+        //         <>
+        //             <Header/>
+        //             <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+        //             <Footer/>
+        //         </>
+        //     )
+        // }
     }
 }
 

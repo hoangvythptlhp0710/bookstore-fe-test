@@ -69,7 +69,7 @@ class CheckoutOrder extends React.Component {
         req.post(be_url + "order/" + userId, dataToCheckout)
             .then(() => {
                 localStorage.removeItem("items")
-                localStorage.removeItem("total")
+                // localStorage.removeItem("total")
                 // window.location.href = fe_url + "order?status=customer_confirmed"
                 window.location.href = fe_url + "bill"
             })
@@ -168,14 +168,14 @@ class CheckoutOrder extends React.Component {
                     </div>
                 </div>
             )
-        } else {
-            return (
-                <>
-                    <Header/>
-                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
-                    <Footer/>
-                </>
-            )
+    //     } else {
+    //         return (
+    //             <>
+    //                 <Header/>
+    //                 <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
+    //                 <Footer/>
+    //             </>
+    //         )
         }
     }
 

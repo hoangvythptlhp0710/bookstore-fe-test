@@ -31,7 +31,9 @@ export default class ShoppingCart extends React.Component {
             const outputCarts = res.data;
             let totalPrice = 0;
             outputCarts.forEach(product => {
-                totalPrice += (product.price - product.price * product.discount / 100) * product.quantity;
+                // totalPrice += (product.price - product.price * product.discount / 100) * product.quantity;
+                totalPrice += product.price * product.quantity;
+
             });
             console.log(totalPrice)
             this.setState({
@@ -106,7 +108,9 @@ export default class ShoppingCart extends React.Component {
             data.name = outputCart.name
             data.quantity = outputCart.quantity
             itemList[i] = data
-            total = total + (outputCart.price - outputCart.price * outputCart.discount / 100) * outputCart.quantity
+            // total = total + (outputCart.price - outputCart.price * outputCart.discount / 100) * outputCart.quantity
+            total = total + (outputCart.price) * outputCart.quantity
+
         }
         localStorage.setItem("total", total)
         localStorage.setItem("items", JSON.stringify(itemList));
