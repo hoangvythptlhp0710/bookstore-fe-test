@@ -1,7 +1,9 @@
 import React from "react";
 import withRouter from "../products/WithRouter";
 import "./Order.css"
-import req, { be_url, fe_url, userId } from "../others/Share";
+import req, {be_url, fe_url, userId} from "../others/Share";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 class CheckoutOrder extends React.Component {
     constructor(props) {
@@ -20,14 +22,14 @@ class CheckoutOrder extends React.Component {
     fetchUserInfo = () => {
         req.get(be_url + "customer/" + userId)
             .then((res) => {
-                this.setState({ userInfo: res.data })
+                this.setState({userInfo: res.data})
             })
     }
 
     handleCheckout = () => {
         const dataToCheckout = {}
         const itemsToCheckout = []
-        for(let i = 0; i < this.state.items.length; i++) {
+        for (let i = 0; i < this.state.items.length; i++) {
             const item = {}
             item.productId = this.state.items[i].productId
             item.quantity = this.state.items[i].quantity
@@ -66,30 +68,31 @@ class CheckoutOrder extends React.Component {
 
     handleSelectChange = (e) => {
         const paymentMethod = e.target.value
-        this.setState({ paymentMethod: paymentMethod })
+        this.setState({paymentMethod: paymentMethod})
     }
     handleChange = (e) => {
         switch (e.target.name) {
             case "customerName":
-                this.setState({ customerName: e.target.value });
+                this.setState({customerName: e.target.value});
                 break
             case "phone":
                 console.log(e.target.value)
-                this.setState({ phone: e.target.value });
+                this.setState({phone: e.target.value});
                 break
             case "addressToReceive":
-                this.setState({ addressToReceive: e.target.value });
+                this.setState({addressToReceive: e.target.value});
                 break
             case "messageOfCustomer":
-                this.setState({ messageOfCustomer: e.target.value });
+                this.setState({messageOfCustomer: e.target.value});
                 break
             case "voucher":
-                this.setState({ voucher: e.target.value });
+                this.setState({voucher: e.target.value});
                 break
             default:
                 throw new Error("error")
         }
     }
+
     render() {
         return (
             <div className="checkoutContainer">
@@ -154,4 +157,5 @@ class CheckoutOrder extends React.Component {
 
     
 }
+
 export default withRouter(CheckoutOrder)

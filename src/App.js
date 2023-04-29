@@ -3,17 +3,13 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Register from './components/auth/Register'
 import Homepage from './components/homepage/Homepage'
 import Login from "./components/auth/Login";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
 import ProductAdd from './components/admin/ProductAdd';
-import Admin from './components/admin/Admin';
 import "./App.css"
 import ProductUpdate from './components/admin/ProductUpdate';
 import ProductDetails from './components/products/ProductDetails';
 import UpdateCustomer from "./components/customer/customerProfile/UpdateCustomer";
 import ProductsByCategory from './components/products/ProductsByCategory';
 import ShoppingCart from './components/customer/cart/ShoppingCart'
-import NotFound from "./components/others/NotFound";
 import CheckoutOrder from './components/order/CheckoutOrder';
 import OrderByStatus from './components/order/OrderByStatus';
 import CheckBill from './components/order/CheckBill';

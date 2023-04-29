@@ -4,6 +4,8 @@ import "./Homepage.css";
 import {useLocation} from 'react-router-dom';
 import {be_url} from '../others/Share';
 import NotFound from "../others/NotFound";
+import Footer from "../footer/Footer";
+import Header from "../header/Header";
 
 class HomepageWithLocation extends Component {
     state = {
@@ -125,147 +127,149 @@ class HomepageWithLocation extends Component {
         }
         if (this.state.products.length !== 0) {
             return (
-                <section className="container">
-                    <div className='carousel'>
-                        <img src="/images/book3.webp" alt='book3'/>
-                    </div>
-                    <hr></hr>
-                    <div className="wrapper">
-                        <div className="text-center">
-                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "price")
-                                    }}> Price
-                            </button>
-                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "price")
-                                    }}> Price
-                            </button>
-                            <button className="bi-sort-alpha-up-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "name")
-                                    }}> Name
-                            </button>
-                            <button className="bi-sort-alpha-down-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "name")
-                                    }}> Name
-                            </button>
-                            <button className="bi-sort-up btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "category")
-                                    }}> Category
-                            </button>
-                            <button className="bi-sort-down btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "category")
-                                    }}> Category
-                            </button>
-                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "inStock")
-                                    }}> In Stock
-                            </button>
-                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "inStock")
-                                    }}> In Stock
-                            </button>
+                <>
+                    <Header/>
+                    <section className="container">
+                        <div className='carousel'>
+                            <img src="/images/book3.webp" alt='book3'/>
                         </div>
-                        <div className="inner">
-                            <div className="grid mg-left-10">
-                                <div className="products">
-                                    <div className="box">
-                                        {
-                                            this.state.products.map(product => (
-                                                <div className="product text-center" key={product.id}>
-                                                    <a href={"/product/" + product.id} className="product-item">
-                                                        <div className="product-img">
-                                                            <img className="lazy-load"
-                                                                 src={product.images[0]}
-                                                                 data-src={product.images}
-                                                                 alt={product.name}/>
-                                                            { product.discount !== 0 && <div className="sale-off">-{product.discount}%</div>}
-                                                        </div>
-                                                        <div className="product-title">{product.name}</div>
-                                                        <div className="product-price">
+                        <hr></hr>
+                        <div className="wrapper">
+                            <div className="text-center">
+                                <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "price")
+                                        }}> Price
+                                </button>
+                                <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "price")
+                                        }}> Price
+                                </button>
+                                <button className="bi-sort-alpha-up-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "name")
+                                        }}> Name
+                                </button>
+                                <button className="bi-sort-alpha-down-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "name")
+                                        }}> Name
+                                </button>
+                                <button className="bi-sort-up btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "category")
+                                        }}> Category
+                                </button>
+                                <button className="bi-sort-down btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "category")
+                                        }}> Category
+                                </button>
+                                <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "inStock")
+                                        }}> In Stock
+                                </button>
+                                <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "inStock")
+                                        }}> In Stock
+                                </button>
+                            </div>
+                            <div className="inner">
+                                <div className="grid mg-left-10">
+                                    <div className="products">
+                                        <div className="box">
+                                            {
+                                                this.state.products.map(product => (
+                                                    <div className="product text-center" key={product.id}>
+                                                        <a href={"/product/" + product.id} className="product-item">
+                                                            <div className="product-img">
+                                                                <img className="lazy-load"
+                                                                     src={product.images[0]}
+                                                                     data-src={product.images}
+                                                                     alt={product.name}/>
+                                                                {product.discount !== 0 && <div
+                                                                    className="sale-off">-{product.discount}%</div>}
+                                                            </div>
+                                                            <div className="product-title">{product.name}</div>
+                                                            <div className="product-price">
                                                             <span
                                                                 className="current-price">{(product.price - product.price * product.discount / 100).toFixed(2)}$</span>
-                                                            <span
-                                                                className="original-price"><s>{(product.price).toFixed(2)}$</s></span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            ))
-                                        }
-                                    </div>
-                                    <div>
-                                        {arr.map((item) => (
-                                            <div>
-                                                {item}
-                                            </div>
-                                        ))}
+                                                                <span
+                                                                    className="original-price"><s>{(product.price).toFixed(2)}$</s></span>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                        <div>
+                                            {arr}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                    <Footer/></>
             )
         } else {
-            return (
-                <section className="container">
-                    <div className='carousel'>
-                        <img src="/images/book3.webp" alt='book3'/>
-                    </div>
-                    <hr></hr>
-                    <div className="wrapper">
-                        <div className="text-center">
-                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "price")
-                                    }}> Price
-                            </button>
-                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "price")
-                                    }}> Price
-                            </button>
-                            <button className="bi-sort-alpha-up-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "name")
-                                    }}> Name
-                            </button>
-                            <button className="bi-sort-alpha-down-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "name")
-                                    }}> Name
-                            </button>
-                            <button className="bi-sort-up btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "category")
-                                    }}> Category
-                            </button>
-                            <button className="bi-sort-down btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "category")
-                                    }}> Category
-                            </button>
-                            <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("asc", "inStock")
-                                    }}> In Stock
-                            </button>
-                            <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
-                                    onClick={() => {
-                                        this.fetchSort("desc", "inStock")
-                                    }}> In Stock
-                            </button>
+            return (<><Header/>
+                    <section className="container">
+                        <div className='carousel'>
+                            <img src="/images/book3.webp" alt='book3'/>
                         </div>
-                        <NotFound title='(╥﹏╥) No books was found!' details='Perhaps you should try searching another keyword!'/>
-                    </div>
-                </section>
+                        <hr></hr>
+                        <div className="wrapper">
+                            <div className="text-center">
+                                <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "price")
+                                        }}> Price
+                                </button>
+                                <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "price")
+                                        }}> Price
+                                </button>
+                                <button className="bi-sort-alpha-up-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "name")
+                                        }}> Name
+                                </button>
+                                <button className="bi-sort-alpha-down-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "name")
+                                        }}> Name
+                                </button>
+                                <button className="bi-sort-up btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "category")
+                                        }}> Category
+                                </button>
+                                <button className="bi-sort-down btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "category")
+                                        }}> Category
+                                </button>
+                                <button className="bi-sort-numeric-up-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("asc", "inStock")
+                                        }}> In Stock
+                                </button>
+                                <button className="bi-sort-numeric-down-alt btn btn-outline-secondary m-2"
+                                        onClick={() => {
+                                            this.fetchSort("desc", "inStock")
+                                        }}> In Stock
+                                </button>
+                            </div>
+                            <NotFound title='(╥﹏╥) No books was found!'
+                                      details='Perhaps you should try searching another keyword!'/>
+                        </div>
+                    </section>
+                    <Footer/></>
             )
         }
     }
