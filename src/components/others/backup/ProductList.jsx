@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import req, {be_url, role} from "../others/Share";
-import NotFound from "../others/NotFound";
+import req, {be_url, role} from "../Share";
+import NotFound from "../NotFound";
 
 export default class ProductList extends React.Component {
 

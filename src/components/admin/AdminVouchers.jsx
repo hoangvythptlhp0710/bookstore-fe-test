@@ -90,7 +90,7 @@ export default class AdminVouchers extends React.Component {
                                         {this.state.vouchers.map(voucher => {
                                                 return (
                                                     <tr key={voucher.id}>
-                                                        <td>{voucher.customerId}</td>
+                                                        <td>{voucher.customerEmail}</td>
                                                         <td>{voucher.title}</td>
                                                         <td>{voucher.rate}</td>
                                                         <td>{voucher.dueDate}</td>

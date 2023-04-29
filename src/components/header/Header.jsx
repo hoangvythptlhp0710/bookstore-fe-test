@@ -53,13 +53,14 @@ class HeaderWithNavigate extends Component {
                 <div className='top'>
                     {!accessToken ?
                         <nav className='ml-auto'>
-                            <a href='/login'>Login |</a>
-                            <a href='/register'>Register</a>
+                            <a href='/login'>&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;</a>|
+                            <a href='/register'>&nbsp;Register</a>
                         </nav>
                         : <nav className='ml-auto'>
-                            <span className="logout" onClick={this.logout}>Logout |</span>
-                            <a href='/login'>Re-login |</a>
-                            <a href='/register'>Re-register</a>
+                            <span className="logout"
+                                  onClick={this.logout}>&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;</span>|
+                            <a href='/login'>&nbsp;Re-login&nbsp;&nbsp;</a>|
+                            <a href='/register'>&nbsp;Re-register&nbsp&nbsp</a>
                         </nav>
                     }
                 </div>

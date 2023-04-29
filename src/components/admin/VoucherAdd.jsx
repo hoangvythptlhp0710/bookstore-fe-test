@@ -1,5 +1,5 @@
 import React from "react";
-import "../draft/Admin.css";
+import "../others/backup/Admin.css";
 import req, {be_url, role} from "../others/Share";
 import NotFound from "../others/NotFound";
 import Header from "../header/Header";
@@ -60,7 +60,8 @@ export default class VoucherAdd extends React.Component {
                                onChange={this.handleChange}/>
 
                         <label className="h6 guide">Customer ID</label>
-                        <input type="number" className="form-control enter" id="customerId" value={this.state.customerId} required
+                        <input type="number" className="form-control enter" id="customerId"
+                               value={this.state.customerId} required
                                onChange={this.handleChange}/>
 
                         <label className="h6 guide">Rate</label>

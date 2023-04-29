@@ -1,5 +1,5 @@
 import React from "react";
-import "../draft/Admin.css";
+import "../others/backup/Admin.css";
 import req, {be_url, role} from "../others/Share";
 import NotFound from "../others/NotFound";
 import Header from "../header/Header";

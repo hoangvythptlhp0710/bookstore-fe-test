@@ -2,7 +2,8 @@
     display: flex;
     margin-top: 50px;
 }
-.amount{
+
+.amount {
     display: flex;
     border: 1px #33cc66 solid;
     padding: 10px;
@@ -10,16 +11,17 @@
     margin-bottom: 10px;
     justify-content: space-between;
     align-content: center;
-    
+
 }
+
 .userInfo {
     width: 50%;
     /* margin: 50px; */
     padding-left: 50px;
     padding-right: 50px;
     display: block;
-   text-align: center;
-    
+    text-align: center;
+
 }
 
 .userInfo input {
@@ -27,9 +29,10 @@
     height: 50px;
     margin-top: 10px;
     margin-bottom: 10px;
-   
+
 }
-.bill{
+
+.bill {
     width: 50%;
     /* background-color: #f1f1f1; */
     /* height: 500px; */
@@ -126,32 +129,34 @@ button:hover {
 
 .quantity_order {
     margin-left: 30px;
-  }
+}
 
 
-.checkout{
+.checkout {
     border-color: #33cc33;
     width: 95%;
-  }
-  .out {
+}
+
+.out {
     background-color: white;
     border-color: #33cc33;
     width: 100%;
-  }
+}
 
-  .form{
+.form {
     padding: 10px;
-  }
-  .enter{
+}
+
+.enter {
     border-width: 2px;
     width: 93%;
-  }
+}
 
-  .bill{
+.bill {
 
     border-radius: 5px;
     border-color: #33cc33;
     border-image-width: 1px;
-  }
+}
 
  
