@@ -36,6 +36,9 @@ export default function CustomerUpdate() {
                 console.log("Submit!")
                 window.location = "/";
             })
+            .catch((error) => {
+                alert(error.response.data.errors[0].defaultMessage)
+            })
     }
 
     let fetchCustomer = async () => {
@@ -77,25 +80,12 @@ export default function CustomerUpdate() {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label>Password</label>
-                                <input
-                                    type="password"
-                                    id='password'
-                                    required
-                                    className="form-control"
-                                    placeholder="Enter old password"
-                                    value={password}
-                                    onChange={(e) => handleChange(e)}
-                                />
-                            </div>
-                            <div className="mb-3">
                                 <label>New Password</label>
                                 <input
                                     type="password"
                                     id='password'
-                                    required
                                     className="form-control"
-                                    value={password}
+                                    placeholder="Enter new password"
                                     onChange={(e) => handleChange(e)}
                                 />
                             </div>
