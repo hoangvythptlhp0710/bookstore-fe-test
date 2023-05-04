@@ -42,7 +42,7 @@ function App() {
                     {/* user only */}
                     <Route path='/cart' element={<ShoppingCart/>}></Route>
                     <Route path="/my_profile" element={<UpdateCustomer/>}/>
-                    <Route path="/orders" element={<OrderByStatus/>}></Route>
+                    <Route path="/order" element={<OrderByStatus/>}></Route>
                     <Route path="/bill" element={<CheckBill/>}></Route>
                     <Route path="/success" element={<SuccessNotify/>}></Route>
                     <Route path="/order/:id" element={<CheckoutOrder/>}></Route>

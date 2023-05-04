@@ -44,15 +44,7 @@ class OrderByStatus extends React.Component {
                     <Header/>
                     <div>
                         <div className="order_list">
-                            <ul>
-                                <li><a href={fe_url + "order"}>All |</a></li>
-                                <li><a href={this.base_link + "customer_confirmed"}>Checked out |</a></li>
-                                <li><a href={this.base_link + "admin_preparing"}>Preparing |</a></li>
-                                <li><a href={this.base_link + "shipping"}>Shipping |</a></li>
-                                <li><a href={this.base_link + "customer_request_cancel"}>Request cancel |</a></li>
-                                <li><a href={this.base_link + "customer_canceled"}>Cancelled |</a></li>
-                                <li><a href={this.base_link + "success"}>Success</a></li>
-                            </ul>
+                        <h1>{"Orders: " + this.state.status}</h1>
                         </div>
                         {this.state.orders.length !== 0 &&
                             <div className="order_item">
@@ -90,6 +82,8 @@ class OrderByStatus extends React.Component {
                                 }
                             </div>
                         }
+                        {this.state.orders.length === 0 && <NotFound title="(╥﹏╥) 404 error: No order found!"
+                        details={"There is no order being " + this.state.status}></NotFound>}
                     </div>
                     <Footer/>
                 </>

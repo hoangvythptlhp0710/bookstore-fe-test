@@ -57,7 +57,6 @@ class CheckoutOrder extends React.Component {
             .then(() => {
                 localStorage.removeItem("items")
                 localStorage.removeItem("total")
-                // window.location.href = fe_url + "order?status=customer_confirmed"
                 window.location.href = fe_url + "bill"
             })
             .catch((error) => {
@@ -103,14 +102,17 @@ class CheckoutOrder extends React.Component {
                         <form className="form out card">
                             <label className=" h6 guide">Name</label>
                             <input className="checkout" required name="customerName" placeholder="User name"
+                            defaultValue={this.state.userInfo.username}
                                    onChange={this.handleChange}></input>
 
                             <label className=" h6 guide">Phone number</label>
                             <input className="checkout" required name="phone" placeholder="Phone number"
+                            defaultValue={this.state.userInfo.phone}
                                    onChange={this.handleChange}></input>
 
                             <label className="h6 guide">Address</label>
                             <input className="checkout" required name="addressToReceive"
+                            defaultValue={this.state.userInfo.address}
                                    placeholder="Address to receive"
                                    onChange={this.handleChange}></input>
 
@@ -121,7 +123,6 @@ class CheckoutOrder extends React.Component {
 
                             <label className=" h6 guide ">Payment method</label>
                             <select className="form-control enter" onChange={this.handleSelectChange}>
-                                <option>Select Payment Method</option>
                                 <option value="cash">By cash</option>
                                 <option value="online">Online</option>
 
@@ -130,7 +131,6 @@ class CheckoutOrder extends React.Component {
                         </form>
 
                     </div>
-
 
                     <div className="bill">
                         <h3>Products information</h3>

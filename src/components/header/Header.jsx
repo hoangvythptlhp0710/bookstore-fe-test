@@ -59,8 +59,7 @@ class HeaderWithNavigate extends Component {
                         : <nav className='ml-auto'>
                             <span className="logout"
                                   onClick={this.logout}>&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;</span>|
-                            <a href='/login'>&nbsp;Re-login&nbsp;&nbsp;</a>|
-                            <a href='/register'>&nbsp;Re-register&nbsp;&nbsp;</a>
+                            <a href='/login'>&nbsp;Re-login&nbsp;&nbsp;</a>
                         </nav>
                     }
                 </div>
@@ -70,7 +69,11 @@ class HeaderWithNavigate extends Component {
                         <div className="dropdown">
                             <div className="drop-btn"><i className="bi bi-list"></i></div>
                             <div className="dropdown-content">
-                                {role === "ROLE_ADMIN" && <a href={fe_url + 'admin/products'}>Admin</a>}
+                                <a href={fe_url + 'order?status=customer_confirmed'}>Checked out orders</a>
+                                <a href={fe_url + 'order?status=admin_preparing'}>Preparing orders</a>
+                                <a href={fe_url + 'order?status=shipping'}>Shipping orders</a>
+                                <a href={fe_url + 'order?status=success'}>Successful orders</a>
+                                <a href={fe_url + 'order?status=customer_canceled'}>Cancelled orders</a>
                             </div>
                         </div>
                         <a href={this.baseLink + "detective/0"}>Detective</a>
@@ -90,14 +93,10 @@ class HeaderWithNavigate extends Component {
                     </form>
                     {role === "ROLE_CUSTOMER" &&
                         <>
-                            <a href='/#'><Link to={fe_url + "cart"}><i className="bi bi-cart2 customCart"><span
-                                className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link></a>
-                            <li className='account'><img src='/images/account.png' alt='account'
-                                                         className='account'></img>
-                                <ul className='sub-account'>
-                                    <div><a href='/my_profile'>Profile</a></div>
-                                    <div className='orders'><a href={fe_url + "order"}>Orders</a></div>
-                                </ul>
+                            <Link to={fe_url + "cart"} className='linkToCart'><i className="bi bi-cart2 customCart"><span
+                                className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link>
+                            <li className='account'><Link to="my_profile"><img src='/images/account.png' alt='account'
+                                                         className='account'></img></Link>
                             </li>
                         </>}
                 </div>

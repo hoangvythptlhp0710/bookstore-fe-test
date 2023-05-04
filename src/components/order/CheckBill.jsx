@@ -26,7 +26,7 @@ class CheckBill extends React.Component {
 
 
     render() {
-        if (role === "ROLE_USER") {
+        if (role === "ROLE_CUSTOMER") {
             return (
 
                 <div className="container">
