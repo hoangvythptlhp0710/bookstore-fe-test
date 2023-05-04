@@ -53,7 +53,7 @@ class OrderByStatus extends React.Component {
 
                                     </div>
                                     <a className="admin-navigation" href={fe_url + "admin/products"}>Manage
-                                        products</a>
+                                        books</a>
                                     <a className="admin-navigation current-pos" href={fe_url + "admin/orders"}>Manage
                                         orders</a>
                                     <a className="admin-navigation" href={fe_url + "admin/vouchers"}>Manage vouchers</a>

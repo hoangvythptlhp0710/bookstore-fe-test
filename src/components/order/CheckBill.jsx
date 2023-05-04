@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "../products/WithRouter";
 import "./Bill.css"
-import {fe_url} from "../others/Share";
+import {fe_url, role} from "../others/Share";
 import Header from "../header/Header";
 import NotFound from "../others/NotFound";
 import Footer from "../footer/Footer";
@@ -18,7 +18,7 @@ class CheckBill extends React.Component {
 
 
     handleConfirm = () => {
-        if (this.state.dataToCheckout.paymentMethod == "cash") {
+        if (this.state.dataToCheckout.paymentMethod === "cash") {
             window.location.href = fe_url + "success"
         }
 

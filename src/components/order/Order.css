@@ -144,12 +144,12 @@ button:hover {
 }
 
 .form {
-    padding: 10px;
+    padding: 20px;
 }
 
 .enter {
     border-width: 2px;
-    width: 93%;
+    width: 100%
 }
 
 .bill {
