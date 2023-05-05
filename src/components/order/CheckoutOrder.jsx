@@ -67,26 +67,19 @@ class CheckoutOrder extends React.Component {
             dataToCheckout.addressToReceive = this.state.userInfo.address
         }
         if (this.state.voucherChosen) {
-            const newTotal = this.state.total * this.state.voucherChosen.rate
-            this.setState({ total: newTotal })
+            const newTotal = this.state.total * (1-this.state.voucherChosen.rate/100)
+            this.setState({ total: newTotal }, () => {
+                localStorage.setItem('total', this.state.total);
+            })
             dataToCheckout.voucherId = this.state.voucherChosen.id
         } else {
             dataToCheckout.voucherId = -1
         }
         dataToCheckout.messageOfCustomer = this.state.messageOfCustomer
 
-        // localStorage.setItem('dataToCheckout', JSON.stringify(dataToCheckout));
-        // localStorage.setItem('products', localStorage.getItem("items"));
-
-        // localStorage.setItem('total', this.state.total);
-
-        req.post(be_url + "order/" + userId, dataToCheckout)
-            .then(() => {
-                window.location.href = fe_url + "success"
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        localStorage.setItem('dataToCheckout', JSON.stringify(dataToCheckout));
+        localStorage.setItem('products', localStorage.getItem("items"));
+        window.location.href = fe_url + "bill"
     }
 
     handleSelectVoucher = (e) => {

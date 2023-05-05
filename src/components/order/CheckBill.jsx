@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "../products/WithRouter";
 import "./Bill.css"
-import { fe_url, role } from "../others/Share";
+import req, { be_url, fe_url, role, userId } from "../others/Share";
 import Header from "../header/Header";
 import NotFound from "../others/NotFound";
 import Footer from "../footer/Footer";
@@ -19,11 +19,34 @@ class CheckBill extends React.Component {
 
     handleConfirm = () => {
         if (this.state.dataToCheckout.paymentMethod === "cash") {
-            localStorage.removeItem("items")
-            localStorage.removeItem("total")
-            window.location.href = fe_url + "success"
+            req.post(be_url + "order/" + userId, this.state.dataToCheckout)
+                .then(() => {
+                    
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+                if (localStorage.getItem("isFromCart") === "true") {
+                    this.deleteItems();
+                }
+                window.location.href = fe_url + "success"
+                localStorage.removeItem("isFromCart")
+                localStorage.removeItem("items")
+                localStorage.removeItem("total")
+                localStorage.removeItem("dataToCheckout")
+                localStorage.removeItem("products")
         }
 
+    }
+
+    deleteItems = () => {
+        req.delete(be_url + "cart/" + userId)
+            .then(() => {
+                console.log("Cart deleted successfully.");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
 
