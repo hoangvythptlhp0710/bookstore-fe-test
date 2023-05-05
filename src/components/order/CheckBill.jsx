@@ -44,20 +44,38 @@ class CheckBill extends React.Component {
         if (this.state.dataToCheckout.paymentMethod == "cash") {
             window.location.href = fe_url + "success"
         }
+        if (localStorage.getItem("isFromCart") === "true") {
+            this.deleteItems();
+        }
+        localStorage.removeItem("isFromCart")
+        localStorage.removeItem("items")
+        localStorage.removeItem("total")
+        localStorage.removeItem("dataToCheckout")
+        localStorage.removeItem("products")
+    }
 
+    deleteItems = () => {
+        console.log(be_url + "cart/" + userId)
+        req.delete(be_url + "cart/" + userId)
+            .then(() => {
+                console.log("Cart deleted successfully.");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
 
 
     render() {
-        // if (role === "ROLE_USER") {
+        if (role === "ROLE_CUSTOMER") {
             return (
 
                 <div className="container">
                     <div className="title">
                         <h3>Confirm order information</h3></div>
                     <div className="boxofbill">
-                        <h3>Delivey address</h3>
+                        <h3>Delivery address</h3>
                         <div className="address">
                             <p className="nameinbill">{this.state.dataToCheckout.customerName}</p>
                             <p className="phoneinbill">{this.state.dataToCheckout.phone}</p>
@@ -79,7 +97,7 @@ class CheckBill extends React.Component {
                                 <p className="total">{item.quantity * item.price} $</p>
                             </div>)}
                         <div className="amount">
-                            <h5>Total: $</h5>
+                            <h5>{"Total: " + this.state.total + " $"}</h5>
                         </div>
                         <div className="amount">
                             <h5>Payment: {this.state.dataToCheckout.paymentMethod}</h5>
@@ -92,15 +110,15 @@ class CheckBill extends React.Component {
 
                 </div>
             )
-        // } else {
-        //     return (
-        //         <>
-        //             <Header/>
-        //             <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
-        //             <Footer/>
-        //         </>
-        //     )
-        // }
+        } else {
+            return (
+                <>
+                    <Header />
+                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!' />
+                    <Footer />
+                </>
+            )
+        }
     }
 }
 

@@ -114,6 +114,7 @@ export default class ShoppingCart extends React.Component {
         }
         localStorage.setItem("total", total)
         localStorage.setItem("items", JSON.stringify(itemList));
+        localStorage.setItem("isFromCart", "true")
         window.location.href = `${fe_url}order/${userId}`;
     }
 
