@@ -21,25 +21,24 @@ class CheckBill extends React.Component {
         if (this.state.dataToCheckout.paymentMethod === "cash") {
             req.post(be_url + "order/" + userId, this.state.dataToCheckout)
                 .then(() => {
-                    
+                    window.location.href = fe_url + "success"
                 })
                 .catch((error) => {
                     console.log(error)
                 })
-                if (localStorage.getItem("isFromCart") === "true") {
-                    this.deleteItems();
-                }
-                window.location.href = fe_url + "success"
-                localStorage.removeItem("isFromCart")
-                localStorage.removeItem("items")
-                localStorage.removeItem("total")
-                localStorage.removeItem("dataToCheckout")
-                localStorage.removeItem("products")
         }
-
+        if (localStorage.getItem("isFromCart") === "true") {
+            this.deleteItems();
+        }
+        localStorage.removeItem("isFromCart")
+        localStorage.removeItem("items")
+        localStorage.removeItem("total")
+        localStorage.removeItem("dataToCheckout")
+        localStorage.removeItem("products")
     }
 
     deleteItems = () => {
+        console.log(be_url + "cart/" + userId)
         req.delete(be_url + "cart/" + userId)
             .then(() => {
                 console.log("Cart deleted successfully.");
