@@ -26,17 +26,27 @@ class OrderByStatus extends React.Component {
             })
     }
 
-    handleUpdateStatus = (id, fromStatus, toStatus) => {
+    componentDidUpdate() {
+        this.handleUpdateStatus();
+        this.fetchOrderByStatus();
+    }
+
+    handleUpdateStatus = async (id, fromStatus, toStatus) => {
         const body = {
             fromStatus: fromStatus,
             toStatus: toStatus,
         };
-        req.put(be_url + "order/" + id, body)
-            .catch((error) => {
-                console.log(error)
-            })
-        this.fetchOrderByStatus()
+        try {
+            await req.put(be_url + "order/" + id, body);
+            const updatedOrders = [...this.state.orders];
+            const updatedOrderIndex = updatedOrders.findIndex(order => order.id === id);
+            updatedOrders[updatedOrderIndex].orderStatus = toStatus;
+            this.setState({ orders: updatedOrders });
+        } catch (error) {
+            console.log(error);
+        }
     }
+    
 
     render() {
         if (role === "ROLE_CUSTOMER") {
@@ -51,7 +61,7 @@ class OrderByStatus extends React.Component {
                                 <hr></hr>
                                 {
                                     this.state.orders.map(order => (
-                                        <div key={order.id}><h2>Orders: {order.orderStatus}</h2>
+                                        <div key={order.id}>
                                             <hr></hr>
                                             {order.items.map(item => (<div className="item" key={item.productId}>
                                                 <p><img src={item.images[0]} alt="product"></img></p>
@@ -63,18 +73,15 @@ class OrderByStatus extends React.Component {
                                             </div>))}
                                             <p>Payment method: {order.paymentMethod}</p>
                                             <p>Total order: {order.total} $</p>
-                                            {/*{(role === "ROLE_ADMIN" && order.orderStatus === "customer_confirmed") && <button*/}
-                                            {/*    onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "admin_preparing")}>Prepare</button>}*/}
-                                            {/*{(role === "ROLE_ADMIN" && order.orderStatus === "admin_preparing") && <button*/}
-                                            {/*    onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "shipping")}>Ship</button>}*/}
+
                                             {(role === "ROLE_CUSTOMER" && order.orderStatus === "admin_preparing") &&
                                                 <button
                                                     onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "customer_request_cancel")}>Request
-                                                    cancel</button>}
+                                                    cancel</button>}&nbsp;
                                             {order.orderStatus === "customer_confirmed" && <button
-                                                onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "customer_canceled")}>Cancel</button>}
+                                                onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "customer_canceled")}>Cancel</button>}&nbsp;
                                             {(role === "ROLE_CUSTOMER" && order.orderStatus === "shipping") && <button
-                                                onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "success")}>Received</button>}
+                                                onClick={() => this.handleUpdateStatus(order.id, order.orderStatus, "success")}>Received</button>}&nbsp;
                                             {(order.orderStatus === "success" || order.orderStatus === "customer_canceled") &&
                                                 <button>Buy again</button>}
                                             <hr></hr>
@@ -82,7 +89,7 @@ class OrderByStatus extends React.Component {
                                 }
                             </div>
                         }
-                        {this.state.orders.length === 0 && <NotFound title="(╥﹏╥) 404 error: No order found!"
+                        {this.state.orders.length === 0 && <NotFound title="(╥﹏╥)No order found!"
                         details={"There is no order being " + this.state.status}></NotFound>}
                     </div>
                     <Footer/>

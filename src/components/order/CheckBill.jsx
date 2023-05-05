@@ -1,7 +1,7 @@
 import React from "react";
 import withRouter from "../products/WithRouter";
 import "./Bill.css"
-import {fe_url, role} from "../others/Share";
+import { fe_url, role } from "../others/Share";
 import Header from "../header/Header";
 import NotFound from "../others/NotFound";
 import Footer from "../footer/Footer";
@@ -19,6 +19,8 @@ class CheckBill extends React.Component {
 
     handleConfirm = () => {
         if (this.state.dataToCheckout.paymentMethod === "cash") {
+            localStorage.removeItem("items")
+            localStorage.removeItem("total")
             window.location.href = fe_url + "success"
         }
 
@@ -33,7 +35,7 @@ class CheckBill extends React.Component {
                     <div className="title">
                         <h3>Confirm order information</h3></div>
                     <div className="boxofbill">
-                        <h3>Delivey address</h3>
+                        <h3>Delivery address</h3>
                         <div className="address">
                             <p className="nameinbill">{this.state.dataToCheckout.customerName}</p>
                             <p className="phoneinbill">{this.state.dataToCheckout.phone}</p>
@@ -55,7 +57,7 @@ class CheckBill extends React.Component {
                                 <p className="total">{item.quantity * item.price} $</p>
                             </div>)}
                         <div className="amount">
-                            <h5>Total: $</h5>
+                            <h5>{"Total: " + this.state.total + " $"}</h5>
                         </div>
                         <div className="amount">
                             <h5>Payment: {this.state.dataToCheckout.paymentMethod}</h5>
@@ -71,9 +73,9 @@ class CheckBill extends React.Component {
         } else {
             return (
                 <>
-                    <Header/>
-                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!'/>
-                    <Footer/>
+                    <Header />
+                    <NotFound title='(╥﹏╥) Access denied!' details='You have no permission to access this page!' />
+                    <Footer />
                 </>
             )
         }
