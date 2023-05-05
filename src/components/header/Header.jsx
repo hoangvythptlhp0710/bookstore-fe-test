@@ -9,19 +9,38 @@ class HeaderWithNavigate extends Component {
 
     state = {
         name: "",
-        numberOfItemInCart: 0
+        numberOfItemInCart: 0,
+        avatar: null,
+        avatarLoaded: false, // Add a new state to track if the avatar image has loaded
+
     }
     baseLink = fe_url + "product/"
 
     componentDidMount() {
         this.getNumberOfItem();
+        this.getUserProfile();
     }
 
-    handleChange = event => {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
+    getUserProfile = () => {
+        axios.get(`${be_url}customer/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((res) => {
+            const avatarUrl = res.data.avatar;
+            const avatarImage = new Image();
+            avatarImage.src = avatarUrl;
+            avatarImage.onload = () => {
+                this.handleAvatarLoad(avatarUrl);
+            };
+        }).catch((err) => {
+            console.log(err)
+        })
     }
+
+    handleAvatarLoad = () => {
+        this.setState({ avatarLoaded: true });
+      }
 
     search = (event) => {
         event.preventDefault();
@@ -57,9 +76,10 @@ class HeaderWithNavigate extends Component {
                             <a href='/register'>&nbsp;Register</a>
                         </nav>
                         : <nav className='ml-auto'>
-                            <span className="logout"
-                                  onClick={this.logout}>&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;</span>|
-                            <a href='/login'>&nbsp;Re-login&nbsp;&nbsp;</a>
+                            <a className="logout"
+                                  onClick={this.logout} href='#'>&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;</a>|
+                            {/* <a href='/login'>&nbsp;Re-login&nbsp;&nbsp;</a>|
+                            <a href='/register'>&nbsp;Re-register&nbsp;&nbsp;</a> */}
                         </nav>
                     }
                 </div>
@@ -69,11 +89,7 @@ class HeaderWithNavigate extends Component {
                         <div className="dropdown">
                             <div className="drop-btn"><i className="bi bi-list"></i></div>
                             <div className="dropdown-content">
-                                <a href={fe_url + 'order?status=customer_confirmed'}>Checked out orders</a>
-                                <a href={fe_url + 'order?status=admin_preparing'}>Preparing orders</a>
-                                <a href={fe_url + 'order?status=shipping'}>Shipping orders</a>
-                                <a href={fe_url + 'order?status=success'}>Successful orders</a>
-                                <a href={fe_url + 'order?status=customer_canceled'}>Cancelled orders</a>
+                                {/**/}
                             </div>
                         </div>
                         <a href={this.baseLink + "detective/0"}>Detective</a>
@@ -82,6 +98,8 @@ class HeaderWithNavigate extends Component {
                         <a href={this.baseLink + "comic/0"}>Comic</a>
                         <a href={this.baseLink + "adventure/0"}>Adventure</a>
                         <a href={this.baseLink + "literature/0"}>Literature</a>
+                        {role === "ROLE_ADMIN" && <a href={fe_url + 'admin/products'}>Manage product</a>}
+                        {role === "ROLE_ADMIN" && <a href={fe_url + 'admin/orders'}>Manage order</a>}
 
                     </div>
                     <form className='d-flex'>
@@ -93,10 +111,14 @@ class HeaderWithNavigate extends Component {
                     </form>
                     {role === "ROLE_CUSTOMER" &&
                         <>
-                            <Link to={fe_url + "cart"} className='linkToCart'><i className="bi bi-cart2 customCart"><span
-                                className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link>
-                            <li className='account'><Link to={fe_url + "my_profile"}><img src='/images/account.png' alt='account'
-                                                         className='account'></img></Link>
+                            <a href='/#'><Link to={fe_url + "cart"}><i className="bi bi-cart2 customCart"><span
+                                className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link></a>
+                            <li className='account'><img src={this.state.avatar} alt='account'
+                                                         className='account'></img>
+                                <ul className='sub-account'>
+                                    <div><a href='/my_profile'>Profile</a></div>
+                                    <div className='orders'><a href={fe_url + "order"}>Orders</a></div>
+                                </ul>
                             </li>
                         </>}
                 </div>

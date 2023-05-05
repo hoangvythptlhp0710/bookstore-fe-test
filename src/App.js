@@ -14,8 +14,12 @@ import CheckoutOrder from './components/order/CheckoutOrder';
 import OrderByStatus from './components/order/OrderByStatus';
 import CheckBill from './components/order/CheckBill';
 import SuccessNotify from './components/order/SuccessNotify';
-import FailNotify from './components/order/FailNotify';
-import { faKissWinkHeart } from '@fortawesome/free-solid-svg-icons';
+import VoucherAdd from "./components/admin/VoucherAdd";
+import AdminVouchers from "./components/admin/AdminVouchers";
+import AdminProducts from "./components/admin/AdminProducts";
+import AdminOrders from "./components/admin/AdminOrders";
+import Page404 from "./components/others/Page404";
+import NotFound from "./components/others/NotFound";
 
 
 function App() {
@@ -29,31 +33,21 @@ function App() {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path='/product/:category/:page' element={<ProductsByCategory/>}></Route>
-                    <Route path="/order/:id"  element={<CheckoutOrder/>}></Route>
-                    <Route path="/order" element={<OrderByStatus />}></Route>
-                    <Route path="/bill" element={<CheckBill />}></Route>
-                    <Route path="/success" element={<SuccessNotify />}></Route>
-                    <Route path="/fail" element={<FailNotify/>}></Route>
-
-
-                    
+                    <Route path='/success' element={<SuccessNotify/>}></Route>
                     {/* admin only */}
-                    <Route path="/admin/product/add" element={<ProductAdd/>}/>
+                    <Route path="/admin/products" element={<AdminProducts/>}/>
+                    <Route path="/admin/product" element={<ProductAdd/>}/>
                     <Route path="/admin/product/:id" element={<ProductUpdate/>}/>
-                    {/* <Route path="/admin/products" element={<AdminProducts/>}></Route> */}
-                    {/* <Route path="/admin/orders" element={<AdminOrders/>}></Route> */}
-                    {/* <Route path="/admin/vouchers" element={<AdminVouchers/>}></Route> */}
-                    {/* <Route path="/admin/voucher/add" element={<VoucherAdd/>}></Route> */}
+                    <Route path="/admin/products" element={<AdminProducts/>}></Route>
+                    <Route path="/admin/orders" element={<AdminOrders/>}></Route>
+                    <Route path="/admin/vouchers" element={<AdminVouchers/>}></Route>
+                    <Route path="/admin/voucher/add" element={<VoucherAdd/>}></Route>
                     {/* user only */}
                     <Route path='/cart' element={<ShoppingCart/>}></Route>
+                    <Route path='/order/:id' element={<CheckoutOrder/>}></Route>
                     <Route path="/my_profile" element={<UpdateCustomer/>}/>
-                    <Route path="/order" element={<OrderByStatus/>}></Route>
-                    <Route path="/bill" element={<CheckBill/>}></Route>
-                    <Route path="/success" element={<SuccessNotify/>}></Route>
-                    <Route path="/order/:id" element={<CheckoutOrder/>}></Route>
-
-                    {/* <Route path="/*" element={<Page404 title='(╥﹏╥) 404 error: Page not found!' */}
-                                                       {/* details='We cannot find this page, please try again later!'/>}/> */}
+                    <Route path="/bill" element={<CheckBill/>}/>
+                    <Route path="/*" element={<NotFound title='(╥﹏╥) 404 error: Page not found!' details='We cannot find this page, please try again later!'/>}/>
                 </Routes>
             </div>
         </Router>
@@ -61,8 +55,3 @@ function App() {
 }
 
 export default App
-
-
-
-// Thằng nào thêm eslint vào :) Giờ nó cứ bắt dùng thì ms đc thêm đấy :) ai bieét
-// t có thêm đâu faKissWinkHeart
