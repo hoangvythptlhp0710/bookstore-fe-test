@@ -5,7 +5,7 @@ import NotFound from "../others/NotFound";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import axios from 'axios';
-import ImageUploading, { ImageListType } from "react-images-uploading";
+import ImageUploading from "react-images-uploading";
 
 
 export default function ProductUpdate() {
@@ -37,7 +37,9 @@ export default function ProductUpdate() {
     const formData = new FormData();
   
     useEffect(() => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       fetchProductList();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   
     const { name, description, price, inStock, images, category, discount } =
@@ -177,7 +179,7 @@ export default function ProductUpdate() {
                 maxNumber={10}
                 dataURLKey="data_url"
               >
-                {({ imageList, onImageUpload, onImageRemoveAll }) => (
+                {({ onImageUpload, onImageRemoveAll, onImageRemove }) => (
                   <div className="upload__image-wrapper">
                     <button
                       type="button"
@@ -197,7 +199,7 @@ export default function ProductUpdate() {
                     {images.map((image, index) => (
                       <div key={index} className="image-item">
                         <img
-                          src={image}
+                          src={image["data_url"]}
                           alt=""
                           width="100"
                           height="100"
@@ -206,7 +208,7 @@ export default function ProductUpdate() {
                           <button
                             type="button"
                             className="btn btn-danger"
-                            onClick={() => onImageRemoveAll(index)}
+                            onClick={() => onImageRemove(index)}
                           >
                             Remove
                           </button>
