@@ -108,12 +108,16 @@ class HeaderWithNavigate extends Component {
                     </form>
                     {role === "ROLE_CUSTOMER" &&
                         <>
-                            <Link to={fe_url + "cart"} className='linkToCart'><i className="bi bi-cart2 customCart"><span
-                                className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link>
-                            <li className='account'><Link to={fe_url + "my_profile"}><img src={this.state.avatar} alt='account'
-                                                         className='account'></img></Link>
-                            </li>
-                        </>}
+                        <a href='/#'><Link to={fe_url + "cart"}><i className="bi bi-cart2 customCart"><span
+                            className='numberOfItem'>{this.state.numberOfItemInCart}</span></i></Link></a>
+                        <li className='account'><img src={this.state.avatar} alt='account'
+                                                     className='account'></img>
+                            <ul className='sub-account'>
+                                <div><a href='/my_profile'>Profile</a></div>
+                                <div className='orders'><a href={fe_url + "order"}>Orders</a></div>
+                            </ul>
+                        </li>
+                    </>}
                 </div>
                 <hr></hr>
             </nav>
